@@ -1,40 +1,9 @@
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
-const shell = require('shelljs');
 const cron = require('node-cron');
 
-//Take Image in 5 minutes 
-cron.schedule("*/5 * * * *", function() {
-    console.log("---------------------");
-    console.log("Running Cron Job = IMAGE");
-    shell.exec('/home/pi/webcam/webcamScript.sh');
-    
-    console.log("Updating Image with Cron Job");
-    // Load client secrets from a local file.
-    fs.readFile('credentials.json', (err, content) => {
-      if (err) return console.log('Error loading client secret file:', err);
-      // Authorize a client with credentials, then call the Google Drive API.
-      //authorize(JSON.parse(content), uploadFileVideo); //FOR UPLOADS.
-      authorizeImage(JSON.parse(content), updateFile); //FOR UPDATES.
-    });
-});
-console.log('aca estoy');
-//Take Video
-cron.schedule("*/13 * * * *", function() {
-    console.log("---------------------")
-    console.log("Running Cron Job = VIDEO");
-    shell.exec('/home/pi/webcam/videoWebcamScript.sh');
-    
-    console.log("Updating Video with Cron Job");
-    // Load client secrets from a local file.
-    fs.readFile('credentials.json', (err, content) => {
-      if (err) return console.log('Error loading client secret file:', err);
-      // Authorize a client with credentials, then call the Google Drive API.
-      //authorize(JSON.parse(content), uploadFileVideo); //FOR UPLOADS.
-      authorizeVideo(JSON.parse(content), updateVideo); //FOR UPDATES.
-    });
-});
+const capture = require('./capture')
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
@@ -44,6 +13,75 @@ const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const TOKEN_PATH = 'token.json';
 const imageIdConst = '1gcZsLX0CxuG8_it0Tu9BrdPdthFAk_Z1';
 const videoIdConst = '1cNRm7YX8lh2tmp1SPG90V0buhAUZEL7n';
+
+const IMAGE_TIME_MINUTES = 5;
+const VIDEO_TIME_MINUTES = 13;
+
+console.log(`Starting...`)
+
+function main() {
+  checkDependencies()
+
+  // startImageJob()
+  // startVideoJob()
+
+  // takeAndUploadImage()
+  takeAndUploadVideo()
+}
+
+main()
+
+function checkDependencies() {
+  // TODO
+}
+
+function startImageJob() {
+  //Take Image in 5 minutes
+  cron.schedule(`*/${IMAGE_TIME_MINUTES} * * * *`, function() {
+    console.log("---------------------");
+    console.log("Running Cron Job = IMAGE");
+
+    takeAndUploadImage()
+  });
+}
+
+function takeAndUploadImage() {
+  capture.captureImage()
+
+  console.log("Updating Image with Cron Job");
+
+  // Load client secrets from a local file.
+  fs.readFile('./credentials/credentials.json', (err, content) => {
+    if (err) return console.log('Error loading client secret file:', err);
+    // Authorize a client with credentials, then call the Google Drive API.
+    //authorize(JSON.parse(content), uploadFileVideo); //FOR UPLOADS.
+    authorizeImage(JSON.parse(content), updateFile); //FOR UPDATES.
+  });
+}
+
+function startVideoJob() {
+  //Take Video
+  cron.schedule(`*/${VIDEO_TIME_MINUTES} * * * *`, function() {
+      console.log("---------------------")
+      console.log("Running Cron Job = VIDEO");
+
+    takeAndUploadVideo()
+  });
+}
+
+function takeAndUploadVideo() {
+  capture.captureVideo()
+
+    console.log("Updating Video with Cron Job");
+
+    // Load client secrets from a local file.
+    fs.readFile('./credentials/credentials.json', (err, content) => {
+      if (err) return console.log('Error loading client secret file:', err);
+      // Authorize a client with credentials, then call the Google Drive API.
+      //authorize(JSON.parse(content), uploadFileVideo); //FOR UPLOADS.
+      authorizeVideo(JSON.parse(content), updateVideo); //FOR UPDATES.
+    });
+}
 
 /**
  * Create an OAuth2 client with the given credentials, and then execute the
