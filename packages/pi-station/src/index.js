@@ -10,7 +10,7 @@ const SCOPES = ['https://www.googleapis.com/auth/drive'];
 // The file token.json stores the user's access and refresh tokens, and is
 // created automatically when the authorization flow completes for the first
 // time.
-const TOKEN_PATH = 'token.json';
+const TOKEN_PATH = './credentials/token.json';
 const imageIdConst = '1gcZsLX0CxuG8_it0Tu9BrdPdthFAk_Z1';
 const videoIdConst = '1cNRm7YX8lh2tmp1SPG90V0buhAUZEL7n';
 
