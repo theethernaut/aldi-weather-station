@@ -12,6 +12,7 @@
     "fs": "0.0.1-security",
     "googleapis": "^51.0.0",
     "node-cron": "^2.0.3",
+    "node-dht-sensor": "^0.4.2",
     "shelljs": "^0.8.4"
   }
 }
