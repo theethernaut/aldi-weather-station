@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DIR=../output
+DIR=./output
 filename=captureVideo.avi
 
 # Take video controller for USB webcam
