@@ -2,18 +2,21 @@ const fs = require('fs');
 const {google} = require('googleapis');
 const cron = require('node-cron');
 const capture = require('./capture')
-const setup = require('../setup/setup')
+const {videoId} = require('../setup/setup')
 
 //const videoIdConst = '1cNRm7YX8lh2tmp1SPG90V0buhAUZEL7n';
 const TOKEN_PATH = '../credentials/token.json'
 const VIDEO_TIME_MINUTES = 13;
+let videoIdConst = videoId
+console.log('videoId',videoId)
+
 
 function startVideoJob() {
   //Take Video
   cron.schedule(`*/${VIDEO_TIME_MINUTES} * * * *`, function() {
       console.log("---------------------")
       console.log("Running Cron Job = VIDEO");
-
+      console.log('videoId',videoId)
     takeAndUploadVideo()
   });
 }
@@ -46,13 +49,12 @@ function authorizeVideo(credentials, callback) {
     fs.readFile(TOKEN_PATH, (err, token) => {
       if (err) return console.log('Please run npm setup first to get the TOKEN')
       oAuth2Client.setCredentials(JSON.parse(token))
-      let videoIdConst = setup.getVideoId
       callback(oAuth2Client, videoIdConst) //FOR UPDATES.
     })
 }
 
 //Update the video file in Aldi folder.
-function updateVideo(auth, fileId) {
+function updateVideo(auth, videoId) {
   const drive = google.drive({ version: 'v3', auth });
   var fileMetadata = {
       'name': 'captureVideo.avi'
@@ -65,7 +67,7 @@ function updateVideo(auth, fileId) {
   drive.files.update({
       resource: fileMetadata,
       media: media,
-      fileId: fileId
+      fileId: videoId
       //addParents:'1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW'
   }, function (err, res) {
         if (err) {

@@ -1,26 +1,25 @@
 const fs = require('fs')
 const readline = require('readline')
 const {google} = require('googleapis')
-const capture = require('./capture')
-const storage = require('node-persist');
+const {imageId, videoId, readToken} = require('./setup') 
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/drive']
 const TOKEN_PATH = '../credentials/token.json'
-const IDS_PATH = './IDS.json'
-let imageId
-let videoId
-capture.captureImage()
-capture.captureVideo()
+let imgId = imageId
+console.log('imagenID : ',imgId)
+let vidId = videoId
+console.log('vidId ',vidId)
 
+readTokenSetup();
+readTokenGetId();
 
-if (!fs.existsSync(TOKEN_PATH)) readToken()
-function readToken() {
-  fs.readFile('../credentials/credentials.json', (err, content) => {
-    if (err) return console.log('Error loading client secret file:', err)
-    // Authorize a client with credentials, then call the Google Drive API.
-    authorizeImage(JSON.parse(content), uploadFileImage) //FOR UPDATES.
-  }) 
+function readTokenGetId() {
+    fs.readFile('../credentials/credentials.json', (err, content) => {
+        if (err) return console.log('Error loading client secret file:', err)
+        // Authorize a client with credentials, then call the Google Drive API.
+        authorizeImage(JSON.parse(content), getImageIdFunc) //FOR UPDATES.
+    })
 }
 
 /**
@@ -69,61 +68,38 @@ function getAccessToken(oAuth2Client, callback) {
   })
 }
 
-//Upload image file.
-function uploadFileImage(auth) {
-    const drive = google.drive({ version: 'v3', auth })
-    var fileMetadata = {
-        'name': 'captureImage.jpg'
-        //parents:['1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW'] //ID OF FOLDER 
-    }
-    var media = {
-        mimeType: 'image/jpeg',
-        body: fs.createReadStream('../scripts/output/captureImage.jpg')
-    }
-    drive.files.create({
-        resource: fileMetadata,
-        media: media,
-        fields: 'id'
-    }, function (err, res) {
-        if (err) {
-            // Handle error
-            console.log(err)
-        } else {
-            console.log('File Id: ', res.data.id)
-            imageId = res.data.id
-            //getImageId(auth, imageId)
-            uploadFileVideo(auth)
-        }
-    })
-}
 
-//Upload video file.
-function uploadFileVideo(auth) {
+function getImageIdFunc(auth, imgId) {
     const drive = google.drive({ version: 'v3', auth })
-    var fileMetadata = {
-        'name': 'captureVideo.avi'
-        //parents:['1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW']
-    }
-    var media = {
-        mimeType: 'video/avi',
-        uploadType:'resumable',
-        body: fs.createReadStream('../scripts/output/captureVideo.avi')
-    }
-    drive.files.create({
-        resource: fileMetadata,
-        media:media,
-        fields: 'id'
+    drive.files.get({
+      'fileId': imgId
     }, function (err, res) {
-        if (err) {
-            // Handle error
-            console.log(err)
-        } else {
-            console.log('File Id: ', res.data.id)
-            imageId = res.data.id
-        }
+      if (err) {
+          // Handle error
+          console.log(err)
+      } else {
+        getVideoIdFunc(auth, vidId)
+        return res.data.id
+      }
     })
-}
+  }
 
-module.exports = {
-  imageId, videoId
-}
+  
+function getVideoIdFunc(auth, vidId) {
+    const drive = google.drive({ version: 'v3', auth })
+    drive.files.get({
+      'fileId': videoId
+    }, function (err, res) {
+      if (err) {
+          // Handle error
+          console.log(err)
+      } else {
+        return res.data.id
+      }
+    })
+  }
+
+  module.exports = {
+      getImageIdFunc,
+      getVideoIdFunc
+  }

@@ -5,7 +5,7 @@ const updateVideo = require('./updateVideo')
 console.log(`Starting...`)
 
 function main() {
-  checkDependencies()
+  //checkDependencies()
   updateImage.startImageJob()
   updateVideo.startVideoJob()
   //dhtHumidity.execDht11()

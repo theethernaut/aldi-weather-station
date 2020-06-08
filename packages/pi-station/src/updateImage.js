@@ -2,13 +2,15 @@ const fs = require('fs')
 const {google} = require('googleapis')
 const cron = require('node-cron')
 const capture = require('./capture')
-const setup = require('../setup/setup')
+//const imageId = require('../setup/setup')
+const {imageId} = require('../setup/setup')
 
 //const imageIdConst = '1gcZsLX0CxuG8_it0Tu9BrdPdthFAk_Z1'
-const imageIdConst = setup.getImageId
+const imageIdConst = imageId
 const TOKEN_PATH = '../credentials/token.json'
 const IMAGE_TIME_MINUTES = 5
-console.log(imageIdConst)
+console.log('imageId'+imageIdConst)
+
 function startImageJob() {
   //Take Image in 5 minutes
   cron.schedule(`*/${IMAGE_TIME_MINUTES} * * * *`, function() {
@@ -39,6 +41,7 @@ function takeAndUploadImage() {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
+
 function authorizeImage(credentials, callback) {
   const {client_secret, client_id, redirect_uris} = credentials.installed
   const oAuth2Client = new google.auth.OAuth2(
@@ -51,7 +54,7 @@ function authorizeImage(credentials, callback) {
 }
 
 //Update the image file in Aldi folder.
-function updateImage(auth, fileId) {
+function updateImage(auth, imageIdConst) {
   const drive = google.drive({ version: 'v3', auth })
   var fileMetadata = {
       'name': 'captureImage.jpg'
@@ -63,7 +66,7 @@ function updateImage(auth, fileId) {
   drive.files.update({
       resource: fileMetadata,
       media: media,
-      fileId: fileId
+      fileId: imageIdConst
       //addParents:'1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW'
   }, function (err, res) {
         if (err) {
