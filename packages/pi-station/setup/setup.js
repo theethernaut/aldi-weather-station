@@ -11,11 +11,16 @@ const CREDENTIALS_PATH = __dirname + '/../credentials/credentials.json'
 const IDS_PATH = './IDS.json'
 let imageId
 let videoId
-capture.captureImage()
-capture.captureVideo()
 
-readToken()
-// if (!fs.existsSync(TOKEN_PATH)) readToken()
+function main() {
+  capture.captureImage()
+  capture.captureVideo()
+
+  // readToken()
+  if (!fs.existsSync(TOKEN_PATH)) readToken()
+}
+
+main()
 
 function readToken() {
   fs.readFile(CREDENTIALS_PATH, (err, content) => {
