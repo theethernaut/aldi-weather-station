@@ -5,10 +5,12 @@ const capture = require('./capture')
 const storage = require('node-persist');
 
 //const imageIdConst = '1gcZsLX0CxuG8_it0Tu9BrdPdthFAk_Z1'
-let imageIdConst = await storage.getItem('imageId')
+async function getImageId () {
+  return imageIdConst = await  storage.getItem('imageId')
+}
 const TOKEN_PATH = '../credentials/token.json'
 const IMAGE_TIME_MINUTES = 5
-console.log('imageId'+imageIdConst)
+console.log('imageId'+getImageId)
 
 function startImageJob() {
   //Take Image in 5 minutes
@@ -65,7 +67,7 @@ function updateImage(auth, imageIdConst) {
   drive.files.update({
       resource: fileMetadata,
       media: media,
-      fileId: imageIdConst
+      fileId: getImageId
       //addParents:'1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW'
   }, function (err, res) {
         if (err) {

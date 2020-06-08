@@ -7,8 +7,10 @@ const storage = require('node-persist');
 //const videoIdConst = '1cNRm7YX8lh2tmp1SPG90V0buhAUZEL7n';
 const TOKEN_PATH = '../credentials/token.json'
 const VIDEO_TIME_MINUTES = 13;
-let videoIdConst = await storage.getItem('videoId')
-console.log('videoId',videoId)
+async function getVideoId () {
+  return videoIdConst = await storage.getItem('videoId')
+}
+console.log('videoId',getVideoId)
 
 
 function startVideoJob() {
@@ -67,7 +69,7 @@ function updateVideo(auth, videoId) {
   drive.files.update({
       resource: fileMetadata,
       media: media,
-      fileId: videoId
+      fileId: getVideoId
       //addParents:'1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW'
   }, function (err, res) {
         if (err) {

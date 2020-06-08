@@ -1,7 +1,7 @@
 const fs = require('fs')
 const readline = require('readline')
 const {google} = require('googleapis')
-const capture = require('./capture')
+const capture = require('../src/capture')
 const storage = require('node-persist');
 
 // If modifying these scopes, delete token.json.
@@ -13,8 +13,8 @@ let videoId
 capture.captureImage()
 capture.captureVideo()
 
-
-if (!fs.existsSync(TOKEN_PATH)) readToken()
+readToken()
+//if (!fs.existsSync(TOKEN_PATH)) readToken()
 function readToken() {
   fs.readFile('../credentials/credentials.json', (err, content) => {
     if (err) return console.log('Error loading client secret file:', err)
@@ -84,7 +84,7 @@ function uploadFileImage(auth) {
         resource: fileMetadata,
         media: media,
         fields: 'id'
-    }, function (err, res) {
+    }, async function (err, res) {
         if (err) {
             // Handle error
             console.log(err)
@@ -92,8 +92,7 @@ function uploadFileImage(auth) {
             console.log('File Id: ', res.data.id)
             imageId = res.data.id
             await storage.init({dir: './IDS.json'});
-            await storage.setItem('imageId',imageId)
-            console.log(await storage.getItem('imageId')); 
+            await storage.setItem('imageId',imageId) 
             uploadFileVideo(auth)
         }
     })
@@ -115,16 +114,14 @@ function uploadFileVideo(auth) {
         resource: fileMetadata,
         media:media,
         fields: 'id'
-    }, function (err, res) {
+    }, async function (err, res) {
         if (err) {
             // Handle error
             console.log(err)
         } else {
             console.log('File Id: ', res.data.id)
             videoId = res.data.id
-            await storage.init({dir: './IDS.json'});
-            await storage.setItem('imageId',imageId)
-            console.log(await storage.getItem('imageId')); 
+            await storage.setItem('videoId',videoId)
         }
     })
 }
