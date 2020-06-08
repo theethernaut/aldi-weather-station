@@ -51,12 +51,12 @@ function authorizeVideo(credentials, callback) {
     fs.readFile(TOKEN_PATH, (err, token) => {
       if (err) return console.log('Please run npm setup first to get the TOKEN')
       oAuth2Client.setCredentials(JSON.parse(token))
-      callback(oAuth2Client, videoIdConst) //FOR UPDATES.
+      callback(oAuth2Client, getVideoId) //FOR UPDATES.
     })
 }
 
 //Update the video file in Aldi folder.
-function updateVideo(auth, videoId) {
+function updateVideo(auth, getVideoId) {
   const drive = google.drive({ version: 'v3', auth });
   var fileMetadata = {
       'name': 'captureVideo.avi'

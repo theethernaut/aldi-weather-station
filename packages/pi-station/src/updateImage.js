@@ -50,12 +50,12 @@ function authorizeImage(credentials, callback) {
       fs.readFile(TOKEN_PATH, (err, token) => {
         if (err) return console.log('Please run npm setup first to get the TOKEN')
         oAuth2Client.setCredentials(JSON.parse(token))
-        callback(oAuth2Client, imageIdConst) //FOR UPDATES.
+        callback(oAuth2Client, getImageId) //FOR UPDATES.
       })
 }
 
 //Update the image file in Aldi folder.
-function updateImage(auth, imageIdConst) {
+function updateImage(auth, getImageId) {
   const drive = google.drive({ version: 'v3', auth })
   var fileMetadata = {
       'name': 'captureImage.jpg'
