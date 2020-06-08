@@ -64,7 +64,7 @@ function updateVideo(auth, getVideoId) {
   var media = {
       mimeType: 'video/avi',
       uploadType:'resumable',
-      body: fs.createReadStream('../scripts/output/captureVideo.avi')
+      body: fs.createReadStream('../src/output/captureVideo.avi')
   };
   drive.files.update({
       resource: fileMetadata,

@@ -78,7 +78,7 @@ function uploadFileImage(auth) {
     }
     var media = {
         mimeType: 'image/jpeg',
-        body: fs.createReadStream('../scripts/output/captureImage.jpg')
+        body: fs.createReadStream('../src/output/captureImage.jpg')
     }
     drive.files.create({
         resource: fileMetadata,
@@ -108,7 +108,7 @@ function uploadFileVideo(auth) {
     var media = {
         mimeType: 'video/avi',
         uploadType:'resumable',
-        body: fs.createReadStream('../scripts/output/captureVideo.avi')
+        body: fs.createReadStream('../src/output/captureVideo.avi')
     }
     drive.files.create({
         resource: fileMetadata,

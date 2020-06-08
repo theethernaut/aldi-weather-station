@@ -62,7 +62,7 @@ function updateImage(auth, getImageId) {
   }
   var media = {
       mimeType: 'image/jpeg',
-      body: fs.createReadStream('../scripts/output/captureImage.jpg')
+      body: fs.createReadStream('../src/output/captureImage.jpg')
   }
   drive.files.update({
       resource: fileMetadata,
