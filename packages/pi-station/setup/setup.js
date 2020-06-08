@@ -91,7 +91,9 @@ function uploadFileImage(auth) {
         } else {
             console.log('File Id: ', res.data.id)
             imageId = res.data.id
-            //getImageId(auth, imageId)
+            await storage.init({dir: './IDS.json'});
+            await storage.setItem('imageId',imageId)
+            console.log(await storage.getItem('imageId')); 
             uploadFileVideo(auth)
         }
     })
@@ -119,11 +121,10 @@ function uploadFileVideo(auth) {
             console.log(err)
         } else {
             console.log('File Id: ', res.data.id)
-            imageId = res.data.id
+            videoId = res.data.id
+            await storage.init({dir: './IDS.json'});
+            await storage.setItem('imageId',imageId)
+            console.log(await storage.getItem('imageId')); 
         }
     })
-}
-
-module.exports = {
-  imageId, videoId
 }

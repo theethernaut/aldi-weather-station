@@ -2,11 +2,10 @@ const fs = require('fs')
 const {google} = require('googleapis')
 const cron = require('node-cron')
 const capture = require('./capture')
-//const imageId = require('../setup/setup')
-const {imageId} = require('../setup/setup')
+const storage = require('node-persist');
 
 //const imageIdConst = '1gcZsLX0CxuG8_it0Tu9BrdPdthFAk_Z1'
-const imageIdConst = imageId
+let imageIdConst = await storage.getItem('imageId')
 const TOKEN_PATH = '../credentials/token.json'
 const IMAGE_TIME_MINUTES = 5
 console.log('imageId'+imageIdConst)

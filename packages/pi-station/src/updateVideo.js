@@ -2,12 +2,12 @@ const fs = require('fs');
 const {google} = require('googleapis');
 const cron = require('node-cron');
 const capture = require('./capture')
-const {videoId} = require('../setup/setup')
+const storage = require('node-persist');
 
 //const videoIdConst = '1cNRm7YX8lh2tmp1SPG90V0buhAUZEL7n';
 const TOKEN_PATH = '../credentials/token.json'
 const VIDEO_TIME_MINUTES = 13;
-let videoIdConst = videoId
+let videoIdConst = await storage.getItem('videoId')
 console.log('videoId',videoId)
 
 
