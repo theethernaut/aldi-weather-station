@@ -13,7 +13,7 @@ let videoId
 capture.captureImage()
 capture.captureVideo()
 
-
+//readToken()
 if (!fs.existsSync(TOKEN_PATH)) readToken()
 function readToken() {
   fs.readFile('../credentials/credentials.json', (err, content) => {
