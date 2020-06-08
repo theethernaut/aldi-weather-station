@@ -8,7 +8,7 @@ const storage = require('node-persist');
 const TOKEN_PATH = '../credentials/token.json'
 const VIDEO_TIME_MINUTES = 13;
 async function getVideoId () {
-  return videoIdConst = await storage.getItem('videoId')
+  return await storage.getItem('videoId')
 }
 console.log('videoId',getVideoId)
 
@@ -69,7 +69,7 @@ function updateVideo(auth, getVideoId) {
   drive.files.update({
       resource: fileMetadata,
       media: media,
-      fileId: getVideoId
+      fileId: getVideoId()
       //addParents:'1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW'
   }, function (err, res) {
         if (err) {

@@ -6,7 +6,7 @@ const storage = require('node-persist');
 
 //const imageIdConst = '1gcZsLX0CxuG8_it0Tu9BrdPdthFAk_Z1'
 async function getImageId () {
-  return imageIdConst = await  storage.getItem('imageId')
+  return await storage.getItem('imageId')
 }
 const TOKEN_PATH = '../credentials/token.json'
 const IMAGE_TIME_MINUTES = 5
@@ -67,7 +67,7 @@ function updateImage(auth, getImageId) {
   drive.files.update({
       resource: fileMetadata,
       media: media,
-      fileId: getImageId
+      fileId: getImageId()
       //addParents:'1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW'
   }, function (err, res) {
         if (err) {
