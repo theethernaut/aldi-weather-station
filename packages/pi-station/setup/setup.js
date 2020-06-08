@@ -6,21 +6,23 @@ const storage = require('node-persist');
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/drive']
-const TOKEN_PATH = '../credentials/token.json'
+const TOKEN_PATH = __dirname + '/../credentials/token.json'
+const CREDENTIALS_PATH = __dirname + '/../credentials/credentials.json'
 const IDS_PATH = './IDS.json'
 let imageId
 let videoId
 capture.captureImage()
 capture.captureVideo()
 
-//readToken()
-if (!fs.existsSync(TOKEN_PATH)) readToken()
+readToken()
+// if (!fs.existsSync(TOKEN_PATH)) readToken()
+
 function readToken() {
-  fs.readFile('../credentials/credentials.json', (err, content) => {
+  fs.readFile(CREDENTIALS_PATH, (err, content) => {
     if (err) return console.log('Error loading client secret file:', err)
     // Authorize a client with credentials, then call the Google Drive API.
     authorizeImage(JSON.parse(content), uploadFileImage) //FOR UPDATES.
-  }) 
+  })
 }
 
 /**
@@ -78,7 +80,7 @@ function uploadFileImage(auth) {
     }
     var media = {
         mimeType: 'image/jpeg',
-        body: fs.createReadStream('../src/output/captureImage.jpg')
+        body: fs.createReadStream(__dirname + '/../src/output/captureImage.jpg')
     }
     drive.files.create({
         resource: fileMetadata,
@@ -108,7 +110,7 @@ function uploadFileVideo(auth) {
     var media = {
         mimeType: 'video/avi',
         uploadType:'resumable',
-        body: fs.createReadStream('../src/output/captureVideo.avi')
+        body: fs.createReadStream(__dirname + '/../src/output/captureVideo.avi')
     }
     drive.files.create({
         resource: fileMetadata,
