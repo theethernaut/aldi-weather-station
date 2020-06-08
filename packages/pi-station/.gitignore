@@ -1,1 +1,5 @@
 node_modules/
+*.avi
+*.jpg
+setup/IDS/
+credentials/

@@ -91,7 +91,7 @@ function uploadFileImage(auth) {
         } else {
             console.log('File Id: ', res.data.id)
             imageId = res.data.id
-            await storage.init({dir: './IDS.json'});
+            await storage.init({dir: './IDS'});
             await storage.setItem('imageId',imageId) 
             uploadFileVideo(auth)
         }
