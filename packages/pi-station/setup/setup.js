@@ -15,11 +15,11 @@ let imageId
 let videoId
 
 function main() {
-  capture.captureImage()
-  capture.captureVideo()
+  //capture.captureImage()
+  //capture.captureVideo()
 
-  // readToken()
-  if (!fs.existsSync(TOKEN_PATH)) readToken()
+   readToken()
+  //if (!fs.existsSync(TOKEN_PATH)) readToken()
 }
 
 main()
@@ -100,7 +100,7 @@ function uploadFileImage(auth) {
         } else {
             console.log('File Id: ', res.data.id)
             imageId = res.data.id
-            await storage.init({dir: './IDS'});
+            await storage.init({dir: __dirname + '/../IDS'});
             await storage.setItem('imageId',imageId) 
             uploadFileVideo(auth)
         }

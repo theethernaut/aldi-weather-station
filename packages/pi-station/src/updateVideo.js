@@ -4,7 +4,6 @@ const cron = require('node-cron');
 const capture = require('./capture')
 const storage = require('node-persist');
 
-const VIDEO_PATH = __dirname + '/../output/captureVideo.avi'
 const TOKEN_PATH = __dirname + '/../credentials/token.json'
 const CREDENTIALS_PATH = __dirname + '/../credentials/credentials.json'
 const VIDEO_TIME_MINUTES = 13;
@@ -12,8 +11,6 @@ const VIDEO_TIME_MINUTES = 13;
 async function getVideoId () {
   return await storage.getItem('videoId')
 }
-console.log('videoId',getVideoId)
-
 
 function startVideoJob() {
   //Take Video
@@ -66,7 +63,7 @@ function updateVideo(auth, getVideoId) {
   var media = {
       mimeType: 'video/avi',
       uploadType:'resumable',
-      body: fs.createReadStream(VIDEO_PATH)
+      body: fs.createReadStream('../output/captureVideo.avi')
   };
   drive.files.update({
       resource: fileMetadata,
