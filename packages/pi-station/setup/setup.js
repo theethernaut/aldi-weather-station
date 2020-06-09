@@ -5,6 +5,8 @@ const capture = require('../src/capture')
 const storage = require('node-persist');
 
 // If modifying these scopes, delete token.json.
+const IMAGE_PATH = __dirname + '/../output/captureImage.jpg'
+const VIDEO_PATH = __dirname + '/../output/captureVideo.avi'
 const SCOPES = ['https://www.googleapis.com/auth/drive']
 const TOKEN_PATH = __dirname + '/../credentials/token.json'
 const CREDENTIALS_PATH = __dirname + '/../credentials/credentials.json'
@@ -85,7 +87,7 @@ function uploadFileImage(auth) {
     }
     var media = {
         mimeType: 'image/jpeg',
-        body: fs.createReadStream(__dirname + '/../src/output/captureImage.jpg')
+        body: fs.createReadStream(IMAGE_PATH)
     }
     drive.files.create({
         resource: fileMetadata,
@@ -115,7 +117,7 @@ function uploadFileVideo(auth) {
     var media = {
         mimeType: 'video/avi',
         uploadType:'resumable',
-        body: fs.createReadStream(__dirname + '/../src/output/captureVideo.avi')
+        body: fs.createReadStream(VIDEO_PATH)
     }
     drive.files.create({
         resource: fileMetadata,

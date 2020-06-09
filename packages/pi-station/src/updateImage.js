@@ -4,13 +4,14 @@ const cron = require('node-cron')
 const capture = require('./capture')
 const storage = require('node-persist');
 
-//const imageIdConst = '1gcZsLX0CxuG8_it0Tu9BrdPdthFAk_Z1'
+const IMAGE_PATH = __dirname + '/../output/captureImage.jpg'
+const TOKEN_PATH = __dirname + '/../credentials/token.json'
+const CREDENTIALS_PATH = __dirname + '/../credentials/credentials.json'
+const IMAGE_TIME_MINUTES = 5
+
 async function getImageId () {
   return await storage.getItem('imageId')
 }
-const TOKEN_PATH = '../credentials/token.json'
-const IMAGE_TIME_MINUTES = 5
-console.log('imageId'+getImageId)
 
 function startImageJob() {
   //Take Image in 5 minutes
@@ -28,7 +29,7 @@ function takeAndUploadImage() {
   console.log("Updating Image with Cron Job")
 
   // Load client secrets from a local file.
-  fs.readFile('../credentials/credentials.json', (err, content) => {
+  fs.readFile(CREDENTIALS_PATH, (err, content) => {
     if (err) return console.log('Error loading client secret file:', err)
     // Authorize a client with credentials, then call the Google Drive API.
     //authorize(JSON.parse(content), uploadFileVideo) //FOR UPLOADS.
@@ -62,7 +63,7 @@ function updateImage(auth, getImageId) {
   }
   var media = {
       mimeType: 'image/jpeg',
-      body: fs.createReadStream('../src/output/captureImage.jpg')
+      body: fs.createReadStream(IMAGE_PATH)
   }
   drive.files.update({
       resource: fileMetadata,
