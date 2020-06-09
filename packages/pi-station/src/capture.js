@@ -1,6 +1,6 @@
 const shell = require('shelljs');
 
-const basePath = `${__dirname}/output`
+const basePath = `${__dirname}/../output`
 const imgPath = `${basePath}/captureImage.jpg`
 const vidPath = `${basePath}/captureVideo.avi`
 
