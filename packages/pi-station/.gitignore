@@ -1,6 +1,4 @@
 node_modules/
 *.avi
 *.jpg
-setup/IDS/
-credentials/token.json
-credentials/credentials.json
+IDS/

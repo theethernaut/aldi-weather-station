@@ -4,13 +4,13 @@ const cron = require('node-cron');
 const capture = require('./capture')
 const storage = require('node-persist');
 
-//const videoIdConst = '1cNRm7YX8lh2tmp1SPG90V0buhAUZEL7n';
-const TOKEN_PATH = '../credentials/token.json'
+const TOKEN_PATH = __dirname + '/../credentials/token.json'
+const CREDENTIALS_PATH = __dirname + '/../credentials/credentials.json'
 const VIDEO_TIME_MINUTES = 13;
-async function getVideoId () {
-  return videoIdConst = await storage.getItem('videoId')
-}
 
+async function getVideoId () {
+  return await storage.getItem('videoId')
+}
 
 function startVideoJob() {
   //Take Video
@@ -28,7 +28,7 @@ function takeAndUploadVideo() {
     console.log("Updating Video with Cron Job");
 
     // Load client secrets from a local file.
-    fs.readFile('../credentials/credentials.json', (err, content) => {
+    fs.readFile(CREDENTIALS_PATH, (err, content) => {
       if (err) return console.log('Error loading client secret file:', err);
       // Authorize a client with credentials, then call the Google Drive API.
       authorizeVideo(JSON.parse(content), updateVideo); //FOR UPDATES.
@@ -63,12 +63,12 @@ function updateVideo(auth, getVideoId) {
   var media = {
       mimeType: 'video/avi',
       uploadType:'resumable',
-      body: fs.createReadStream('../src/output/captureVideo.avi')
+      body: fs.createReadStream('../output/captureVideo.avi')
   };
   drive.files.update({
       resource: fileMetadata,
       media: media,
-      fileId: getVideoId
+      fileId: getVideoId()
       //addParents:'1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW'
   }, function (err, res) {
         if (err) {

@@ -5,23 +5,31 @@ const capture = require('../src/capture')
 const storage = require('node-persist');
 
 // If modifying these scopes, delete token.json.
+const IMAGE_PATH = __dirname + '/../output/captureImage.jpg'
+const VIDEO_PATH = __dirname + '/../output/captureVideo.avi'
 const SCOPES = ['https://www.googleapis.com/auth/drive']
-const TOKEN_PATH = '../credentials/token.json'
-const IDS_PATH = './IDS.json'
+const TOKEN_PATH = __dirname + '/../credentials/token.json'
+const CREDENTIALS_PATH = __dirname + '/../credentials/credentials.json'
+
 let imageId
 let videoId
-capture.captureImage()
-//capture.captureVideo()
 
-//readToken()
-//if (!fs.existsSync(TOKEN_PATH)) readToken()
-readToken()
+function main() {
+  //capture.captureImage()
+  //capture.captureVideo()
+
+  //readToken()
+  if (!fs.existsSync(TOKEN_PATH)) readToken()
+}
+
+main()
+
 function readToken() {
-  fs.readFile('../credentials/credentials.json', (err, content) => {
+  fs.readFile(CREDENTIALS_PATH, (err, content) => {
     if (err) return console.log('Error loading client secret file:', err)
     // Authorize a client with credentials, then call the Google Drive API.
     authorizeImage(JSON.parse(content), uploadFileImage) //FOR UPDATES.
-  }) 
+  })
 }
 
 /**
@@ -79,7 +87,7 @@ function uploadFileImage(auth) {
     }
     var media = {
         mimeType: 'image/jpeg',
-        body: fs.createReadStream('../src/output/captureImage.jpg')
+        body: fs.createReadStream(IMAGE_PATH)
     }
     drive.files.create({
         resource: fileMetadata,
@@ -92,7 +100,7 @@ function uploadFileImage(auth) {
         } else {
             console.log('File Id: ', res.data.id)
             imageId = res.data.id
-            await storage.init({dir: './IDS'});
+            await storage.init({dir: __dirname + '/../IDS'});
             await storage.setItem('imageId',imageId) 
             uploadFileVideo(auth)
         }
@@ -109,7 +117,7 @@ function uploadFileVideo(auth) {
     var media = {
         mimeType: 'video/avi',
         uploadType:'resumable',
-        body: fs.createReadStream('../src/output/captureVideo.avi')
+        body: fs.createReadStream(VIDEO_PATH)
     }
     drive.files.create({
         resource: fileMetadata,
