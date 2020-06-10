@@ -1,68 +1,58 @@
-const fs = require("fs");
-const { google } = require("googleapis");
+const express = require("express");
+const app = express();
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+require('dotenv').config();
 
-const TOKEN_PATH = __dirname + "/credentials/token.json";
-const CREDENTIALS_PATH = __dirname + "/credentials/credentials.json";
+const imageRoutes = require("./api/routes/images");
+const videoRoutes = require("./api/routes/videos");
 
-function main() {
-    readCredentials()
-}
+const URI = process.env.MONGOOSE_URI;
 
-main();
+mongoose.connect(URI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useMongoClient: true
+});
 
-function readCredentials() {
-  // Load client secrets from a local file.
-  fs.readFile(CREDENTIALS_PATH, (err, content) => {
-    if (err) return console.log("Error loading client secret file:", err);
-    authorize(JSON.parse(content), downloadImage);
-  });
-}
+mongoose.Promise = global.Promise;
 
-function authorize(credentials, callback) {
-  const { client_secret, client_id, redirect_uris } = credentials.installed;
-  const oAuth2Client = new google.auth.OAuth2(
-    client_id,
-    client_secret,
-    redirect_uris[0]
+app.use(morgan("dev"));
+app.use('/uploads', express.static('uploads'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
-  fs.readFile(TOKEN_PATH, (err, token) => {
-    if (err) throw err;
-    oAuth2Client.setCredentials(JSON.parse(token));
-    callback(oAuth2Client); //FOR UPDATES.
-  });
-}
-
-function downloadImage(auth) {
-  const imageId = "0BwwA4oUTeiV1UVNwOHItT0xfa2M";
-  var dest = fs.createWriteStream("./output/captureImage.jpg");
-  drive.files
-    .get({
-      fileId: imageId,
-      alt: "media",
-    })
-    .on("end", function () {
-      console.log("Done");
-    })
-    .on("error", function (err) {
-      console.log("Error during download", err);
-    })
-    .pipe(dest);
-    downloadVideo(auth);
-}
-
-function downloadVideo(auth) {
-    const videoId = "0BwwA4oUTeiV1UVNwOHItT0xfa2M";
-    var dest = fs.createWriteStream("./output/captureImage.jpg");
-    drive.files
-      .get({
-        fileId: videoId,
-        alt: "media",
-      })
-      .on("end", function () {
-        console.log("Done");
-      })
-      .on("error", function (err) {
-        console.log("Error during download", err);
-      })
-      .pipe(dest);
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
   }
+  next();
+});
+
+// Routes which should handle requests
+app.use("/images", imageRoutes);
+app.use("/videos", videoRoutes);
+
+app.use((req, res, next) => {
+  const error = new Error("Not found");
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message
+    }
+  });
+});
+
+module.exports = app;
