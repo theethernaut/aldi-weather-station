@@ -11,9 +11,9 @@ function main() {
   //updateImage.startImageJob()
   //updateVideo.startVideoJob()
   //dhtHumidity.execDht11()
-  PythonShell.run('lluvia.py', null, function (err) {
+  /*PythonShell.run('lluvia.py', null, function (err) {
     if (err) throw err;
-  });
+  });*/
 }
 
 main()
