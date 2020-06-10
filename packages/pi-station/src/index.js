@@ -1,17 +1,23 @@
-const updateImage = require('./updateImage')
-const updateVideo = require('./updateVideo')
+let {PythonShell} = require('python-shell')
+//const updateImage = require('./updateImage')
+//const updateVideo = require('./updateVideo')
 //const dhtHumidity = require('./dht11')
 
-console.log(`Starting...`)
 
-function main() {
+console.log(`Starting...`)
+main()
+async function main() {
   //checkDependencies()
-  updateImage.startImageJob()
-  updateVideo.startVideoJob()
+  //updateImage.startImageJob()
+  //updateVideo.startVideoJob()
   //dhtHumidity.execDht11()
+  await PythonShell.run('lluvia.py', null, function (err) {
+    if (err) throw err;
+      console.log('finished');
+    });
 }
 
-main()
+
 
 function checkDependencies() {
   // TODO

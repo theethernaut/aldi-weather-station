@@ -11,10 +11,11 @@ const IDS_PATH = './IDS.json'
 let imageId
 let videoId
 capture.captureImage()
-capture.captureVideo()
+//capture.captureVideo()
 
 //readToken()
-if (!fs.existsSync(TOKEN_PATH)) readToken()
+//if (!fs.existsSync(TOKEN_PATH)) readToken()
+readToken()
 function readToken() {
   fs.readFile('../credentials/credentials.json', (err, content) => {
     if (err) return console.log('Error loading client secret file:', err)

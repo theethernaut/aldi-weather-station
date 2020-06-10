@@ -9,8 +9,7 @@ async function getImageId () {
   return imageIdConst = await  storage.getItem('imageId')
 }
 const TOKEN_PATH = '../credentials/token.json'
-const IMAGE_TIME_MINUTES = 5
-console.log('imageId'+getImageId)
+const IMAGE_TIME_MINUTES = 1
 
 function startImageJob() {
   //Take Image in 5 minutes

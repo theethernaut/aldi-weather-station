@@ -10,7 +10,6 @@ const VIDEO_TIME_MINUTES = 13;
 async function getVideoId () {
   return videoIdConst = await storage.getItem('videoId')
 }
-console.log('videoId',getVideoId)
 
 
 function startVideoJob() {
@@ -84,5 +83,3 @@ function updateVideo(auth, getVideoId) {
 module.exports = {
   startVideoJob
 }
-
-
