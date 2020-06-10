@@ -10,7 +10,7 @@ const VIDEO_PATH = __dirname + '/../output/captureVideo.avi'
 const SCOPES = ['https://www.googleapis.com/auth/drive']
 const TOKEN_PATH = __dirname + '/../credentials/token.json'
 const CREDENTIALS_PATH = __dirname + '/../credentials/credentials.json'
-const IDS_PATH = './IDS.json'
+
 let imageId
 let videoId
 
@@ -18,8 +18,8 @@ function main() {
   //capture.captureImage()
   //capture.captureVideo()
 
-   readToken()
-  //if (!fs.existsSync(TOKEN_PATH)) readToken()
+  //readToken()
+  if (!fs.existsSync(TOKEN_PATH)) readToken()
 }
 
 main()

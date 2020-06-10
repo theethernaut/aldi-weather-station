@@ -83,5 +83,3 @@ function updateVideo(auth, getVideoId) {
 module.exports = {
   startVideoJob
 }
-
-

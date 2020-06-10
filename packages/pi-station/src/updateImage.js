@@ -14,7 +14,6 @@ let imgId = getImageId().then(function (result) {
 let imageId;
 
 async function getImageId() {
-  console.log(__dirname);
   await storage.init({ dir: __dirname + "/../IDS" });
   let id = await storage.getItem("imageId");
   return id;
@@ -118,5 +117,5 @@ function getURI(auth, imageId) {
 }
 
 module.exports = {
-  startImageJob,
-};
+  startImageJob
+}
