@@ -7,8 +7,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.19.2",
+    "fetch": "^1.1.0",
+    "form-data": "^3.0.0",
     "fs": "0.0.1-security",
     "googleapis": "^51.0.0",
+    "http": "0.0.1-security",
+    "http-post": "^0.1.1",
     "node-cron": "^2.0.3",
     "node-persist": "^3.1.0",
     "python-shell": "^2.0.1",

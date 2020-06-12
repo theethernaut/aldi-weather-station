@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const image = require("../models/image");
-
+//const image = require("../models/image");
+/*
 // Handle incoming GET requests to /orders
 router.get("/", (req, res, next) => {
   Order.find()
@@ -114,5 +114,5 @@ router.delete("/:orderId", (req, res, next) => {
       });
     });
 });
-
+*/
 module.exports = router;

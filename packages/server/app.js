@@ -3,23 +3,27 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-require('dotenv').config();
+require("dotenv").config();
 
 const imageRoutes = require("./api/routes/images");
-const videoRoutes = require("./api/routes/videos");
+//const videoRoutes = require("./api/routes/videos");
 
 const URI = process.env.MONGOOSE_URI;
 
 mongoose.connect(URI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useMongoClient: true
+  useMongoClient: true
+});
+
+const connection = mongoose.connection;
+
+connection.once("open", () => {
+  console.log("Database is connected");
 });
 
 mongoose.Promise = global.Promise;
 
 app.use(morgan("dev"));
-app.use('/uploads', express.static('uploads'));
+app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -38,7 +42,7 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use("/images", imageRoutes);
-app.use("/videos", videoRoutes);
+//app.use("/videos", videoRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");
@@ -50,8 +54,8 @@ app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
     error: {
-      message: error.message
-    }
+      message: error.message,
+    },
   });
 });
 

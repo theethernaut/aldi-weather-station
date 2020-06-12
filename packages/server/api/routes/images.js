@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const multer = require('multer');
+const fs = require('fs')
+//const multer = require('multer');
 
-const storage = multer.diskStorage({
+/*const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './uploads/');
   },
@@ -14,7 +15,7 @@ const storage = multer.diskStorage({
 
 const fileFilter = (req, file, cb) => {
   // reject a file
-  if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+  if (file.mimetype === 'image/jpeg') {
     cb(null, true);
   } else {
     cb(null, false);
@@ -27,26 +28,26 @@ const upload = multer({
     fileSize: 1024 * 1024 * 5
   },
   fileFilter: fileFilter
-});
+});*/
 
-const Product = require("../models/product");
+const Image = require("../models/image");
 
 router.get("/", (req, res, next) => {
-  Product.find()
-    .select("name price _id productImage")
+  Image.find()
+    .select("_id name type url")
     .exec()
     .then(docs => {
       const response = {
         count: docs.length,
-        products: docs.map(doc => {
+        images: docs.map(doc => {
           return {
-            name: doc.name,
-            price: doc.price,
-            productImage: doc.productImage,
             _id: doc._id,
+            name: doc.name,
+            type: doc.type,
+            url: doc.url,
             request: {
               type: "GET",
-              url: "http://localhost:3000/products/" + doc._id
+              url: "http://localhost:3000/images/" + doc._id
             }
           };
         })
@@ -67,26 +68,32 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.post("/", upload.single('productImage'), (req, res, next) => {
-  const product = new Product({
+router.post("/", (req, res, next) => {
+  const image = new Image({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
-    price: req.body.price,
-    productImage: req.file.path 
+    type: req.body.type,
+    url: req.body.url,
+    file: req.body.file
   });
-  product
+  console.log(req.body.file)
+  fs.writeFile("uploads/captureImage.jpg", req.body.file, 'base64',function(err){
+    err ? console.log(err) : console.log('File created')
+  })
+  image
     .save()
     .then(result => {
       console.log(result);
       res.status(201).json({
-        message: "Created product successfully",
-        createdProduct: {
-            name: result.name,
-            price: result.price,
+        message: "Created image successfully",
+        createdImage: {
             _id: result._id,
+            name: result.name,
+            type: result.type,
+            url: result.url,
             request: {
                 type: 'GET',
-                url: "http://localhost:3000/products/" + result._id
+                url: "http://localhost:3000/images/" + result._id
             }
         }
       });
@@ -99,10 +106,10 @@ router.post("/", upload.single('productImage'), (req, res, next) => {
     });
 });
 
-router.get("/:productId", (req, res, next) => {
-  const id = req.params.productId;
-  Product.findById(id)
-    .select('name price _id productImage')
+router.get("/:imageId", (req, res, next) => {
+  const id = req.params.imageId;
+  Image.findById(id)
+    .select("_id name type url")
     .exec()
     .then(doc => {
       console.log("From database", doc);
@@ -111,7 +118,7 @@ router.get("/:productId", (req, res, next) => {
             product: doc,
             request: {
                 type: 'GET',
-                url: 'http://localhost:3000/products'
+                url: 'http://localhost:3000/images'
             }
         });
       } else {
@@ -126,20 +133,20 @@ router.get("/:productId", (req, res, next) => {
     });
 });
 
-router.patch("/:productId", (req, res, next) => {
-  const id = req.params.productId;
-  const updateOps = {};
-  for (const ops of req.body) {
-    updateOps[ops.propName] = ops.value;
+router.patch("/:imageId", (req, res, next) => {
+  const id = req.params.imageId;
+  const updateImg = {};
+  for (const img of req.body) {
+    updateImg[img.propName] = img.value;
   }
-  Product.update({ _id: id }, { $set: updateOps })
+  Image.update({ _id: id }, { $set: updateImg })
     .exec()
     .then(result => {
       res.status(200).json({
-          message: 'Product updated',
+          message: 'Image updated',
           request: {
               type: 'GET',
-              url: 'http://localhost:3000/products/' + id
+              url: 'http://localhost:3000/images/' + id
           }
       });
     })
@@ -151,7 +158,7 @@ router.patch("/:productId", (req, res, next) => {
     });
 });
 
-router.delete("/:productId", (req, res, next) => {
+/*router.delete("/:productId", (req, res, next) => {
   const id = req.params.productId;
   Product.remove({ _id: id })
     .exec()
@@ -171,6 +178,6 @@ router.delete("/:productId", (req, res, next) => {
         error: err
       });
     });
-});
+});*/
 
 module.exports = router;
