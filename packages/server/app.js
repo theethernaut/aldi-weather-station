@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 
 const imageRoutes = require("./api/routes/images");
-//const videoRoutes = require("./api/routes/videos");
+const videoRoutes = require("./api/routes/videos");
 
 const URI = process.env.MONGOOSE_URI;
 
@@ -42,7 +42,7 @@ app.use((req, res, next) => {
 
 // Routes which should handle requests
 app.use("/images", imageRoutes);
-//app.use("/videos", videoRoutes);
+app.use("/videos", videoRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

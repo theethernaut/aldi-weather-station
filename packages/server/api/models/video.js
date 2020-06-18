@@ -1,10 +1,10 @@
-const { Schema, model } = require('mongoose');
+const mongoose = require('mongoose');
 
-const videoSchema = new Schema(
+const videoSchema = new mongoose.Schema(
     {
-        id: String,
+        _id: mongoose.Schema.Types.ObjectId,
         name: String,
-        url: String
+        videoPath: String
     });
 
-module.exports = model('video', videoSchema);
+module.exports = mongoose.model('video', videoSchema);

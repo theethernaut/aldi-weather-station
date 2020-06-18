@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const fs = require('fs')
-//const multer = require('multer');
+const multer = require('multer');
 
-/*const storage = multer.diskStorage({
+const storage = multer.diskStorage({
   destination: function(req, file, cb) {
     cb(null, './uploads/');
   },
@@ -28,13 +28,13 @@ const upload = multer({
     fileSize: 1024 * 1024 * 5
   },
   fileFilter: fileFilter
-});*/
+});
 
 const Image = require("../models/image");
 
 router.get("/", (req, res, next) => {
   Image.find()
-    .select("_id name type url")
+    .select("_id name imgPath")
     .exec()
     .then(docs => {
       const response = {
@@ -43,8 +43,7 @@ router.get("/", (req, res, next) => {
           return {
             _id: doc._id,
             name: doc.name,
-            type: doc.type,
-            url: doc.url,
+            imgPath: doc.imgPath,
             request: {
               type: "GET",
               url: "http://localhost:3000/images/" + doc._id
@@ -68,29 +67,24 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.post("/", (req, res, next) => {
-  const image = new Image({
-    _id: new mongoose.Types.ObjectId(),
-    name: req.body.name,
-    type: req.body.type,
-    url: req.body.url,
-    file: req.body.file
-  });
-  console.log(req.body.file)
-  fs.writeFile("uploads/captureImage.jpg", req.body.file, 'base64',function(err){
+router.put("/", upload.single('file'), (req, res, next) => {
+  fs.writeFile("uploads/captureImage.jpg", req.body.file, {encoding:'base64'},function(err){
     err ? console.log(err) : console.log('File created')
   })
+  const image = new Image({
+    _id: new mongoose.Types.ObjectId(),
+    name: 'captureImage.jpg',
+    imgPath: './../uploads'
+  });
   image
     .save()
     .then(result => {
-      console.log(result);
       res.status(201).json({
         message: "Created image successfully",
         createdImage: {
             _id: result._id,
             name: result.name,
-            type: result.type,
-            url: result.url,
+            imgPath: result.imgPath,
             request: {
                 type: 'GET',
                 url: "http://localhost:3000/images/" + result._id
@@ -115,7 +109,7 @@ router.get("/:imageId", (req, res, next) => {
       console.log("From database", doc);
       if (doc) {
         res.status(200).json({
-            product: doc,
+            image: doc,
             request: {
                 type: 'GET',
                 url: 'http://localhost:3000/images'

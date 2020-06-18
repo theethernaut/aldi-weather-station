@@ -1,85 +1,43 @@
-const fs = require('fs');
-const {google} = require('googleapis');
-const cron = require('node-cron');
-const capture = require('./capture')
-const storage = require('node-persist');
+var axios = require("axios");
+const formData = require("form-data");
+const fs = require("fs");
 
-const TOKEN_PATH = __dirname + '/../credentials/token.json'
-const CREDENTIALS_PATH = __dirname + '/../credentials/credentials.json'
-const VIDEO_TIME_MINUTES = 13;
+function postVideo() {
+  const URL = "http://localhost:3000/videos";
 
-async function getVideoId () {
-  return await storage.getItem('videoId')
-}
-
-function startVideoJob() {
-  //Take Video
-  cron.schedule(`*/${VIDEO_TIME_MINUTES} * * * *`, function() {
-      console.log("---------------------")
-      console.log("Running Cron Job = VIDEO");
-      console.log('videoId',videoId)
-    takeAndUploadVideo()
-  });
-}
-
-function takeAndUploadVideo() {
-  capture.captureVideo()
-
-    console.log("Updating Video with Cron Job");
-
-    // Load client secrets from a local file.
-    fs.readFile(CREDENTIALS_PATH, (err, content) => {
-      if (err) return console.log('Error loading client secret file:', err);
-      // Authorize a client with credentials, then call the Google Drive API.
-      authorizeVideo(JSON.parse(content), updateVideo); //FOR UPDATES.
-    });
-}
-
-/**
- * Create an OAuth2 client with the given credentials, and then execute the
- * given callback function.
- * @param {Object} credentials The authorization client credentials.
- * @param {function} callback The callback to call with the authorized client.
- */
-
-function authorizeVideo(credentials, callback) {
-  const {client_secret, client_id, redirect_uris} = credentials.installed;
-  const oAuth2Client = new google.auth.OAuth2(
-      client_id, client_secret, redirect_uris[0]);
-    //callback(oAuth2Client); //FOR UPLOADS.
-    fs.readFile(TOKEN_PATH, (err, token) => {
-      if (err) return console.log('Please run npm setup first to get the TOKEN')
-      oAuth2Client.setCredentials(JSON.parse(token))
-      callback(oAuth2Client, getVideoId) //FOR UPDATES.
+  let data = new formData();
+  const file = __dirname + "/../output/captureVideo.avi";
+  let fileEncoded = base64_encode(file);
+  data.append('file', fileEncoded, file.fileName);
+  
+  axios
+    .post(URL, data, {
+      headers: {
+        accept: "application/json",
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': `multipart/form-data; boundary=${data._boundary}`
+      },
+      maxContentLength: Infinity,
+      maxBodyLength: Infinity
     })
+    .then((response) => {
+      //handle success
+      console.log(response.data);
+    })
+    .catch((error) => {
+      //handle error
+      console.log(error);
+    });
 }
 
-//Update the video file in Aldi folder.
-function updateVideo(auth, getVideoId) {
-  const drive = google.drive({ version: 'v3', auth });
-  var fileMetadata = {
-      'name': 'captureVideo.avi'
-  };
-  var media = {
-      mimeType: 'video/avi',
-      uploadType:'resumable',
-      body: fs.createReadStream('../output/captureVideo.avi')
-  };
-  drive.files.update({
-      resource: fileMetadata,
-      media: media,
-      fileId: getVideoId()
-      //addParents:'1qvTlW1MHkeS_Pstvo9uZURAvDq7s9hpW'
-  }, function (err, res) {
-        if (err) {
-            // Handle error
-            console.log(err);
-        } else {
-            console.log('Updated Video Success ', res.data);
-        }
-    });
+function base64_encode(file) {
+  // read binary data
+  let bitmap = fs.readFileSync(file);
+  // convert binary data to base64 encoded string
+  let img = new Buffer.from(bitmap).toString("base64");
+  return img;
 }
 
 module.exports = {
-  startVideoJob
+  postVideo
 }
