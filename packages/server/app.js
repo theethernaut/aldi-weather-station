@@ -5,8 +5,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
-const imageRoutes = require("./api/routes/images");
-const videoRoutes = require("./api/routes/videos");
+const recordRoutes = require("./api/routes/records");
+//const videoRoutes = require("./api/routes/videos");
 
 const URI = process.env.MONGOOSE_URI;
 
@@ -25,7 +25,7 @@ mongoose.Promise = global.Promise;
 app.use(morgan("dev"));
 app.use("/uploads", express.static("uploads"));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '1024mb'}));
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -41,8 +41,8 @@ app.use((req, res, next) => {
 });
 
 // Routes which should handle requests
-app.use("/images", imageRoutes);
-app.use("/videos", videoRoutes);
+app.use("/records", recordRoutes);
+//app.use("/videos", videoRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

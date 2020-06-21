@@ -67,11 +67,13 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.put("/", upload.single('file'), (req, res, next) => {
-  fs.writeFile("uploads/captureImage.jpg", req.body.file, {encoding:'base64'},function(err){
+router.post("/", upload.single('file'), (req, res, next) => {
+   res.status(201).json({"req.body":req.body})
+  /*fs.writeFile("uploads/captureImage.jpg", req.body.file, {encoding:'base64'},function(err){
     err ? console.log(err) : console.log('File created')
-  })
-  const image = new Image({
+  })*/
+  //console.log(req.body)
+  /*const image = new Image({
     _id: new mongoose.Types.ObjectId(),
     name: 'captureImage.jpg',
     imgPath: './../uploads'
@@ -97,7 +99,7 @@ router.put("/", upload.single('file'), (req, res, next) => {
       res.status(500).json({
         error: err
       });
-    });
+    });*/
 });
 
 router.get("/:imageId", (req, res, next) => {
