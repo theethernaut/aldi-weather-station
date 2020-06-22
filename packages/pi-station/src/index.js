@@ -1,14 +1,11 @@
-const execSensors = require('../sensors/execSensors')
+const execSensors = require("../sensors/execSensors");
+const record = require("./sendRecord");
 
 console.log(`Starting...`);
 
 function main() {
-  //checkDependencies()
-  execSensors.main()
+  execSensors.main();
+  record.main();
 }
 
 main();
-
-function checkDependencies() {
-  // TODO
-}

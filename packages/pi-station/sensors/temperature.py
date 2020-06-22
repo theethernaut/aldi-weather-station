@@ -29,5 +29,5 @@ def read_temp_c():
         return temp_c
 
     f= open("../output/temp.json","w+")
-	f.write("Temp: " + read_temp_c() + "C")
+	f.write('{"external_temp":"%d °C"}' % (read_temp_c()))
 	f.close()

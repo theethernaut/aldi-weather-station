@@ -6,7 +6,7 @@ async function execDht11() {
     const res = await sensor.read(11, 4);
     var obj = {};
     obj = {
-      temp: `${res.temperature.toFixed(1)}°C`,
+      internal_temp: `${res.temperature.toFixed(1)}°C`,
       humidity: `${res.humidity.toFixed(1)}%`,
     };
     const output = JSON.stringify(obj);

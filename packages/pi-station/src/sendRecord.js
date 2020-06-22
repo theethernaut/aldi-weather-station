@@ -115,3 +115,5 @@ function postData(data) {
       });
   }*/
 }
+
+module.exports = main;

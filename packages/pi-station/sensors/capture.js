@@ -9,7 +9,6 @@ function captureImage() {
 }
 
 function captureVideo() {
-  // shell.exec('ffmpeg -f v4l2 -framerate 24 -video_size 1024x768 -i /dev/video2 -t 5 -y ./output/captureVideo.mkv')
   shell.exec(
     `streamer -q -c /dev/video0 -s 1280x720 -f rgb24 -r 20 -t 00:00:10 -o ${vidPath}`
   );
@@ -17,9 +16,10 @@ function captureVideo() {
 }
 
 function compressVideo() {
-  shell.exec("");
+  shell.exec(
+    `ffmpeg -i ${vidPath} -vcodec msmpeg4v2 -c:a copy -crf 2 -preset slower -y ${basePath}/newVideo.avi`
+  );
 }
-
 module.exports = {
   captureImage,
   captureVideo
