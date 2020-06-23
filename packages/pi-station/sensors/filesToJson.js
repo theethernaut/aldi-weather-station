@@ -7,7 +7,7 @@ function base64_encodeImage(file) {
     if (err) {
       console.log("Error writing file", err);
     } else {
-      console.log("Successfully wrote file");
+      console.log("Successfully wrote Image file");
     }
   });
 }
@@ -19,7 +19,7 @@ function base64_encodeVideo(file) {
     if (err) {
       console.log("Error writing file", err);
     } else {
-      console.log("Successfully wrote file");
+      console.log("Successfully wrote Video file");
     }
   });
 }

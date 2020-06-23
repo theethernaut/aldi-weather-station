@@ -27,7 +27,7 @@ def read_temp_c():
         temp_c = int(temp_string) / 1000.0 # TEMP_STRING IS THE SENSOR OUTPUT, MAKE SURE IT'S AN INTEGER TO DO THE MATH
         temp_c = str(round(temp_c, 1)) # ROUND THE RESULT TO 1 PLACE AFTER THE DECIMAL, THEN CONVERT IT TO A STRING
         return temp_c
-
-    f= open("../output/temp.json","w+")
-	f.write('{"external_temp":"%d °C"}' % (read_temp_c()))
-	f.close()
+    
+f= open("../output/temp.json","w+")
+f.write('{"external_temp":"%s °C"}'% (read_temp_c()))
+f.close()

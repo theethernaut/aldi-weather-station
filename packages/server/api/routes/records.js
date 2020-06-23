@@ -39,7 +39,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  /*fs.writeFile(
+  fs.writeFile(
     "uploads/captureImage.jpg",
     req.body.image,
     { encoding: "base64" },
@@ -54,7 +54,7 @@ router.post("/", (req, res, next) => {
     function (err) {
       err ? console.log(err) : console.log("File video created");
     }
-  );*/
+  );
   const record = new Record({
     _id: new mongoose.Types.ObjectId(),
     internal_temp: req.body.internal_temp,
@@ -65,13 +65,12 @@ router.post("/", (req, res, next) => {
     external_temp: req.body.external_temp,
     uv_index: req.body.uv_index,
     uv_risk_level: req.body.uv_risk_level,
-    wind_direction: req.body.wind_direction,
-    wind_speed: req.body.wind_speed
+    wind_direction: "", //req.body.wind_direction,
+    wind_speed: "" //req.body.wind_speed
   });
   record
     .save()
     .then(result => {
-      console.log(result)
       res.status(201).json({
         message: "Created record successfully",
       });

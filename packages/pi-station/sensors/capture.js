@@ -10,14 +10,14 @@ function captureImage() {
 
 function captureVideo() {
   shell.exec(
-    `streamer -q -c /dev/video0 -s 1280x720 -f rgb24 -r 20 -t 00:00:10 -o ${vidPath}`
+    `streamer -q -c /dev/video0 -s 720x480 -f rgb24 -r 20 -t 00:00:10 -o ${vidPath}`
   );
   compressVideo();
 }
 
 function compressVideo() {
   shell.exec(
-    `ffmpeg -i ${vidPath} -vcodec mpeg4 -vtag xvid -qscale:v 3 -c:a libmp3lame -y ${basePath}newVideo.avi`
+    `ffmpeg -i ${vidPath} -vcodec mpeg4 -vtag xvid -qscale:v 5 -c:a libmp3lame -y ${basePath}/newVideo.avi`
   );
 }
 

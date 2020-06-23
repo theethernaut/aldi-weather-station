@@ -1,12 +1,1 @@
-{
-  "internal_temp": "34 °C",
-  "humidity": "70%",
-  "image": "",
-  "video": "",
-  "rain": "true",
-  "external_temp": "34 °C",
-  "uv_index": "8",
-  "uv_risk_level": "High",
-  "wind_direction": "North",
-  "wind_speed": "20 km/h"
-}
+{"rain":"true"}

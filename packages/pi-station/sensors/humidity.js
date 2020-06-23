@@ -3,18 +3,18 @@ const sensor = require("node-dht-sensor").promises;
 
 async function execDht11() {
   try {
-    const res = await sensor.read(11, 4);
+    const res = await sensor.read(11, 23);
     var obj = {};
     obj = {
       internal_temp: `${res.temperature.toFixed(1)}°C`,
       humidity: `${res.humidity.toFixed(1)}%`,
     };
     const output = JSON.stringify(obj);
-    fs.writeFile(__dirname + "/../output/humidity.json", output, (err) => {
+    fs.writeFile("../output/humidity.json", output, (err) => {
       if (err) {
         console.log("Error writing file", err);
       } else {
-        console.log("Successfully wrote file");
+        console.log("Successfully wrote Humidity file");
       }
       return;
     });
@@ -25,5 +25,5 @@ async function execDht11() {
 }
 
 module.exports = {
-  execDht11,
+  execDht11
 };
