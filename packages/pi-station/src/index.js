@@ -1,23 +1,13 @@
-let {PythonShell} = require('python-shell')
-//const updateImage = require('./updateImage')
-//const updateVideo = require('./updateVideo')
-//const dhtHumidity = require('./dht11')
+const execSensors = require("../sensors/execSensors");
+const record = require("./sendRecord");
 
-
-console.log(`Starting...`)
+console.log(`Starting...`);
 
 function main() {
-  //checkDependencies()
-  //updateImage.startImageJob()
-  //updateVideo.startVideoJob()
-  //dhtHumidity.execDht11()
-  PythonShell.run('lluvia.py', null, function (err) {
-    if (err) throw err;
-  });
+  execSensors.main();
+  setTimeout(function () {
+    record.main();
+  }, 60000); // 60 seconds
 }
 
-main()
-
-function checkDependencies() {
-  // TODO
-}
+main();

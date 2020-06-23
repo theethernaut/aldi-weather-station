@@ -1,31 +1,62 @@
-var google = require('googleapis');
-var OAuth2 = google.auth.OAuth2;
+const express = require("express");
+const app = express();
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+require("dotenv").config();
 
-//setup your oauth credentials and tokens
+const recordRoutes = require("./api/routes/records");
+//const videoRoutes = require("./api/routes/videos");
 
-oauth2Client.setCredentials(tokens);
+const URI = process.env.MONGOOSE_URI;
 
-var drive = google.drive({
-    version: 'v2',
-    auth: oauth2Client
+mongoose.connect(URI, {
+  useMongoClient: true
 });
 
-drive.files.get({
-    fileId: fileId, //id of the file you are looking for
-    alt: 'media'
-}, {
-    responseType: 'arraybuffer',
-    encoding: null
-}, function(err, response) {
-    if (err) {
-        console.log(err);
+const connection = mongoose.connection;
 
-        //handle the error
-    } else {
-        var imageType = response.headers['content-type'];
-        var base64 = new Buffer(response.data, 'utf8').toString('base64');
-        var dataURI = 'data:' + imageType + ';base64,' + base64;
-
-        res.send(dataURI);
-    }
+connection.once("open", () => {
+  console.log("Database is connected");
 });
+
+mongoose.Promise = global.Promise;
+
+app.use(morgan("dev"));
+app.use("/uploads", express.static("uploads"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({limit: '1024mb'}));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+  next();
+});
+
+// Routes which should handle requests
+app.use("/records", recordRoutes);
+//app.use("/videos", videoRoutes);
+
+app.use((req, res, next) => {
+  const error = new Error("Not found");
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
+
+module.exports = app;
