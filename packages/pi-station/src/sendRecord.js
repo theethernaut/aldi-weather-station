@@ -12,7 +12,7 @@ function main() {
 
   setTimeout(function () {
     readFiles();
-  }, 3000); // 5 seconds
+  }, 10000); // 10 seconds
 }
 
 function mergeFiles() {

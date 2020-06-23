@@ -1,25 +1,30 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+const mongoose = require("mongoose");
 
 const Record = require("../models/record");
 
-/*router.get("/", (req, res, next) => {
-  Image.find()
-    .select("_id name imgPath")
+router.get("/", (req, res, next) => {
+  Record.find()
+    .select("_id internal_temp humidity image video rain external_temp uv_index uv_risk_level wind_direction wind_speed")
     .exec()
     .then((docs) => {
       const response = {
         count: docs.length,
-        images: docs.map((doc) => {
+        records: docs.map((doc) => {
           return {
             _id: doc._id,
-            name: doc.name,
-            imgPath: doc.imgPath,
-            request: {
-              type: "GET",
-              url: "http://localhost:3000/images/" + doc._id,
-            },
+            internal_temp: doc.internal_temp,
+            humidity: doc.humidity,
+            image: doc.image,
+            video: doc.video,
+            rain: doc.rain,
+            external_temp: doc.external_temp,
+            uv_index: doc.uv_index,
+            uv_risk_level: doc.uv_risk_level,
+            wind_direction: doc.wind_direction,
+            wind_speed: doc.wind_speed,
           };
         }),
       };
@@ -31,7 +36,7 @@ const Record = require("../models/record");
         error: err,
       });
     });
-});*/
+});
 
 router.post("/", (req, res, next) => {
   /*fs.writeFile(
@@ -50,7 +55,6 @@ router.post("/", (req, res, next) => {
       err ? console.log(err) : console.log("File video created");
     }
   );*/
-  //console.log(req.body);
   const record = new Record({
     _id: new mongoose.Types.ObjectId(),
     internal_temp: req.body.internal_temp,
@@ -64,9 +68,6 @@ router.post("/", (req, res, next) => {
     wind_direction: req.body.wind_direction,
     wind_speed: req.body.wind_speed
   });
-  /*res.status(201).json({
-    message: "Created record successfully",
-  });*/
   record
     .save()
     .then(result => {
