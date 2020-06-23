@@ -16,9 +16,11 @@ async function execDht11() {
       } else {
         console.log("Successfully wrote file");
       }
+      return;
     });
   } catch (err) {
     console.error("Failed to read sensor data:", err);
+    return;
   }
 }
 

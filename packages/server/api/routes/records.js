@@ -4,7 +4,7 @@ const fs = require("fs");
 
 const Record = require("../models/record");
 
-router.get("/", (req, res, next) => {
+/*router.get("/", (req, res, next) => {
   Image.find()
     .select("_id name imgPath")
     .exec()
@@ -31,10 +31,10 @@ router.get("/", (req, res, next) => {
         error: err,
       });
     });
-});
+});*/
 
 router.post("/", (req, res, next) => {
-  fs.writeFile(
+  /*fs.writeFile(
     "uploads/captureImage.jpg",
     req.body.image,
     { encoding: "base64" },
@@ -49,36 +49,38 @@ router.post("/", (req, res, next) => {
     function (err) {
       err ? console.log(err) : console.log("File video created");
     }
-  );
-  res.status(201).json({ "todo piola": "todo mas que piola" });
-  //console.log(req.body)
-  /*const image = new Image({
+  );*/
+  //console.log(req.body);
+  const record = new Record({
     _id: new mongoose.Types.ObjectId(),
-    name: 'captureImage.jpg',
-    imgPath: './../uploads'
+    internal_temp: req.body.internal_temp,
+    humidity: req.body.humidity,
+    image: "./uploads/captureImage.jpg",
+    video: "./uploads/captureVideo.avi",
+    rain: req.body.rain,
+    external_temp: req.body.external_temp,
+    uv_index: req.body.uv_index,
+    uv_risk_level: req.body.uv_risk_level,
+    wind_direction: req.body.wind_direction,
+    wind_speed: req.body.wind_speed
   });
-  image
+  /*res.status(201).json({
+    message: "Created record successfully",
+  });*/
+  record
     .save()
     .then(result => {
+      console.log(result)
       res.status(201).json({
-        message: "Created image successfully",
-        createdImage: {
-            _id: result._id,
-            name: result.name,
-            imgPath: result.imgPath,
-            request: {
-                type: 'GET',
-                url: "http://localhost:3000/images/" + result._id
-            }
-        }
+        message: "Created record successfully",
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
       res.status(500).json({
-        error: err
+        error: err,
       });
-    });*/
+    });
 });
 
 /*router.get("/:imageId", (req, res, next) => {
@@ -107,6 +109,5 @@ router.post("/", (req, res, next) => {
       res.status(500).json({ error: err });
     });
 });*/
-
 
 module.exports = router;

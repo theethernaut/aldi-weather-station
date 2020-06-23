@@ -12,10 +12,8 @@ function main() {
 
   setTimeout(function () {
     readFiles();
-  }, 5000); // 5 seconds
+  }, 3000); // 5 seconds
 }
-
-main();
 
 function mergeFiles() {
   gulp
@@ -80,40 +78,8 @@ function postData(data) {
       //handle error
       //console.log(error);
     });
-  /*} else {
-    console.log(failedRecordsData)
-    axios
-      .post(URL, failedRecordsData, {
-        headers: {
-          accept: "application/json",
-          "Accept-Language": "en-US,en;q=0.8",
-          "Content-Type": "application/json",
-        },
-        maxContentLength: Infinity,
-        maxBodyLength: Infinity,
-      })
-      .then((response) => {
-        //handle success
-        fs.readdir(directoryPath, (err, files) => {
-          if (err) throw err;
-          files.forEach(function (file) {
-            fs.unlinkSync(`${directoryPath}/${file}`, (err) => {
-              if (err) {
-                console.error(err);
-              } else {
-                console.log("File removed correctly.");
-              }
-            });
-            console.log(response.data);
-          });
-        });
-      })
-      .catch((error) => {
-        //handle error
-        console.log(error);
-        failedRecords.push(failedRecords);
-      });
-  }*/
 }
 
-module.exports = main;
+module.exports = {
+  main,
+};

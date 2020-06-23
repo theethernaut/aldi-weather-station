@@ -6,17 +6,20 @@ const files = require("./filesToJson");
 const image = __dirname + "/../files/captureImage.jpg";
 const video = __dirname + "/../files/newVideo.avi";
 
-function main() {
-  shell.exec("python3 rain.py");
-  shell.exec("python3 temperature.py");
-  shell.exec("python3 uvRay.py");
+async function main() {
+  initSensors();
   capture.captureImage();
   capture.captureVideo();
-  humidity.execDht11();
+  await humidity.execDht11();
+  console.log('llega')
   files.base64_encodeImage(image);
   files.base64_encodeVideo(video);
 }
 
-main();
+function initSensors() {
+  shell.exec("python3 rain.py");
+  shell.exec("python3 temperature.py");
+  shell.exec("python3 uvRay.py");
+}
 
 module.exports = main;

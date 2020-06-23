@@ -17,10 +17,11 @@ function captureVideo() {
 
 function compressVideo() {
   shell.exec(
-    `ffmpeg -i ${vidPath} -vcodec msmpeg4v2 -c:a copy -crf 2 -preset slower -y ${basePath}/newVideo.avi`
+    `ffmpeg -i ${vidPath} -vcodec mpeg4 -vtag xvid -qscale:v 3 -c:a libmp3lame -y ${basePath}newVideo.avi`
   );
 }
+
 module.exports = {
   captureImage,
-  captureVideo
+  captureVideo,
 };

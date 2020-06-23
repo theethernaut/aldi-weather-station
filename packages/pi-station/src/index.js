@@ -1,10 +1,10 @@
-const execSensors = require("../sensors/execSensors");
+//const execSensors = require("../sensors/execSensors");
 const record = require("./sendRecord");
 
 console.log(`Starting...`);
 
-function main() {
-  execSensors.main();
+async function main() {
+  //await execSensors.main();
   record.main();
 }
 
