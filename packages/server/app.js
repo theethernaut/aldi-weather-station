@@ -3,8 +3,15 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const passport = require("passport");
+const flash = require("connect-flash");
+const session = require("express-session");
+const cors = require("cors");
+//const expressLayouts = require("express-ejs-layouts");
 require("dotenv").config();
 
+const indexRoutes = require("./api/routes/index");
+const usersRoutes = require("./api/routes/users");
 const recordRoutes = require("./api/routes/records");
 const raspiRoutes = require("./api/routes/raspis");
 
@@ -24,6 +31,7 @@ app.use(morgan("dev"));
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ limit: "4096mb" }));
+app.use(cors());
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -38,7 +46,38 @@ app.use((req, res, next) => {
   next();
 });
 
+// EJS
+//app.use(expressLayouts);
+app.set("view engine", "ejs");
+app.use("/static", express.static("./static/"));
+
+// Express session
+app.use(
+  session({
+    secret: "aldiSurfSchoolPendorcho",
+    resave: true,
+    saveUninitialized: true,
+  })
+);
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+require("./api/config/passport")(passport);
+// Connect flash
+app.use(flash());
+
+// Global variables
+app.use(function (req, res, next) {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  res.locals.error = req.flash("error");
+  next();
+});
+
 // Routes which should handle requests
+app.use("/", indexRoutes);
+app.use("/users", usersRoutes);
 app.use("/records", recordRoutes);
 app.use("/raspis", raspiRoutes);
 

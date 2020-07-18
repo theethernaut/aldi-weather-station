@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const Raspi = require("../models/raspi");
 
 const jwt = require("jsonwebtoken");
-const config = require("../config/config");
+const config = require("../config/keys");
 
 router.post("/", async (req, res) => {
   try {

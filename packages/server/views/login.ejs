@@ -12,7 +12,7 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css">
 	<!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="../static/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
 	<!--===============================================================================================-->
@@ -36,18 +36,18 @@
 		<div class="container-login100" style="background-image: url('../static/img/bg-01.jpg');">
 			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
 				<span class="login100-form-title p-b-53">
-					Master Surfboards
+					Weather Station
 				</span>
 				<% if (message.length > 0) { %>
 				<div class="alert alert-danger"><%= message %></div>
 				<% } %>
-				<form action="/index" method="post" class="login100-form validate-form flex-sb flex-w">
-					<a href="/auth/facebook" class="btn-face m-b-20">
+				<form action="/users/login/" method="post" class="login100-form validate-form flex-sb flex-w">
+					<a href="users/auth/facebook" class="btn-face m-b-20">
 						<i class="fa fa-facebook-official"></i>
 						Facebook
 					</a>
 
-					<a href="/auth/google" class="btn-google m-b-20">
+					<a href="users/auth/google" class="btn-google m-b-20">
 						<img src="../static/img/icons/icon-google.png" alt="GOOGLE">
 						Google
 					</a>
@@ -85,13 +85,13 @@
 							No eres usuario?
 						</span>
 
-						<a href="/signup" class="txt2 bo1">
+						<a href="/users/signup" class="txt2 bo1">
 							Registrate!
 						</a>
 						<br>
-						<a href="/homeInvited" class="link large">
+						<!-- <a href="/users/homeInvited" class="link large">
 							<span class="fa fa-user"></span> Continua sin registrarse
-						</a>
+						</a> -->
 					</div>
 					<br>
 					<div class="d-flex justify-content-center">

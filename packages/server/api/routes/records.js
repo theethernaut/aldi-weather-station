@@ -4,7 +4,7 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 
 const Record = require("../models/record");
-const verifyToken = require("./verifyToken");
+const verifyRaspi = require("./verifyRaspi");
 
 router.get("/", (req, res, next) => {
   Record.find()
@@ -47,7 +47,7 @@ router.get("/public", (req, res, next) => {
   res.send()
 });
 
-router.post("/", verifyToken, (req, res, next) => {
+router.post("/", verifyRaspi, (req, res, next) => {
   // fs.writeFile(
   //   "public/captureImage.jpg",
   //   req.body.image,

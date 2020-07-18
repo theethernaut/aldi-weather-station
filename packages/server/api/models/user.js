@@ -1,20 +1,32 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
-const userSchema = new mongoose.Schema({
-    username: String,
+let userSchema = mongoose.Schema({
+  local: {
     email: String,
     password: String,
-    role: String
+    role: String,
+  },
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String,
+  },
+  google: {
+    id: String,
+    token: String,
+    email: String,
+    name: String,
+  },
 });
 
-userSchema.methods.encryptPassword = async (password) => {
-    const salt = await bcrypt.genSalt(10);
-    return bcrypt.hash(password, salt);
+userSchema.methods.generateHash = function (password) {
+  return bcrypt.hashSync(password, bcrypt.genSaltSync(9));
 };
 
-userSchema.methods.comparePassword = async function (password) {
-    return bcrypt.compare(password, this.password);
+userSchema.methods.validPassword = function (password) {
+  return bcrypt.compareSync(password, this.local.password);
 };
 
-module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model("User", userSchema);
