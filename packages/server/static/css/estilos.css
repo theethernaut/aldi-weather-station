@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+button{
+    height:48px;
+}
+
+.youtube-responsive-container {
+    position:relative;
+    padding-bottom:56.25%;
+    padding-top:30px;
+    height:0;
+    overflow:hidden;
+}
+    
+.youtube-responsive-container iframe, .youtube-responsive-container object, .youtube-responsive-container embed {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+.responsive1 {
+    width: 50%;
+    height: auto;
+    position: relative;
+    float: left;
+}
+
+#map {
+    width: 400px;
+    height: 400px;
+}
+
+#divSlider, #divSlider1 {
+    margin-left: 15px;
+}
+
+.container{
+    margin: 10px;
+}
+
+.right{
+    float: right;
+    width: auto;
+    margin: 0 auto;
+    height: auto;
+}

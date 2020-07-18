@@ -1,0 +1,29 @@
+{
+  "name": "webcamapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "date-time": "^3.1.0",
+    "fetch": "^1.1.0",
+    "form-data": "^3.0.0",
+    "fs": "0.0.1-security",
+    "glob": "^7.1.6",
+    "googleapis": "^51.0.0",
+    "gulp": "^4.0.2",
+    "gulp-merge-json": "^2.1.1",
+    "http": "0.0.1-security",
+    "http-post": "^0.1.1",
+    "json-concat": "0.0.1",
+    "merge-json": "0.1.0-b.3",
+    "node-cron": "^2.0.3",
+    "node-dht-sensor": "^0.4.2",
+    "node-persist": "^3.1.0",
+    "path": "^0.12.7",
+    "shelljs": "^0.8.4"
+  }
+}

@@ -1,0 +1,60 @@
+const express = require("express");
+const app = express();
+const morgan = require("morgan");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+require("dotenv").config();
+
+const recordRoutes = require("./api/routes/records");
+const raspiRoutes = require("./api/routes/raspis");
+
+const URI = process.env.MONGOOSE_URI;
+
+mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true });
+
+const connection = mongoose.connection;
+
+connection.once("open", () => {
+  console.log("Database is connected");
+});
+
+mongoose.Promise = global.Promise;
+
+app.use(morgan("dev"));
+app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json({ limit: "4096mb" }));
+
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+    return res.status(200).json({});
+  }
+  next();
+});
+
+// Routes which should handle requests
+app.use("/records", recordRoutes);
+app.use("/raspis", raspiRoutes);
+
+app.use((req, res, next) => {
+  const error = new Error("Not found");
+  error.status = 404;
+  next(error);
+});
+
+app.use((error, req, res, next) => {
+  res.status(error.status || 500);
+  res.json({
+    error: {
+      message: error.message,
+    },
+  });
+});
+
+module.exports = app;
