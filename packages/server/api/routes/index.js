@@ -7,9 +7,8 @@ const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
 router.get('/', forwardAuthenticated, (req, res) =>  res.render('login.ejs', { message: req.flash('loginMessage') }));
 
 // Dashboard
-router.get("/dashboard", ensureAuthenticated, (req, res) => {
-  console.log(__dirname+'/../../views/dashboard.html')
-  res.sendFile(path.resolve('views/dashboard.html'));
+router.get("/index", ensureAuthenticated, (req, res) => {
+  res.sendFile(path.resolve('views/index.html'));
   //res.sendFile("/../../views/dashboard.html", { root: __dirname });
   //   res.sendFile('/index.html');
 //   res.render('dashboard', {

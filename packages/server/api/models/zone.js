@@ -6,10 +6,6 @@ const zoneSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Raspi",
   },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
   nombre: String
 });
 

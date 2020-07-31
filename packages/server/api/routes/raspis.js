@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
     const raspi = new Raspi({
       _id: new mongoose.Types.ObjectId(),
       username,
-      password,
+      password
     });
     raspi.password = await raspi.encryptPassword(password);
     await raspi.save();

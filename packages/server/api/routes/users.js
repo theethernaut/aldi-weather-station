@@ -14,7 +14,7 @@ router.get('/signup', forwardAuthenticated, (req, res) => res.render('signup.ejs
 
 // Register
 router.post('/signup', passport.authenticate('local-signup', {
-  successRedirect: '/dashboard',
+  successRedirect: '/index',
   failureRedirect: '/users/signup',
   failureFlash: true
 }));
@@ -22,7 +22,7 @@ router.post('/signup', passport.authenticate('local-signup', {
 // Login
 router.post('/login', (req, res, next) => {
   passport.authenticate('local-login', {
-    successRedirect: '/dashboard',
+    successRedirect: '/index',
     failureRedirect: '/users/login',
     failureFlash: true
   })(req, res, next);
