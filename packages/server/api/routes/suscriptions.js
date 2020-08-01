@@ -1,29 +1,28 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-let cron = require("node-cron");
+let schedule = require("node-schedule");
 let nodemailer = require("nodemailer");
 
 const Suscription = require("../models/suscription");
 const Record = require("../models/record");
 const User = require("../models/user");
-let raspi;
+const { response } = require("../../app");
+let raspi; //Traer dato de la web
 
 getUserName = () => {
-    User
-    .find({ "invitees._id": req.query.invitation_id })
-    .populate('invitees.user')
+  User.find({ "User._id": req.query.user._id }).populate("invitees.user");
 
-    // User.findOne({ "local.email": email, "invitees._id": req.query.invitation_id }, function (err, user) {
-    //     if (err) return done(err);
-    //     if (user) {
-    //       return done(
-    //         null,
-    //         false,
-    //         req.flash("signupMessage", "Este usuario ya existe")
-    //       );
-    //     }
-}
+  // User.findOne({ "local.email": email, "invitees._id": req.query.invitation_id }, function (err, user) {
+  //     if (err) return done(err);
+  //     if (user) {
+  //       return done(
+  //         null,
+  //         false,
+  //         req.flash("signupMessage", "Este usuario ya existe")
+  //       );
+  //     }
+};
 
 getRecordData();
 let internal_temp = getRecordData.records.internal_temp;
@@ -40,20 +39,45 @@ let wind_speed = getRecordData.records.wind_speed;
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "<FROM_EMAIL_ADDRESS>",
-    pass: "<FROM_EMAIL_PASSWORD>",
+    user: "aldisurfschool31@gmail.com",
+    pass: process.env.GMAIL_PASS,
   },
 });
 
 let mailOptions = {
-  from: "<FROM_EMAIL_ADDRESS>",
-  to: "<TO_EMAIL_ADDRESS>",
-  subject: `${}`,
-  text: "Some content to send",
+  from: "aldisurfschool31@gmail.com",
+  to: getUserName(),
+  subject: "Tu reporte de playa esta pronto!",
+  text: `<h3>¡Hola!</h3> <br>
+        <h4> El reporte para hoy nos dice: <h4><br>
+        <p>Temperatura interna: ${internal_temp} </p> <br>
+        <p>Temperatura externa: ${external_temp} </p> <br>
+        <p>Humedad: ${humidity} </p> <br>
+        <p>Direccion del viento: ${wind_direction} </p> <br>
+        <p>Velocidad del viento: ${wind_speed} </p> <br>
+        <p>Lluvia: ${rain} </p> <br>
+        <p>UV index: ${uv_index} </p> <br>
+        <p>Riesgo de rayos UV: ${uv_risk_level} </p> <br>
+        <p>Imagen: ${image} </p> <br>
+        <p>Video: ${video} </p> <br>
+        <h4> Gracias por confiar en nosotros. </h4> <br>
+        <h3> Weather Station </h3>
+       `,
 };
 
-cron.schedule("* * * * *", () => {
-  // Send e-mail
+var mailScheduler = function (job) {
+  // set rules for scheduler
+  var rule = new schedule.RecurrenceRule();
+  rule.dayOfWeek = [new schedule.Range(0, 6)];
+  rule.hour = 16; //Find it from database
+  // scheduleJob take a rule and a function
+  // you will need to pass a function object
+  // into the mailScheduler function
+  schedule.scheduleJob("mailJob", rule, job);
+};
+
+// Send e-mail
+const sendEmail = () =>
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log(error);
@@ -61,9 +85,17 @@ cron.schedule("* * * * *", () => {
       console.log("Email sent: " + info.response);
     }
   });
-});
 
-let getRecordData = () => router.get("/", (req, res, next) => {
+const main = () => {
+  if (active == true) {
+    //Bring Active from mongoDB
+    mailScheduler(sendEmail);
+  } else {
+    schedule.cancelJob("mailJob");
+  }
+};
+
+let getRecordData = () => {
   Record.find()
     .sort({ _id: -1 })
     .limit(1)
@@ -90,7 +122,6 @@ let getRecordData = () => router.get("/", (req, res, next) => {
           };
         }),
       };
-      res.status(200).json(response);
     })
     .catch((err) => {
       console.log(err);
@@ -98,6 +129,7 @@ let getRecordData = () => router.get("/", (req, res, next) => {
         error: err,
       });
     });
-});
+    return response;
+};
 
-// module.exports = router;
+module.exports = main;

@@ -6,8 +6,8 @@ const suscriptionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  hora: String,
-  frequencia: Number
+  hour: String,
+  active: boolean
 });
 
 module.exports = mongoose.model("Suscription", suscriptionSchema);

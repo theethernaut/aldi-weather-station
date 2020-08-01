@@ -91,3 +91,36 @@ try {
 } catch (error) {
   console.log(error);
 }
+console.log("1")
+// function updateDependent(){
+//   var c = $currencySelect.val(),
+//       vals = master[c].values;
+//       console.log(c)
+
+//   $amountSelect.empty();
+//   $.each(vals, function(){
+// console.log(vals)
+
+//     $('<option/>', { value : this }).appendTo($amountSelect);
+//   });
+// }
+
+// //var subDomain = window.location.host.split('.')[0] || "ru",
+
+// var subDomain = "1",
+//   master = {
+//     "1": {
+//       "values": ["Parada 32", "La Barra", "El Emir"]
+//     },
+//     "2": {
+//       "values": ["El Barco","El Desplayado"]
+//     },
+//     "3": {
+//       "values": ["Playa Honda", "Playa Pocitos", "Playa Carrasco"]
+//     }
+//   },
+//   $currencySelect = $("#select1"),
+//   $amountSelect = $("#select2");
+
+// $currencySelect.on("change", updateDependent);
+// getElementById("#select1").val(subDomain).trigger("change"); 
