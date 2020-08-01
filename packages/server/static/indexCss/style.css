@@ -106,6 +106,7 @@ select::-ms-expand {
 .select {
   position: relative;
   display: flex;
+  padding: 0 0.5em;
   width: 20em;
   height: 3em;
   line-height: 3;
@@ -158,8 +159,11 @@ select {
     width: 50%;
     margin-left: auto;
   }
-  .sidebar{
-    width: 30%;
-    margin-right: auto;
-  }
+}
+
+.texto {
+  font-weight: bolder;
+  font-size: larger;
+  font-family: inherit;
+
 }
