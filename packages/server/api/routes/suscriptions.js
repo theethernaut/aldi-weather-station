@@ -48,7 +48,7 @@ let mailOptions = {
   from: "aldisurfschool31@gmail.com",
   to: getUserName(),
   subject: "Tu reporte de playa esta pronto!",
-  text: `<h3>¡Hola!</h3> <br>
+  html: `<h3>¡Hola!</h3> <br>
         <h4> El reporte para hoy nos dice: <h4><br>
         <p>Temperatura interna: ${internal_temp} </p> <br>
         <p>Temperatura externa: ${external_temp} </p> <br>
@@ -61,7 +61,8 @@ let mailOptions = {
         <p>Imagen: ${image} </p> <br>
         <p>Video: ${video} </p> <br>
         <h4> Gracias por confiar en nosotros. </h4> <br>
-        <h3> Weather Station </h3>
+        <h3> Buenas Olas! <br>
+             Weather Station </h3>
        `,
 };
 

@@ -81,3 +81,53 @@ const listar = () => {
   });
 };
 listar();
+/*
+El Pendorcho
+El Emir
+El Desplayado
+La Posta del Cangrejo
+El Barco Hundido
+El Desplayado
+La Honda
+Pocitos
+Carrasco
+*/
+function changeRecords() {
+  let idPendorcho, idEmir, idLaPosta, idDesplayado, idElBarco, idHonda, idPocitos, idCarrasco;
+  var idRaspi;
+  var selectRaspi = document.getElementsByName("countySel").value;
+  if (selectRaspi === "El Pendorcho") idRaspi = idPendorcho;
+  if (selectRaspi === "El Emir") idRaspi = idEmir;
+  if (selectRaspi === "La Posta del Cangrejo") idRaspi = idLaPosta;
+  if (selectRaspi === "El Barco Hundido") idRaspi = idElBarco;
+  if (selectRaspi === "El Desplayado") idRaspi = idDesplayado;
+  if (selectRaspi === "La Honda") idRaspi = idHonda;
+  if (selectRaspi === "Pocitos") idRaspi = idPocitos;
+  if (selectRaspi === "Carrasco") idRaspi = idCarrasco;
+  $.ajax({
+    url: "http://localhost:3000/records?idRaspi="+idRaspi,
+    type: "GET",
+    dataType: "json",
+    data:{},
+    success: listarRecord,
+    error: mostrarError,
+  });
+}
+
+function sucribe() {
+  var chks = document.getElementsByName("offer");
+
+  if (opts.value == 'Del') {
+      for (var i = 0; i <= chks.length - 1; i++) {
+          chks[i].disabled = false;
+          document.getElementById('div').innerHTML = 'Checkboxes enabled';
+      }
+  }
+  else {
+      for (var i = 0; i <= chks.length - 1; i++) {
+          chks[i].disabled = true;
+          chks[i].checked = false;
+          document.getElementById('div').innerHTML = 'Checkboxes disabled and unchecked';
+      }
+  }
+}

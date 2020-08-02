@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const recordSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  id_raspi: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Raspi",
+  },
   internal_temp: String,
   humidity: String,
   image: String,
