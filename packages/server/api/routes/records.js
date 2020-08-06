@@ -48,24 +48,25 @@ router.get("/public", (req, res, next) => {
 });
 
 router.post("/", verifyRaspi, (req, res, next) => {
-  // fs.writeFile(
-  //   "public/captureImage.jpg",
-  //   req.body.image,
-  //   { encoding: "base64" },
-  //   function (err) {
-  //     err ? console.log(err) : console.log("File image created");
-  //   }
-  // );
-  // fs.writeFile(
-  //   "public/captureVideo.avi",
-  //   req.body.video,
-  //   { encoding: "base64" },
-  //   function (err) {
-  //     err ? console.log(err) : console.log("File video created");
-  //   }
-  // );
+  fs.writeFile(
+    "public/captureImage.jpg",
+    req.body.image,
+    { encoding: "base64" },
+    function (err) {
+      err ? console.log(err) : console.log("File image created");
+    }
+  );
+  fs.writeFile(
+    "public/captureVideo.avi",
+    req.body.video,
+    { encoding: "base64" },
+    function (err) {
+      err ? console.log(err) : console.log("File video created");
+    }
+  );
   const record = new Record({
     _id: new mongoose.Types.ObjectId(),
+    //raspiId:
     internal_temp: req.body.internal_temp,
     humidity: req.body.humidity,
     image: "./public/captureImage.jpg",
