@@ -10,7 +10,7 @@ async function execDht11() {
       humidity: `${res.humidity.toFixed(1)}%`,
     };
     const output = JSON.stringify(obj);
-    fs.writeFile("../output/humidity.json", output, (err) => {
+    fs.writeFile(`${__dirname}/../output/humidity.json`, output, (err) => {
       if (err) {
         console.log("Error writing file", err);
       } else {

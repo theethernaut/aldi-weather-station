@@ -4,7 +4,7 @@ const gulp = require("gulp");
 const axios = require("axios");
 const fs = require("fs");
 
-const directoryPath = __dirname + "/../data/";
+const directoryPath = `${__dirname}/../data`;
 let time = dateTime();
 
 function main() {
@@ -17,7 +17,7 @@ function main() {
 
 function mergeFiles() {
   gulp
-    .src(__dirname + "/../output/*.json")
+    .src(`${__dirname}/../output/*.json`)
     .pipe(
       merge({
         fileName: `record+${time
@@ -27,7 +27,7 @@ function mergeFiles() {
           .join("-")}.json`,
       })
     )
-    .pipe(gulp.dest("../data"));
+    .pipe(gulp.dest(`${directoryPath}`));
 }
 
 function readFiles() {

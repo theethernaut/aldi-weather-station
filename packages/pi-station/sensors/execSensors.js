@@ -16,9 +16,9 @@ function main() {
 }
 
 function initSensors() {
-  shell.exec("sudo python3 ../sensors/temperature.py");
-  shell.exec("sudo python3 ../sensors/rain.py");
-  shell.exec("sudo python3 ../sensors/uvRay.py");
+  shell.exec(`sudo python3 ${__dirname}/temperature.py`);
+  shell.exec(`sudo python3 ${__dirname}/rain.py`);
+  shell.exec(`sudo python3 ${__dirname}/uvRay.py`);
 }
 
 module.exports = {
