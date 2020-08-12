@@ -1,12 +1,17 @@
 const listarRecord = (resp) => {
   let lluvia;
   let riesgo;
-  if(resp.records[0].uv_risk_level === "LOW") riesgo = "Bajo";
-  if(resp.records[0].uv_risk_level === "Medium") riesgo = "Medio";
-  if(resp.records[0].uv_risk_level === "High") riesgo = "Alto";
-  if(resp.records[0].rain === "true") lluvia = "Está lloviendo";
-  if(resp.records[0].rain === "false") lluvia = "No está lloviendo";
-  $("#data").empty();
+  let uv = resp.uv_risk_level.toUpperCase();
+  if (uv === "LOW") {
+    riesgo = "Bajo";
+  } else if (uv === "MODERATE") {
+    riesgo = "Medio";
+  } else {
+    riesgo = "Alto";
+  }
+
+  if (resp.rain === "true") lluvia = "Está lloviendo";
+  if (resp.rain === "false") lluvia = "No está lloviendo";
   $("#data").empty();
   $("#data").append(
     `<div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-2">
@@ -18,7 +23,7 @@ const listarRecord = (resp) => {
               <p class="u-align-center u-text-3">
                 <img src="../static/img/sun-vacio.png" style="width:50%; height:auto;">
               </p>
-              <p class="u-align-center texto"> ${resp.records[0].external_temp} </p>
+              <p class="u-align-center texto"> ${resp.external_temp} </p>
             </div>
           </div>
 
@@ -27,7 +32,7 @@ const listarRecord = (resp) => {
               <p class="u-align-center u-text u-text-4">
                 <img src="../static/img/drop.png" style="width:50%; height:auto;">
               </p>
-              <p class="u-align-center texto"> ${resp.records[0].humidity} </p>
+              <p class="u-align-center texto"> ${resp.humidity} </p>
             </div>
           </div>
 
@@ -45,8 +50,8 @@ const listarRecord = (resp) => {
               <p class="u-align-center u-text u-text-6">
                 <img src="../static/img/compass.png" style="width:50%; height:auto;">
               </p>
-              <p class="u-align-center texto"> ${resp.records[0].wind_direction} </p>
-              <p class="u-align-center texto"> ${resp.records[0].wind_speed} </p>
+              <p class="u-align-center texto"> ${resp.wind_direction} </p>
+              <p class="u-align-center texto"> ${resp.wind_speed} </p>
             </div>
           </div>
 
@@ -55,7 +60,7 @@ const listarRecord = (resp) => {
               <p class="u-align-center u-text u-text-7">
               <img src="../static/img/uv.png" style="width:50%; height:auto;">
               </p>
-              <p class="u-align-center texto"> Índice: ${resp.records[0].uv_index} </p>
+              <p class="u-align-center texto"> Índice: ${resp.uv_index} </p>
               <p class="u-align-center texto"> Riesgo: ${riesgo} </p>
             </div>
           </div>
@@ -72,6 +77,7 @@ const mostrarError = (error) => {
 };
 
 const listar = () => {
+  $("#suscribeCheck").attr("disabled", true);
   $.ajax({
     url: "http://localhost:3000/records",
     type: "GET",
@@ -81,21 +87,20 @@ const listar = () => {
   });
 };
 listar();
-/*
-El Pendorcho
-El Emir
-El Desplayado
-La Posta del Cangrejo
-El Barco Hundido
-El Desplayado
-La Honda
-Pocitos
-Carrasco
-*/
+
+let idPendorcho = "5f25deec455c843370ac03f6",
+  idLaPosta = "5f2d98444da90845f442dc2b",
+  idEmir = "5f2d99e54da90845f442dc2c",
+  idDesplayado = "5f2d99e54da90845f442dc2e",
+  idElBarco = "5f2d99e54da90845f442dc2d",
+  idHonda = "5f2d99e54da90845f442dc2f",
+  idPocitos = "5f2d99e54da90845f442dc30",
+  idCarrasco = "5f2d99e54da90845f442dc31";
+
 function changeRecords() {
-  let idPendorcho, idEmir, idLaPosta, idDesplayado, idElBarco, idHonda, idPocitos, idCarrasco;
   var idRaspi;
-  var selectRaspi = document.getElementsByName("countySel").value;
+  var selectRaspi = document.getElementById("countySel").value;
+
   if (selectRaspi === "El Pendorcho") idRaspi = idPendorcho;
   if (selectRaspi === "El Emir") idRaspi = idEmir;
   if (selectRaspi === "La Posta del Cangrejo") idRaspi = idLaPosta;
@@ -105,29 +110,53 @@ function changeRecords() {
   if (selectRaspi === "Pocitos") idRaspi = idPocitos;
   if (selectRaspi === "Carrasco") idRaspi = idCarrasco;
   $.ajax({
-    url: "http://localhost:3000/records?idRaspi="+idRaspi,
+    url: "http://localhost:3000/records/idRaspi",
     type: "GET",
     dataType: "json",
-    data:{},
+    data: { idRaspi: idRaspi },
     success: listarRecord,
     error: mostrarError,
   });
 }
 
-function sucribe() {
-  var chks = document.getElementsByName("offer");
+$("#countySel").change(function () {
+  $("#suscribeCheck").removeAttr("disabled");
+});
 
-  if (opts.value == 'Del') {
-      for (var i = 0; i <= chks.length - 1; i++) {
-          chks[i].disabled = false;
-          document.getElementById('div').innerHTML = 'Checkboxes enabled';
+function suscribe() {
+  var data, hour, raspi, active;
+  hour = $("#horarios").children("option:selected").val();
+
+  var selectRaspi = document.getElementById("countySel").value;
+
+  if (selectRaspi === "El Pendorcho") raspi = idPendorcho;
+  if (selectRaspi === "El Emir") raspi = idEmir;
+  if (selectRaspi === "La Posta del Cangrejo") raspi = idLaPosta;
+  if (selectRaspi === "El Barco Hundido") raspi = idElBarco;
+  if (selectRaspi === "El Desplayado") raspi = idDesplayado;
+  if (selectRaspi === "La Honda") raspi = idHonda;
+  if (selectRaspi === "Pocitos") raspi = idPocitos;
+  if (selectRaspi === "Carrasco") raspi = idCarrasco;
+  active = true;
+  data = { hour: hour, raspi: raspi, active: active };
+  $.ajax({
+    url: "http://localhost:3000/suscriptions",
+    data: data,
+    type: "post",
+    dataType: "json",
+    success: function (data) {
+      //  ... do something with the data...
+      let activo = data.active;
+      if (activo == true) {
+        activo = "Si";
+      } else {
+        active = "No";
       }
-  }
-  else {
-      for (var i = 0; i <= chks.length - 1; i++) {
-          chks[i].disabled = true;
-          chks[i].checked = false;
-          document.getElementById('div').innerHTML = 'Checkboxes disabled and unchecked';
-      }
-  }
+      alert(`Usted se ha suscrito con exito!`);
+      $("#suscribe").empty();
+      $("#suscribe").append(
+        `<p class="u-text u-text-2"> Suscrito: ${activo} </p> `
+      );
+    },
+  });
 }

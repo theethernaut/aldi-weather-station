@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const recordSchema = new mongoose.Schema({
   _id: mongoose.Schema.Types.ObjectId,
-  id_raspi: {
+  idRaspberry: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Raspi",
   },

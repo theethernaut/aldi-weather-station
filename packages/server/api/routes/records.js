@@ -7,31 +7,23 @@ const Record = require("../models/record");
 const verifyRaspi = require("./verifyRaspi");
 
 router.get("/", (req, res, next) => {
-  Record.find()
+  Record.findOne()
     .sort({ _id: -1 })
-    .limit(1)
-    .select(
-      "_id internal_temp humidity image video rain external_temp uv_index uv_risk_level wind_direction wind_speed"
-    )
     .exec()
     .then((docs) => {
       const response = {
-        count: docs.length,
-        records: docs.map((doc) => {
-          return {
-            _id: doc._id,
-            internal_temp: doc.internal_temp,
-            humidity: doc.humidity,
-            image: doc.image,
-            video: doc.video,
-            rain: doc.rain,
-            external_temp: doc.external_temp,
-            uv_index: doc.uv_index,
-            uv_risk_level: doc.uv_risk_level,
-            wind_direction: doc.wind_direction,
-            wind_speed: doc.wind_speed,
-          };
-        }),
+        _id: docs._id,
+        idRaspberry: docs.idRaspberry,
+        internal_temp: docs.internal_temp,
+        humidity: docs.humidity,
+        image: docs.image,
+        video: docs.video,
+        rain: docs.rain,
+        external_temp: docs.external_temp,
+        uv_index: docs.uv_index,
+        uv_risk_level: docs.uv_risk_level,
+        wind_direction: docs.wind_direction,
+        wind_speed: docs.wind_speed,
       };
       res.status(200).json(response);
     })
@@ -44,7 +36,7 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/public", (req, res, next) => {
-  res.send()
+  res.send();
 });
 
 router.post("/", verifyRaspi, (req, res, next) => {
@@ -66,7 +58,7 @@ router.post("/", verifyRaspi, (req, res, next) => {
   );
   const record = new Record({
     _id: new mongoose.Types.ObjectId(),
-    //raspiId:
+    idRaspberry: req.body.idRaspberry,
     internal_temp: req.body.internal_temp,
     humidity: req.body.humidity,
     image: "./public/captureImage.jpg",
@@ -78,48 +70,43 @@ router.post("/", verifyRaspi, (req, res, next) => {
     wind_direction: "", //req.body.wind_direction,
     wind_speed: "", //req.body.wind_speed
   });
-  record
-    .save()
-    .then((result) => {
-      res.status(201).json({
-        message: "Created record successfully",
+  record.save(function (error) {
+    Record.find({})
+      .populate("idRaspberry")
+      .exec()
+      .then((result) => {
+        res.status(201).json({
+          message: "Created record successfully",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          error: err,
+        });
       });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
-      });
-    });
+  });
 });
 
-router.get("/:raspiId", (req, res, next) => {
-  const id = req.params.raspiId;
-  Record.find({id_raspi : id})
+router.get("/idRaspi", (req, res, next) => {
+  const id = req.query.idRaspi;
+  Record.findOne({ idRaspberry: id })
     .sort({ _id: -1 })
-    .limit(1)
-    .select(
-      `_id internal_temp humidity image video rain external_temp uv_index uv_risk_level wind_direction wind_speed`
-    )
     .exec()
     .then((docs) => {
       const response = {
-        count: docs.length,
-        records: docs.map((doc) => {
-          return {
-            _id: doc._id,
-            internal_temp: doc.internal_temp,
-            humidity: doc.humidity,
-            image: doc.image,
-            video: doc.video,
-            rain: doc.rain,
-            external_temp: doc.external_temp,
-            uv_index: doc.uv_index,
-            uv_risk_level: doc.uv_risk_level,
-            wind_direction: doc.wind_direction,
-            wind_speed: doc.wind_speed,
-          };
-        }),
+        _id: docs._id,
+        idRaspberry: docs.idRaspberry,
+        internal_temp: docs.internal_temp,
+        humidity: docs.humidity,
+        image: docs.image,
+        video: docs.video,
+        rain: docs.rain,
+        external_temp: docs.external_temp,
+        uv_index: docs.uv_index,
+        uv_risk_level: docs.uv_risk_level,
+        wind_direction: docs.wind_direction,
+        wind_speed: docs.wind_speed,
       };
       res.status(200).json(response);
     })

@@ -3,38 +3,50 @@ const router = express.Router();
 const mongoose = require("mongoose");
 let schedule = require("node-schedule");
 let nodemailer = require("nodemailer");
+const axios = require("axios");
 
 const Suscription = require("../models/suscription");
 const Record = require("../models/record");
 const User = require("../models/user");
-const { response } = require("../../app");
-let raspi; //Traer dato de la web
+//const { response } = require("../../app");
 
-getUserName = () => {
-  User.find({ "User._id": req.query.user._id }).populate("invitees.user");
-
-  // User.findOne({ "local.email": email, "invitees._id": req.query.invitation_id }, function (err, user) {
-  //     if (err) return done(err);
-  //     if (user) {
-  //       return done(
-  //         null,
-  //         false,
-  //         req.flash("signupMessage", "Este usuario ya existe")
-  //       );
-  //     }
+let respuestaRecord;
+let getRecordData = (raspiId) => {
+  const URL = "http://localhost:3000/records/idRaspi";
+  axios
+    .get(URL, {
+      params: {
+        idRaspi: raspiId,
+      },
+    })
+    .then((response) => {
+      //handle success
+      respuestaRecord = response;
+    })
+    .catch((error) => {
+      //handle error
+      console.log(error);
+    });
 };
 
-getRecordData();
-let internal_temp = getRecordData.records.internal_temp;
-let humidity = getRecordData.records.humidity;
-let image = getRecordData.records.image;
-let video = getRecordData.records.video;
-let rain = getRecordData.records.rain;
-let external_temp = getRecordData.records.external_temp;
-let uv_index = getRecordData.records.uv_index;
-let uv_risk_level = getRecordData.records.uv_risk_level;
-let wind_direction = getRecordData.records.wind_direction;
-let wind_speed = getRecordData.records.wind_speed;
+let respuestaUser;
+let getUserData = (userId) => {
+  const URL = "http://localhost:3000/users/userId";
+  axios
+    .get(URL, {
+      params: {
+        userId: userId,
+      },
+    })
+    .then((response) => {
+      //handle success
+      respuestaUser = response;
+    })
+    .catch((error) => {
+      //handle error
+      console.log(error);
+    });
+};
 
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -45,32 +57,32 @@ let transporter = nodemailer.createTransport({
 });
 
 let mailOptions = {
-  from: "aldisurfschool31@gmail.com",
-  to: getUserName(),
-  subject: "Tu reporte de playa esta pronto!",
-  html: `<h3>¡Hola!</h3> <br>
-        <h4> El reporte para hoy nos dice: <h4><br>
-        <p>Temperatura interna: ${internal_temp} </p> <br>
-        <p>Temperatura externa: ${external_temp} </p> <br>
-        <p>Humedad: ${humidity} </p> <br>
-        <p>Direccion del viento: ${wind_direction} </p> <br>
-        <p>Velocidad del viento: ${wind_speed} </p> <br>
-        <p>Lluvia: ${rain} </p> <br>
-        <p>UV index: ${uv_index} </p> <br>
-        <p>Riesgo de rayos UV: ${uv_risk_level} </p> <br>
-        <p>Imagen: ${image} </p> <br>
-        <p>Video: ${video} </p> <br>
-        <h4> Gracias por confiar en nosotros. </h4> <br>
-        <h3> Buenas Olas! <br>
-             Weather Station </h3>
-       `,
+  // from: "aldisurfschool31@gmail.com",
+  // to: respuestaUser.local.email,
+  // subject: "Tu reporte de playa esta pronto!",
+  // html: `<h3>¡Datos ambientales de Aldi-Surf-School!</h3> <br>
+  //       <h4> El reporte para hoy nos dice: <h4><br>
+  //       <p>Temperatura interna: ${respuestaRecord.internal_temp} </p> <br>
+  //       <p>Temperatura externa: ${respuestaRecord.external_temp} </p> <br>
+  //       <p>Humedad: ${respuestaRecord.humidity} </p> <br>
+  //       <p>Dirección del viento: ${respuestaRecord.wind_direction} </p> <br>
+  //       <p>Velocidad del viento: ${respuestaRecord.wind_speed} </p> <br>
+  //       <p>Lluvia: ${respuestaRecord.rain} </p> <br>
+  //       <p>UV index: ${respuestaRecord.uv_index} </p> <br>
+  //       <p>Riesgo de rayos UV: ${respuestaRecord.uv_risk_level} </p> <br>
+  //       <p>Imagen: ${respuestaRecord.image} </p> <br>
+  //       <p>Video: ${respuestaRecord.video} </p> <br>
+  //       <h4> Gracias por confiar en nosotros. </h4> <br>
+  //       <h3> Buenas Olas! <br>
+  //            Weather Station </h3>
+  //      `,
 };
 
-var mailScheduler = function (job) {
+var mailScheduler = function (hora, job) {
   // set rules for scheduler
   var rule = new schedule.RecurrenceRule();
   rule.dayOfWeek = [new schedule.Range(0, 6)];
-  rule.hour = 16; //Find it from database
+  rule.hour = hora; //Find it from database
   // scheduleJob take a rule and a function
   // you will need to pass a function object
   // into the mailScheduler function
@@ -87,50 +99,49 @@ const sendEmail = () =>
     }
   });
 
-const main = () => {
-  if (active == true) {
+const main = (activo, raspiId, userId, hora) => {
+  if (activo == true) {
+    getRecordData(raspiId);
+    getUserData(userId);
     //Bring Active from mongoDB
-    mailScheduler(sendEmail);
+    mailScheduler(hora, sendEmail());
   } else {
     schedule.cancelJob("mailJob");
   }
 };
 
-let getRecordData = () => {
-  Record.find()
-    .sort({ _id: -1 })
-    .limit(1)
-    .select(
-      "_id internal_temp humidity image video rain external_temp uv_index uv_risk_level wind_direction wind_speed"
-    )
-    .exec()
-    .then((docs) => {
-      const response = {
-        count: docs.length,
-        records: docs.map((doc) => {
-          return {
-            _id: doc._id,
-            internal_temp: doc.internal_temp,
-            humidity: doc.humidity,
-            image: doc.image,
-            video: doc.video,
-            rain: doc.rain,
-            external_temp: doc.external_temp,
-            uv_index: doc.uv_index,
-            uv_risk_level: doc.uv_risk_level,
-            wind_direction: doc.wind_direction,
-            wind_speed: doc.wind_speed,
-          };
-        }),
-      };
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({
-        error: err,
+router.post("/", (req, res, next) => {
+  let activo = req.body.active;
+  let raspiId = req.body.raspi;
+  let userId = req.session.passport.user;
+  let hora = req.body.hour;
+  const suscription = new Suscription({
+    _id: new mongoose.Types.ObjectId(),
+    user: req.session.passport.user,
+    raspi: req.body.raspi,
+    hour: req.body.hour,
+    active: req.body.active,
+  });
+  suscription.save(function (error) {
+    Suscription.find({})
+      .populate("user")
+      .populate("zone")
+      .exec()
+      .then((result) => {
+        res.status(201).json({
+          message: "Created record successfully",
+          active: result.active,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json({
+          error: err,
+        });
       });
-    });
-    return response;
-};
+  });
 
-module.exports = main;
+  main(activo, raspiId, userId, hora);
+});
+
+module.exports = router;

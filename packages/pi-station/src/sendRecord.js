@@ -64,6 +64,7 @@ function postData(data) {
       fs.readdir(directoryPath, (err, files) => {
         if (err) throw err;
         files.forEach(function (file) {
+          console.log(file)
           fs.unlinkSync(`${directoryPath}/${file}`, (err) => {
             if (err) {
               console.error(err);
@@ -74,7 +75,7 @@ function postData(data) {
           console.log(response.data);
         });
       });
-    })
+    }) 
     .catch((error) => {
       //handle error
       console.log(error);

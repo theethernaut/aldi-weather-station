@@ -6,8 +6,12 @@ const suscriptionSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  raspi: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Raspi",
+  },
   hour: String,
-  active: boolean
+  active: Boolean,
 });
 
 module.exports = mongoose.model("Suscription", suscriptionSchema);

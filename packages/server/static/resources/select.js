@@ -1,17 +1,17 @@
 var stateObject = {
     "Punta del Este": {
-        "El Pendorcho": "El Pendorcho",
-        "La Posta del Cangrejo": "La Posta del Cangrejo",
-        "El Emir": "El Emir"
+        "El Pendorcho": "5f25deec455c843370ac03f6",
+        "La Posta del Cangrejo": "5f2d98444da90845f442dc2b",
+        "El Emir": "5f2d99e54da90845f442dc2c"
     },
     "Rocha": {
-        "El Barco Hundido": "El Barco Hundido",
-        "El Desplayado": "El Desplayado"
+        "El Barco Hundido": "5f2d99e54da90845f442dc2d",
+        "El Desplayado": "5f2d99e54da90845f442dc2e"
     },
     "Montevideo": {
-        "La Honda": "La Honda",
-        "Pocitos": "Pocitos",
-        "Carrasco": "Carrasco"
+        "La Honda": "5f2d99e54da90845f442dc2f",
+        "Pocitos": "5f2d99e54da90845f442dc30",
+        "Carrasco": "5f2d99e54da90845f442dc31"
     }
 }
 window.onload = function () {

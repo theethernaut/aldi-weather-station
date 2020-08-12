@@ -10,11 +10,6 @@ const cors = require("cors");
 //const expressLayouts = require("express-ejs-layouts");
 require("dotenv").config();
 
-const indexRoutes = require("./api/routes/index");
-const usersRoutes = require("./api/routes/users");
-const recordRoutes = require("./api/routes/records");
-const raspiRoutes = require("./api/routes/raspis");
-
 const URI = process.env.MONGOOSE_URI;
 
 mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true });
@@ -74,12 +69,19 @@ app.use(function (req, res, next) {
   res.locals.error = req.flash("error");
   next();
 });
+const indexRoutes = require("./api/routes/index");
+const usersRoutes = require("./api/routes/users");
+const recordRoutes = require("./api/routes/records");
+const raspiRoutes = require("./api/routes/raspis");
+const suscriptionsRoutes = require("./api/routes/suscriptions");
 
 // Routes which should handle requests
 app.use("/", indexRoutes);
 app.use("/users", usersRoutes);
 app.use("/records", recordRoutes);
 app.use("/raspis", raspiRoutes);
+app.use("/suscriptions", suscriptionsRoutes);
+
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

@@ -8,10 +8,11 @@
     content="Look Deep Into The Nature, Getting back to nature, This place is special..., Nature, You Might Also Like, Our Mission, Wildlife, Africa is home to many of the world's most famous fauna, Contact Us" />
   <meta name="description" content="" />
   <meta name="page_type" content="np-template-header-footer-from-plugin" />
-  <title>Index</title>
+  <title>Weather Station</title>
   <link rel="stylesheet" href="../static/indexCss/nicepage.css" media="screen" />
   <link rel="stylesheet" href="../static/indexCss/Index.css" media="screen" />
   <link rel="stylesheet" href="../static/indexCss/style.css" media="screen" />
+  <link rel="icon" type="image/png" href="../static/img/compass.png" />
 
   <script class="u-script" type="text/javascript" src="../static/resources/jquery.js" defer=""></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -101,7 +102,7 @@
           <ul class="u-nav u-spacing-30 u-unstyled u-nav-1">
             <li class="u-nav-item">
               <a class="u-border-3 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-                href="" style="padding: 10px 14px;">Logout</a>
+                href="/users/logout" style="padding: 10px 14px; color:#111111">Logout</a>
             </li>
           </ul>
         </div>
@@ -111,7 +112,7 @@
             <div class="u-menu-close"></div>
             <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
               <li class="u-nav-item">
-                <a class="u-button-style u-nav-link" href="" style="padding: 10px 20px;">Logout</a>
+                <a class="u-button-style u-nav-link" href="/users/logout" style="padding: 10px 20px; color:#111111">Logout</a>
               </li>
             </ul>
           </div>
@@ -152,7 +153,7 @@
                 class="u-container-layout u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xl u-valign-top-xs u-container-layout-1">
                 <img class="u-image u-image-default u-image-1" data-image-width="1280" data-image-height="853"
                   data-animation-name="rotateIn" data-animation-duration="1000" data-animation-delay="0"
-                  data-animation-direction="" src="http://localhost:3000/images/captureImage.jpg" />
+                  data-animation-direction="" src="http://localhost:3000/captureImage.jpeg" />
               </div>
             </div>
             <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
@@ -168,8 +169,8 @@
                       width: 100%;
                       height: 100%;
                       " controls>
-                      <source src="http://localhost:3000/images/captureVideo.avi" type="video/mp4" />
-                      <source src="http://localhost:3000/images/captureVideo.avi" type="video/ogg" />
+                      <source src="http://localhost:3000/captureVideo.mp4" type="video/mp4" />
+                      <source src="http://localhost:3000/captureVideo.mp4" type="video/ogg" />
                       Your browser does not support the video tag.
                     </video>
                   </div>
@@ -199,24 +200,23 @@
                 <p class="u-text u-text-2">
                   Deseo recibir e-mails con el estado del tiempo
                 </p>
-                <div class="u-border-5 u-border-grey-75 u-container-style u-group u-group-1">
-                  <label class="label">
-                    <input type="checkbox" name="checkbox" class="checkbox" default="false" />
-                    <div class="checkDiv">
-                      <div class="lineOne"></div>
-                      <div class="lineTwo"></div>
-                    </div>
-                  </label>
-                </div>
+                <!-- <div class="u-border-5 u-border-grey-75 u-container-style u-group u-group-1">
+                  
+                </div> -->
                 <p class="u-text u-text-default u-text-3">
-                <div class="select">
-                  <select name="slct" class="letra" onchange="sucribe()"> 
-                    <option selected disabled>Seleccione una hora.</option>
-                    <option value="1">8:00hs</option>
-                    <option value="2">12:00hs</option>
-                    <option value="3">16:00hs</option>
-                  </select>
-                </div>
+                  <div class="select">
+                    <select name="slct" id="horarios" class="letra"> 
+                      <option value="8">8:00hs</option>
+                      <option value="12">12:00hs</option>
+                      <option value="16">16:00hs</option>
+                    </select>
+                  </div>
+                  <label class="label">
+                    <input type="button" style="width: 110px; height:60px; font-size:18px; color:#111111" id="suscribeCheck" onclick="suscribe()" name="button1" value="Suscribirse" class="u-border-3 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"/> 
+                  </label>
+                  <br>
+                  <p id="suscrito"></p>
+                
                 </p>
               </div>
             </div>

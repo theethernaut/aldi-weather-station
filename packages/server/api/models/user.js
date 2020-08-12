@@ -2,23 +2,23 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 let userSchema = mongoose.Schema({
+  _id: mongoose.Schema.Types.ObjectId,
   local: {
     email: String,
     password: String,
-    role: String,
   },
-  facebook: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-  },
-  google: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-  },
+  // facebook: {
+  //   id: String,
+  //   token: String,
+  //   email: String,
+  //   name: String,
+  // },
+  // google: {
+  //   id: String,
+  //   token: String,
+  //   email: String,
+  //   name: String,
+  // },
 });
 
 userSchema.methods.generateHash = function (password) {
