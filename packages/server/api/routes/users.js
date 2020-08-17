@@ -3,7 +3,7 @@ const passport = require("passport");
 const router = express.Router();
 
 // Load User model
-//const User = require('../models/User');
+const User = require('../models/user');
 const { forwardAuthenticated } = require("../config/auth");
 
 // Login Page
@@ -44,13 +44,11 @@ router.get("/logout", (req, res) => {
 
 router.get("/userId", (req, res, next) => {
   const id = req.query.userId;
-  Record.findOne({ _id: id })
+  User.findOne({ _id: id })
     .exec()
     .then((docs) => {
       const response = {
-        local: {
-          email: docs.email,
-        },
+        email: docs.local.email
       };
       res.status(200).json(response);
     })

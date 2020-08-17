@@ -146,15 +146,15 @@ function suscribe() {
     dataType: "json",
     success: function (data) {
       //  ... do something with the data...
-      let activo = data.active;
-      if (activo == true) {
+      let activo = data.activo;
+      if (activo == "true") {
         activo = "Si";
       } else {
-        active = "No";
+        activo = "No";
       }
       alert(`Usted se ha suscrito con exito!`);
-      $("#suscribe").empty();
-      $("#suscribe").append(
+      $("#suscrito").empty();
+      $("#suscrito").append(
         `<p class="u-text u-text-2"> Suscrito: ${activo} </p> `
       );
     },

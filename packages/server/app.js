@@ -12,7 +12,10 @@ require("dotenv").config();
 
 const URI = process.env.MONGOOSE_URI;
 
-mongoose.connect(URI, { useUnifiedTopology: true, useNewUrlParser: true });
+mongoose.connect(URI, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true
+});
 
 const connection = mongoose.connection;
 
@@ -81,7 +84,6 @@ app.use("/users", usersRoutes);
 app.use("/records", recordRoutes);
 app.use("/raspis", raspiRoutes);
 app.use("/suscriptions", suscriptionsRoutes);
-
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

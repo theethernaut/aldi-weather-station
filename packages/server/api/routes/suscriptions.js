@@ -4,111 +4,147 @@ const mongoose = require("mongoose");
 let schedule = require("node-schedule");
 let nodemailer = require("nodemailer");
 const axios = require("axios");
+const https = require("https");
 
 const Suscription = require("../models/suscription");
 const Record = require("../models/record");
 const User = require("../models/user");
 //const { response } = require("../../app");
-
-let respuestaRecord;
-let getRecordData = (raspiId) => {
+const agent = new https.Agent({ rejectUnauthorized: false });
+let respuestaRecord = {
+  data: {
+    _id: "",
+    idRaspberry: "",
+    internal_temp: "",
+    humidity: "",
+    image: "",
+    video: "",
+    rain: "",
+    external_temp: "",
+    uv_index: "",
+    uv_risk_level: "",
+    wind_direction: "",
+    wind_speed: "",
+  },
+};
+async function getRecordData(activo, raspiId, userId, hora) {
   const URL = "http://localhost:3000/records/idRaspi";
   axios
     .get(URL, {
       params: {
         idRaspi: raspiId,
       },
+      httpsAgent: agent,
+      withCredentials: true,
     })
     .then((response) => {
       //handle success
-      respuestaRecord = response;
+      respuestaRecord = { data: response.data };
+      getUserData(activo, userId, hora, respuestaRecord);
     })
     .catch((error) => {
       //handle error
-      console.log(error);
+      console.log("Error de GET record data " + error);
     });
-};
+}
 
-let respuestaUser;
-let getUserData = (userId) => {
+let respuestaUser = { email: "" };
+async function getUserData(activo, userId, hora, respuestaRecord) {
   const URL = "http://localhost:3000/users/userId";
   axios
     .get(URL, {
       params: {
         userId: userId,
       },
+      httpsAgent: agent,
+      withCredentials: true,
     })
     .then((response) => {
       //handle success
-      respuestaUser = response;
+      respuestaUser = { email: response.data.email };
+      main(activo, hora, respuestaUser, respuestaRecord);
     })
     .catch((error) => {
       //handle error
-      console.log(error);
+      console.log("Error de GET USER DATA: " + error);
     });
-};
-
+}
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "aldisurfschool31@gmail.com",
     pass: process.env.GMAIL_PASS,
   },
+  tls: { rejectUnauthorized: false },
 });
 
 let mailOptions = {
-  // from: "aldisurfschool31@gmail.com",
-  // to: respuestaUser.local.email,
-  // subject: "Tu reporte de playa esta pronto!",
-  // html: `<h3>¡Datos ambientales de Aldi-Surf-School!</h3> <br>
-  //       <h4> El reporte para hoy nos dice: <h4><br>
-  //       <p>Temperatura interna: ${respuestaRecord.internal_temp} </p> <br>
-  //       <p>Temperatura externa: ${respuestaRecord.external_temp} </p> <br>
-  //       <p>Humedad: ${respuestaRecord.humidity} </p> <br>
-  //       <p>Dirección del viento: ${respuestaRecord.wind_direction} </p> <br>
-  //       <p>Velocidad del viento: ${respuestaRecord.wind_speed} </p> <br>
-  //       <p>Lluvia: ${respuestaRecord.rain} </p> <br>
-  //       <p>UV index: ${respuestaRecord.uv_index} </p> <br>
-  //       <p>Riesgo de rayos UV: ${respuestaRecord.uv_risk_level} </p> <br>
-  //       <p>Imagen: ${respuestaRecord.image} </p> <br>
-  //       <p>Video: ${respuestaRecord.video} </p> <br>
-  //       <h4> Gracias por confiar en nosotros. </h4> <br>
-  //       <h3> Buenas Olas! <br>
-  //            Weather Station </h3>
-  //      `,
+  from: "aldisurfschool31@gmail.com",
+  to: respuestaUser.email,
+  subject: "Tu reporte de playa esta pronto!",
+  html: `<h3>¡Datos ambientales de Aldi-Surf-School!</h3> <br>
+        <h4> El reporte para hoy nos dice: <h4><br>
+        <p>Temperatura interna: ${respuestaRecord.data.internal_temp} </p> <br>
+        <p>Temperatura externa: ${respuestaRecord.data.external_temp} </p> <br>
+        <p>Humedad: ${respuestaRecord.data.humidity} </p> <br>
+        <p>Dirección del viento: ${respuestaRecord.data.wind_direction} </p> <br>
+        <p>Velocidad del viento: ${respuestaRecord.data.wind_speed} </p> <br>
+        <p>Lluvia: ${respuestaRecord.data.rain} </p> <br>
+        <p>UV index: ${respuestaRecord.data.uv_index} </p> <br>
+        <p>Riesgo de rayos UV: ${respuestaRecord.data.uv_risk_level} </p> <br>
+        <h4> Gracias por confiar en nosotros. </h4> <br>
+        <h3> Buenas Olas! <br>
+             Weather Station </h3>
+       `,
 };
 
-var mailScheduler = function (hora, job) {
+var mailScheduler = function (hora, respuestaUser, respuestaRecord) {
   // set rules for scheduler
   var rule = new schedule.RecurrenceRule();
   rule.dayOfWeek = [new schedule.Range(0, 6)];
-  rule.hour = hora; //Find it from database
+  rule.hour = "21"; //Find it from database
   // scheduleJob take a rule and a function
   // you will need to pass a function object
   // into the mailScheduler function
-  schedule.scheduleJob("mailJob", rule, job);
+  schedule.scheduleJob("mailJob", rule, function () {
+    sendEmail(respuestaUser, respuestaRecord);
+  });
 };
 
 // Send e-mail
-const sendEmail = () =>
+const sendEmail = (respuestaUser, respuestaRecord) => {
+  mailOptions.to = respuestaUser.email;
+  mailOptions.html = `<h3>¡Datos ambientales de Aldi-Surf-School!</h3> <br>
+  <h4> El reporte para hoy nos dice: <h4><br>
+  <p>Temperatura interna: ${respuestaRecord.data.internal_temp} </p> <br>
+  <p>Temperatura externa: ${respuestaRecord.data.external_temp} </p> <br>
+  <p>Humedad: ${respuestaRecord.data.humidity} </p> <br>
+  <p>Dirección del viento: ${respuestaRecord.data.wind_direction} </p> <br>
+  <p>Velocidad del viento: ${respuestaRecord.data.wind_speed} </p> <br>
+  <p>Lluvia: ${respuestaRecord.data.rain} </p> <br>
+  <p>UV index: ${respuestaRecord.data.uv_index} </p> <br>
+  <p>Riesgo de rayos UV: ${respuestaRecord.data.uv_risk_level} </p> <br>
+  <h4> Gracias por confiar en nosotros. </h4> <br>
+  <h3> Buenas Olas! <br>
+       Weather Station </h3>
+ `;
   transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
-      console.log(error);
+      console.log("Error de email: " + error);
     } else {
       console.log("Email sent: " + info.response);
     }
   });
+};
 
-const main = (activo, raspiId, userId, hora) => {
-  if (activo == true) {
-    getRecordData(raspiId);
-    getUserData(userId);
-    //Bring Active from mongoDB
-    mailScheduler(hora, sendEmail());
+function main(activo, hora, respuestaUser, respuestaRecord) {
+  if (activo == true || activo == "true") {
+    mailScheduler(hora, respuestaUser, respuestaRecord);
   } else {
     schedule.cancelJob("mailJob");
   }
-};
+}
 
 router.post("/", (req, res, next) => {
   let activo = req.body.active;
@@ -127,21 +163,21 @@ router.post("/", (req, res, next) => {
       .populate("user")
       .populate("zone")
       .exec()
-      .then((result) => {
-        res.status(201).json({
-          message: "Created record successfully",
-          active: result.active,
-        });
+      .then(() => {
+        const response = {
+          activo: activo,
+        };
+        getRecordData(activo, raspiId, userId, hora);
+        //await main(activo, raspiId, userId, hora);
+        res.status(201).json(response);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Error de POST :" + err);
         res.status(500).json({
           error: err,
         });
       });
   });
-
-  main(activo, raspiId, userId, hora);
 });
 
 module.exports = router;
