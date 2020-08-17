@@ -38,6 +38,7 @@ module.exports = function (passport) {
               );
             } else {
               var newUser = new User();
+              newUser._id = new mongoose.Types.ObjectId();
               newUser.local.email = email;
               newUser.local.password = newUser.generateHash(password);
               // newUser.local.role = "user";
