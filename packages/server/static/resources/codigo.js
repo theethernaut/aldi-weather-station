@@ -79,7 +79,7 @@ const mostrarError = (error) => {
 const listar = () => {
   $("#suscribeCheck").attr("disabled", true);
   $.ajax({
-    url: "http://18.216.127.70:3000/records",
+    url: "http://3.20.14.136:3000/records",
     type: "GET",
     dataType: "json",
     success: listarRecord,
@@ -110,7 +110,7 @@ function changeRecords() {
   if (selectRaspi === "Pocitos") idRaspi = idPocitos;
   if (selectRaspi === "Carrasco") idRaspi = idCarrasco;
   $.ajax({
-    url: "http://18.216.127.70:3000/records/idRaspi",
+    url: "http://3.20.14.136:3000/records/idRaspi",
     type: "GET",
     dataType: "json",
     data: { idRaspi: idRaspi },
@@ -140,7 +140,7 @@ function suscribe() {
   active = true;
   data = { hour: hour, raspi: raspi, active: active };
   $.ajax({
-    url: "http://18.216.127.70:3000/suscriptions",
+    url: "http://3.20.14.136:3000/suscriptions",
     data: data,
     type: "post",
     dataType: "json",

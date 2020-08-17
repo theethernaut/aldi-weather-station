@@ -47,7 +47,7 @@ function readFiles() {
 }
 
 function postData(data) {
-  const URL = "http://18.216.127.70:3000/records";
+  const URL = "http://3.20.14.136:3000/records";
   axios
     .post(URL, data, {
       headers: {

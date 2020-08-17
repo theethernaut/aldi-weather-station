@@ -63,7 +63,7 @@ router.get("/:raspiId", (req, res, next) => {
           raspi: doc,
           request: {
             type: "GET",
-            url: "http://18.216.127.70:3000/raspis",
+            url: "http://3.20.14.136:3000/raspis",
           },
         });
       } else {
@@ -91,7 +91,7 @@ router.patch("/:raspiId", (req, res, next) => {
         message: "Station updated",
         request: {
           type: "PATCH",
-          url: "http://18.216.127.70:3000/raspis/" + id,
+          url: "http://3.20.14.136:3000/raspis/" + id,
         },
       });
     })
@@ -112,7 +112,7 @@ router.delete("/:raspiId", (req, res, next) => {
         message: "Station deleted",
         request: {
           type: "DELETE",
-          url: "http://18.216.127.70:3000/raspis",
+          url: "http://3.20.14.136:3000/raspis",
           body: { username: "String", password: "String" },
         },
       });
