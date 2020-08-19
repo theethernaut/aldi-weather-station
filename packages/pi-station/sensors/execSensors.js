@@ -4,7 +4,7 @@ const humidity = require("./humidity");
 const files = require("./filesToJson");
 
 const image = __dirname + "/../files/captureImage.jpg";
-const video = __dirname + "/../files/newVideo.avi";
+const video = __dirname + "/../files/newVideo.mp4";
 
 function main() {
   capture.captureImage();
@@ -16,11 +16,11 @@ function main() {
 }
 
 function initSensors() {
-  shell.exec("sudo python3 ../sensors/temperature.py");
-  shell.exec("sudo python3 ../sensors/rain.py");
-  shell.exec("sudo python3 ../sensors/uvRay.py");
+  shell.exec(`sudo python3 ${__dirname}/temperature.py`);
+  shell.exec(`sudo python3 ${__dirname}/rain.py`);
+  shell.exec(`sudo python3 ${__dirname}/uvRay.py`);
 }
 
 module.exports = {
-  main
+  main,
 };

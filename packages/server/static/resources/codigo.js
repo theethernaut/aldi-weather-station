@@ -86,6 +86,8 @@ const listar = () => {
     error: mostrarError,
   });
 };
+$("#Viendo").empty();
+$("#Viendo").append(`Estas viendo: El Pendorcho`);
 listar();
 
 let idPendorcho = "5f25deec455c843370ac03f6",
@@ -98,6 +100,9 @@ let idPendorcho = "5f25deec455c843370ac03f6",
   idCarrasco = "5f2d99e54da90845f442dc31";
 
 function changeRecords() {
+  var Viendo1 = document.getElementById("countySel").value;
+  $("#Viendo").empty();
+  $("#Viendo").append(`Estas viendo: ${Viendo1}`);
   var idRaspi;
   var selectRaspi = document.getElementById("countySel").value;
 
