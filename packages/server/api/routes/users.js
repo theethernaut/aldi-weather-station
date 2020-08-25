@@ -39,12 +39,9 @@ router.post("/login", (req, res, next) => {
 router.get("/logout", (req, res) => {
   req.logout();
   req.session.destroy(function (err) {
-    if (err) { return next(err); }
-    // The response should indicate that the user is no longer authenticated.
-    return res.send({ authenticated: req.isAuthenticated() });
+    res.clearCookie('connect.sid');
+    res.redirect('/'); 
   });
-  req.flash("success_msg", "You are logged out");
-  res.redirect("/users/login");
 });
 
 router.get("/userId", (req, res, next) => {

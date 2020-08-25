@@ -53,8 +53,8 @@ app.use("/static", express.static("./static/"));
 app.use(
   session({
     secret: "aldiSurfSchoolPendorcho",
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
   })
 );
 
