@@ -95,7 +95,7 @@ select {
   outline: 0;
   box-shadow: none;
   border: 0 !important;
-  background: #04465a;
+  background: #007fff;
   background-image: none;
 }
 /* Remove IE arrow */
@@ -110,7 +110,7 @@ select::-ms-expand {
   width: 20em;
   height: 3em;
   line-height: 3;
-  background: #1ed0d6;
+  background: #003fff;
   overflow: hidden;
   border-radius: 0.25em;
 }
@@ -134,7 +134,7 @@ select {
   right: 0;
   padding: 0 1em;
   color: white;
-  background: #3994be;
+  background: #007fff;
   cursor: pointer;
   pointer-events: none;
   -webkit-transition: 0.25s all ease;
@@ -143,7 +143,7 @@ select {
 }
 /* Transition */
 .select:hover::after {
-  color: #f39c12;
+  color: #fff;
 }
 
 .move {

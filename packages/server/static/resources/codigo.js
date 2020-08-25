@@ -29,7 +29,7 @@ const listarRecord = (resp) => {
 
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-4">
             <div class="u-container-layout u-container-layout-4">
-              <p class="u-align-center u-text u-text-4">
+              <p class="u-align-center u-text u-text-3">
                 <img src="../static/img/drop.png" style="width:50%; height:auto;">
               </p>
               <p class="u-align-center texto"> ${resp.humidity} </p>
@@ -38,7 +38,7 @@ const listarRecord = (resp) => {
 
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-5">
             <div class="u-container-layout u-container-layout-5">
-              <p class="u-align-center u-text u-text-5">
+              <p class="u-align-center u-text u-text-3">
                 <img src="../static/img/rain.png" style="width:50%; height:auto;">
               </p>
               <p class="u-align-center texto"> ${lluvia} </p>
@@ -47,7 +47,7 @@ const listarRecord = (resp) => {
 
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-6">
             <div class="u-container-layout u-container-layout-6">
-              <p class="u-align-center u-text u-text-6">
+              <p class="u-align-center u-text u-text-3">
                 <img src="../static/img/compass.png" style="width:50%; height:auto;">
               </p>
               <p class="u-align-center texto"> ${resp.wind_direction} </p>
@@ -57,7 +57,7 @@ const listarRecord = (resp) => {
 
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-7">
             <div class="u-container-layout u-container-layout-7">
-              <p class="u-align-center u-text u-text-7">
+              <p class="u-align-center u-text u-text-3">
               <img src="../static/img/uv.png" style="width:50%; height:auto;">
               </p>
               <p class="u-align-center texto"> Índice: ${resp.uv_index} </p>

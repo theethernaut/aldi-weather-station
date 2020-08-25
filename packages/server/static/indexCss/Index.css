@@ -1,14 +1,15 @@
-.u-section-1 {background-image: linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("../img/pexelsphoto3393444.jpeg"); background-position: 50% 100%}
+/*.u-section-1 {background-image: linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url("../img/pexelsphoto3393444.jpeg"); background-position: 50% 100%}*/
+.u-section-1 {background-color: #4B92DB;background-position: 50% 100%}
 .u-section-1 .u-sheet-1 {min-height: 708px}
 .u-section-1 .u-text-1 {margin: 82px 147px 0 717px}
 .u-section-1 .u-text-2 {margin: -36px 715px 0 145px}
 .u-section-1 .u-layout-wrap-1 {margin: 26px auto 0 0}
 .u-section-1 .u-layout-cell-1 {min-height: 400px}
 .u-section-1 .u-container-layout-1 {padding: 30px}
-.u-section-1 .u-image-1 {width: 473px; height: 287px; box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4); animation-duration: 1000ms; margin: 0 auto}
+.u-section-1 .u-image-1 {width: 473px; height: 287px; /*box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4); animation-duration: 1000ms; margin: 0 auto*/}
 .u-section-1 .u-layout-cell-2 {min-height: 400px}
 .u-section-1 .u-container-layout-2 {padding: 30px}
-.u-section-1 .u-video-1 {width: 481px; height: 287px; box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4); animation-duration: 1000ms; margin: 0 auto}
+.u-section-1 .u-video-1 {width: 481px; height: 287px; /*box-shadow: 5px 5px 20px 0 rgba(0,0,0,0.4); animation-duration: 1000ms; margin: 0 auto*/}
 .u-section-1 .u-layout-wrap-2 {margin: 14px auto 60px 0}
 .u-section-1 .u-layout-cell-3 {min-height: 277px}
 .u-section-1 .u-container-layout-3 {padding: 30px 30px 24px}

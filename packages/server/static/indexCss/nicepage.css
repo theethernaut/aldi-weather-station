@@ -4399,7 +4399,7 @@ a {
   background-clip: padding-box;
   border: none;
   border-radius: 3px;
-  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  /*transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;*/
   background-color: transparent;
   color: inherit;
 }
@@ -13070,6 +13070,7 @@ section.u-image,
   height: 0;
   padding: 0;
   overflow: hidden;
+  box-shadow:none;
 }
 .embed-responsive .embed-responsive-item,
 .embed-responsive iframe,
@@ -15937,7 +15938,7 @@ blockquote .small:before {
   display: block;
   width: auto;
   right: 44px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);*/
   transform: translateY(6px);
   transition: transform 0.25s;
   -webkit-backface-visibility: hidden;
@@ -17501,7 +17502,7 @@ h6 {
 }
 .u-body {
   color: #04465A;
-  background-color: #ffffff;
+  background-color: #c2c5cc;
 }
 /*end-variables color*/
 /*begin-variables font*/
@@ -20768,7 +20769,7 @@ a.u-link.u-hover-grey-light-3:hover {
 .u-container-style.u-white:before,
 .u-table-alt-white tr:nth-child(even) {
   color: #04465A;
-  background-color: #ffffff;
+  background-color: #c2c5cc;
 }
 .u-button-style.u-white,
 .u-button-style.u-white[class*="u-border-"] {
