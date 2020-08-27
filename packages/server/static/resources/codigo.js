@@ -40,7 +40,7 @@ const listarRecord = (resp) => {
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-3">
             <div class="u-container-layout u-container-layout-3">
               <p class="u-align-center u-text-3">
-                <img src="../static/img/sun-vacio.png" style="width:50%; height:auto;">
+                <img src="../static/img/Termometro.png" style="width:50%; height:auto;">
               </p>
               <p class="u-align-center texto"> ${resp.external_temp} </p>
             </div>
