@@ -1,3 +1,22 @@
+let idPendorcho = "5f25deec455c843370ac03f6",
+  idLaPosta = "5f2d98444da90845f442dc2b",
+  idEmir = "5f2d99e54da90845f442dc2c",
+  idDesplayado = "5f2d99e54da90845f442dc2e",
+  idElBarco = "5f2d99e54da90845f442dc2d",
+  idHonda = "5f2d99e54da90845f442dc2f",
+  idPocitos = "5f2d99e54da90845f442dc30",
+  idCarrasco = "5f2d99e54da90845f442dc31";
+
+function main() {
+  $("#Viendo").empty();
+  $("#Viendo").append(`Estas viendo: El Pendorcho`);
+  listar();
+
+  $("#countySel").change(function () {
+    $("#suscribeCheck").removeAttr("disabled");
+  });
+}
+
 const listarRecord = (resp) => {
   let lluvia;
   let riesgo;
@@ -12,12 +31,12 @@ const listarRecord = (resp) => {
 
   if (resp.rain === "true") lluvia = "Está lloviendo";
   if (resp.rain === "false") lluvia = "No está lloviendo";
+
   $("#data").empty();
   $("#data").append(
     `<div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-2">
       <div class="u-gutter-0 u-layout">
         <div class="u-layout-row">
-
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-3">
             <div class="u-container-layout u-container-layout-3">
               <p class="u-align-center u-text-3">
@@ -26,50 +45,56 @@ const listarRecord = (resp) => {
               <p class="u-align-center texto"> ${resp.external_temp} </p>
             </div>
           </div>
-
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-4">
             <div class="u-container-layout u-container-layout-4">
-              <p class="u-align-center u-text u-text-3">
+              <p class="u-align-center u-text u-text-4">
                 <img src="../static/img/drop.png" style="width:50%; height:auto;">
               </p>
               <p class="u-align-center texto"> ${resp.humidity} </p>
             </div>
           </div>
-
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-5">
             <div class="u-container-layout u-container-layout-5">
-              <p class="u-align-center u-text u-text-3">
-                <img src="../static/img/rain.png" style="width:50%; height:auto;">
+              <p class="u-align-center u-text u-text-5">
+                <img id="imagenLluvia"; src="../static/img/rain.png" style="width:50%; height:auto;">
               </p>
               <p class="u-align-center texto"> ${lluvia} </p>
             </div>
           </div>
-
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-6">
             <div class="u-container-layout u-container-layout-6">
-              <p class="u-align-center u-text u-text-3">
+              <p class="u-align-center u-text u-text-6">
                 <img src="../static/img/compass.png" style="width:50%; height:auto;">
               </p>
               <p class="u-align-center texto"> ${resp.wind_direction} </p>
               <p class="u-align-center texto"> ${resp.wind_speed} </p>
             </div>
           </div>
-
           <div class="u-container-style u-layout-cell u-left-cell u-size-12 u-layout-cell-7">
             <div class="u-container-layout u-container-layout-7">
-              <p class="u-align-center u-text u-text-3">
+              <p class="u-align-center u-text u-text-7">
               <img src="../static/img/uv.png" style="width:50%; height:auto;">
               </p>
               <p class="u-align-center texto"> Índice: ${resp.uv_index} </p>
               <p class="u-align-center texto"> Riesgo: ${riesgo} </p>
             </div>
           </div>
-
         </div>
       </div>
     </div>
     `
   );
+
+  $("imagenLluvia").empty();
+  if (resp.rain === "true") {
+    lluvia = "Está lloviendo";
+    document.getElementById("imagenLluvia").src = "../static/img/rain.png";
+    //$("#imagenLluvia").attr("src","../static/img/rain.png");
+  } if (resp.rain === "false") {
+    lluvia = "No está lloviendo";
+    document.getElementById("imagenLluvia").src = "../static/img/sun-vacio.png";
+    //$("#imagenLluvia").attr("src","../static/img/sun-vacio.png");
+  }
 };
 
 const mostrarError = (error) => {
@@ -86,23 +111,13 @@ const listar = () => {
     error: mostrarError,
   });
 };
-$("#Viendo").empty();
-$("#Viendo").append(`Estas viendo: El Pendorcho`);
-listar();
-
-let idPendorcho = "5f25deec455c843370ac03f6",
-  idLaPosta = "5f2d98444da90845f442dc2b",
-  idEmir = "5f2d99e54da90845f442dc2c",
-  idDesplayado = "5f2d99e54da90845f442dc2e",
-  idElBarco = "5f2d99e54da90845f442dc2d",
-  idHonda = "5f2d99e54da90845f442dc2f",
-  idPocitos = "5f2d99e54da90845f442dc30",
-  idCarrasco = "5f2d99e54da90845f442dc31";
 
 function changeRecords() {
   var Viendo1 = document.getElementById("countySel").value;
   $("#Viendo").empty();
+  $("#ViendoSuscripcion").empty();
   $("#Viendo").append(`Estas viendo: ${Viendo1}`);
+  $("#ViendoSuscripcion").append(`${Viendo1}`);
   var idRaspi;
   var selectRaspi = document.getElementById("countySel").value;
 
@@ -123,10 +138,6 @@ function changeRecords() {
     error: mostrarError,
   });
 }
-
-$("#countySel").change(function () {
-  $("#suscribeCheck").removeAttr("disabled");
-});
 
 function suscribe() {
   var data, hour, raspi, active;
@@ -165,3 +176,5 @@ function suscribe() {
     },
   });
 }
+
+main();

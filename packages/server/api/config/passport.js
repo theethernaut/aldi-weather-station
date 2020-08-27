@@ -77,7 +77,7 @@ module.exports = function (passport) {
               return done(
                 null,
                 false,
-                req.flash("loginMessage", "Password incorrecta.")
+                req.flash("loginMessage", "Contraseña incorrecta.")
               );
             }
             return done(null, user);
