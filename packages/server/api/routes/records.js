@@ -57,7 +57,9 @@ router.post("/", verifyRaspi, (req, res, next) => {
       err ? console.log(err) : console.log("File video created");
     }
   );
-  shell.exec(`ffmpeg -i public/captureVideo.avi -y public/captureVideo.mp4`)
+
+  shell.exec(`ffmpeg -i public/captureVideo.avi -y public/captureVideo.mp4`);
+
   const record = new Record({
     _id: new mongoose.Types.ObjectId(),
     idRaspberry: req.body.idRaspberry,
