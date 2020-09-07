@@ -41,7 +41,7 @@ router.get("/public", (req, res, next) => {
 });
 
 router.post("/", verifyRaspi, (req, res, next) => {
-  fs.writeFile(
+  fs.writeFileSync(
     "public/captureImage.jpg",
     req.body.image,
     { encoding: "base64" },
@@ -49,8 +49,8 @@ router.post("/", verifyRaspi, (req, res, next) => {
       err ? console.log(err) : console.log("File image created");
     }
   );
-  fs.writeFile(
-    "public/captureVideo.avi",
+  fs.writeFileSync(
+    "public/captureVideo.mp4",
     req.body.video,
     { encoding: "base64" },
     function (err) {
@@ -58,38 +58,38 @@ router.post("/", verifyRaspi, (req, res, next) => {
     }
   );
 
-  shell.exec(`ffmpeg -i public/captureVideo.avi -y public/captureVideo.mp4`);
-
-  const record = new Record({
-    _id: new mongoose.Types.ObjectId(),
-    idRaspberry: req.body.idRaspberry,
-    internal_temp: req.body.internal_temp,
-    humidity: req.body.humidity,
-    image: "./public/captureImage.jpg",
-    video: "./public/captureVideo.avi",
-    rain: req.body.rain,
-    external_temp: req.body.external_temp,
-    uv_index: req.body.uv_index,
-    uv_risk_level: req.body.uv_risk_level,
-    wind_direction: "", //req.body.wind_direction,
-    wind_speed: "", //req.body.wind_speed
-  });
-  record.save(function (error) {
-    Record.find({})
-      .populate("idRaspberry")
-      .exec()
-      .then((result) => {
-        res.status(201).json({
-          message: "Created record successfully",
+    const record = new Record({
+      _id: new mongoose.Types.ObjectId(),
+      idRaspberry: req.body.idRaspberry,
+      internal_temp: req.body.internal_temp,
+      humidity: req.body.humidity,
+      image: "./public/captureImage.jpg",
+      video: "./public/captureVideo.mp4",
+      rain: req.body.rain,
+      external_temp: req.body.external_temp,
+      uv_index: req.body.uv_index,
+      uv_risk_level: req.body.uv_risk_level,
+      wind_direction: "", //req.body.wind_direction,
+      wind_speed: "", //req.body.wind_speed
+    });
+  
+    record.save(function (error) {
+      Record.find({})
+        .populate("idRaspberry")
+        .exec()
+        .then((result) => {
+          res.status(201).json({
+            message: "Created record successfully",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+          res.status(500).json({
+            error: err,
+          });
         });
-      })
-      .catch((err) => {
-        console.log(err);
-        res.status(500).json({
-          error: err,
-        });
-      });
-  });
+    });
+  
 });
 
 router.get("/idRaspi", (req, res, next) => {
