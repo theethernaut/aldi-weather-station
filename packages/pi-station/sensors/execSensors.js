@@ -4,7 +4,7 @@ const humidity = require("./humidity");
 const files = require("./filesToJson");
 
 const image = __dirname + "/../files/captureImage.jpg";
-const video = __dirname + "/../files/newVideo.avi";
+const video = __dirname + "/../files/newVideo.mp4";
 
 function main() {
   capture.captureImage();

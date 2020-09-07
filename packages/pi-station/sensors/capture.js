@@ -19,9 +19,12 @@ function compressVideo() {
   shell.exec(
     `ffmpeg -i ${vidPath} -vcodec mpeg4 -vtag xvid -qscale:v 5 -c:a libmp3lame -y ${basePath}/newVideo.avi`
   );
+  shell.exec(
+  `ffmpeg -i ${basePath}/newVideo.avi -y ${basePath}/newVideo.mp4`
+  );
 }
 
 module.exports = {
   captureImage,
-  captureVideo,
+  captureVideo
 };

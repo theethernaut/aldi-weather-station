@@ -8,11 +8,11 @@ io.setmode(io.BCM)
 io.setup(rain_sensor, io.IN)
 
 if io.input(rain_sensor):
-    f= open("./output/rain.json","w+")
+    f= open("/home/pi/Desktop/aldi-weather-station/packages/pi-station/output/rain.json","w+")
     f.write('{"rain":"false"}')
     f.close()
 else:
-    f= open("./output/rain.json","w+")
+    f= open("/home/pi/Desktop/aldi-weather-station/packages/pi-station/output/rain.json","w+")
     f.write('{"rain":"true"}')
     f.close()
 	

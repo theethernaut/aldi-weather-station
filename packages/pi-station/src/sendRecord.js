@@ -47,7 +47,7 @@ function readFiles() {
 }
 
 function postData(data) {
-  const URL = "http://localhost:3000/records";
+  const URL = "http://3.20.14.136:80/records";
   axios
     .post(URL, data, {
       headers: {
@@ -76,11 +76,10 @@ function postData(data) {
       });
     })
     .catch((error) => {
-      //handle error
       console.log(error);
     });
 }
 
 module.exports = {
-  main,
+  main
 };
