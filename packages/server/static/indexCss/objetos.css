@@ -1,0 +1,214 @@
+#header-text {
+  font-weight: bold;
+  position: absolute;
+  left: 10px;
+  color: #fff;
+  width: fit-content;
+  height: fit-content;
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+#logout-text {
+  position: absolute;
+  right: 5px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+#logout-text:hover {
+  color: #007fff;
+}
+
+.introduccion {
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.img-video {
+  position: relative;
+  top: 0;
+  height: auto;
+  width: 49%;
+  border: 2px solid;
+  border-color: #003fff;
+  display: inline-block;
+}
+
+#responsive-image {
+  left: 3px;
+}
+
+#encarcela-video {
+  position: static;
+}
+
+#responsive-video {
+  margin: 0;
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.estacion-actual-top {
+  display: inline-block;
+  text-align: left;
+  font-weight: bold;
+  margin: 2px;
+  color: #fff;
+  width: fit-content;
+  height: auto;
+  font-size: 34px;
+}
+
+.estacion-actual-bottom {
+  display: inline-block;
+  text-align: left;
+  font-weight: bold;
+  left: 10px;
+  color: #fff;
+  width: fit-content;
+  height: auto;
+  font-size: 20px;
+}
+
+.station-icons {
+  width: 100px;
+  height: auto;
+  display: flex;
+}
+
+.suscripcion-button {
+  width: 8em;
+  height: 2.8em;
+  color: #fff;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
+  border-color: #003fff;
+  background-color: #007fff;
+  border-radius: 0.25em;
+  margin: 10px;
+}
+
+.suscripcion-button:hover {
+  color: #003fff;
+}
+
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+
+#footer-text {
+  color: white;
+  font-weight: lighter;
+  padding-top: 10px;
+}
+
+
+/* All selects below*/
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background-image: none;
+}
+
+/* Custom Select */
+.select {
+  position: relative;
+  display: flex;
+  margin: 10px;
+  padding: 0 0.5em;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+  background: #007fff;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+
+select {
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fff;
+  font-weight: 700;
+  font-size: 16px;
+  background: #007fff;
+  cursor: pointer;
+}
+
+option {
+  padding: 1px;
+  font-size: 16px;
+}
+
+/* Arrow */
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  color: white;
+  background: #007fff;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: 0.25s all ease;
+  -o-transition: 0.25s all ease;
+  transition: 0.25s all ease;
+}
+
+/* Transition */
+.select:hover:after {
+  color: #003fff
+}
+
+@media (max-width: 900px) {
+  .img-video {
+    position: relative;
+    top: 0;
+    display: inline;
+  }
+
+  #responsive-video {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  .img-video {
+    height: auto;
+    width: 75%;
+  }
+
+  .estacion-actual-top {
+    display: inline-block;
+    margin-left: 10%;
+  }
+
+  #header-text {
+    font-weight: bold;
+    position: absolute;
+    left: 5px;
+    color: #fff;
+    width: fit-content;
+    height: fit-content;
+    font-size: 20px;
+    bottom: -15px;
+  }
+}
