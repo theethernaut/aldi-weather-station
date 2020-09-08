@@ -2,7 +2,6 @@
   font-weight: bold;
   position: absolute;
   left: 10px;
-  color: #fff;
   width: fit-content;
   height: fit-content;
   font-size: 24px;
@@ -60,7 +59,6 @@
   text-align: left;
   font-weight: bold;
   margin: 2px;
-  color: #fff;
   width: fit-content;
   height: auto;
   font-size: 34px;
@@ -71,14 +69,13 @@
   text-align: left;
   font-weight: bold;
   left: 10px;
-  color: #fff;
   width: fit-content;
   height: auto;
   font-size: 20px;
 }
 
 .station-icons {
-  width: 100px;
+  width: 100%;
   height: auto;
   display: flex;
 }
@@ -106,9 +103,9 @@ select::-ms-expand {
 }
 
 #footer-text {
-  color: white;
   font-weight: lighter;
   padding-top: 10px;
+  color: #fff;
 }
 
 
@@ -125,7 +122,7 @@ select {
 }
 
 /* Custom Select */
-.select {
+.custom-select {
   position: relative;
   display: flex;
   margin: 10px;
@@ -154,13 +151,13 @@ option {
 }
 
 /* Arrow */
-.select::after {
+.custom-select::after {
   content: "\25BC";
   position: absolute;
   top: 0;
   right: 0;
   padding: 0 1em;
-  color: white;
+  color: #fff;
   background: #007fff;
   cursor: pointer;
   pointer-events: none;
@@ -170,7 +167,7 @@ option {
 }
 
 /* Transition */
-.select:hover:after {
+.custom-select:hover::after {
   color: #003fff
 }
 
@@ -205,7 +202,6 @@ option {
     font-weight: bold;
     position: absolute;
     left: 5px;
-    color: #fff;
     width: fit-content;
     height: fit-content;
     font-size: 20px;

@@ -15,7 +15,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script class="u-script" type="text/javascript" src="../static/resources/codigo.js" defer=""></script>
   <script src="../static/resources/select.js"> </script>
-  <meta name="generator" content="Nicepage 2.20.1, nicepage.com" />
 
   <script type="application/ld+json">
       {
@@ -38,12 +37,7 @@
       <p id="header-text">
         Estación Meteorológica
       </p>
-
       <a id="logout-text" href="/users/logout">Logout</a>
-
-      <a id="logout-text" href="/users/logout">Logout</a>
-
-
     </header>
 
     <div class="intro">
@@ -51,14 +45,14 @@
 
         <div id="station-selecciones">
           <div id="select-first-div">
-            <div class="select">
+            <div class="custom-select">
               <select name="optone" id="stateSel" size="1">
                 <option value="" selected disabled> Seleccione Zona</option>
               </select>
             </div>
           </div>
           <div id="select-second-div">
-            <div class="select">
+            <div class="custom-select">
               <select name="opttwo" id="countySel" size="1" onchange="changeRecords()">
                 <option value="" selected disabled> Primero seleccione la Zona</option>
               </select>
@@ -73,7 +67,7 @@
 
         <div class="station-responsive-image-video">
           <img id="responsive-image" class="img-video" data-image-width="1280" data-image-height="720"
-            src="http://3.20.14.136:80/captureImage.jpeg" />
+            src="http://3.20.14.136:80/captureImage.jpg" />
 
           <div id="encarcela-video">
             <video id="responsive-video" class="img-video" frameborder="0" allowfullscreen="true" controls>
@@ -98,7 +92,7 @@
 
 
       <div class="suscripcion-horarios">
-        <div class="select">
+        <div class="custom-select">
           <select name="slct" id="horarios">
             <option value="8">8:00hs</option>
             <option value="12">12:00hs</option>

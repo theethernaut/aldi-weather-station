@@ -4,7 +4,7 @@ const gulp = require("gulp");
 const axios = require("axios");
 const fs = require("fs");
 
-const directoryPath = __dirname + "/../data/";
+const directoryPath = `${__dirname}/../data`;
 let time = dateTime();
 
 function main() {
@@ -17,7 +17,7 @@ function main() {
 
 function mergeFiles() {
   gulp
-    .src(__dirname + "/../output/*.json")
+    .src(`${__dirname}/../output/*.json`)
     .pipe(
       merge({
         fileName: `record+${time
@@ -27,7 +27,7 @@ function mergeFiles() {
           .join("-")}.json`,
       })
     )
-    .pipe(gulp.dest("../data"));
+    .pipe(gulp.dest(`${directoryPath}`));
 }
 
 function readFiles() {
@@ -47,7 +47,7 @@ function readFiles() {
 }
 
 function postData(data) {
-  const URL = "http://3.20.14.136:3000/records";
+  const URL = "http://3.20.14.136:80/records";
   axios
     .post(URL, data, {
       headers: {
@@ -64,7 +64,6 @@ function postData(data) {
       fs.readdir(directoryPath, (err, files) => {
         if (err) throw err;
         files.forEach(function (file) {
-          console.log(file)
           fs.unlinkSync(`${directoryPath}/${file}`, (err) => {
             if (err) {
               console.error(err);
@@ -75,13 +74,12 @@ function postData(data) {
           console.log(response.data);
         });
       });
-    }) 
+    })
     .catch((error) => {
-      //handle error
       console.log(error);
     });
 }
 
 module.exports = {
-  main,
+  main
 };

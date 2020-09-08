@@ -5,9 +5,8 @@
 }
 
 body {
-  width: fit-content;
+  width: 100%;
   margin: 0;
-  /*margin-bottom: 2.5em;*/
   font-family: 'Open Sans', sans-serif;
   font-size: 1.2rem;
   line-height: 1.6;
@@ -32,10 +31,8 @@ header {
 }
 
 .station-texto {
-  font-weight: bolder;
+  font-weight: bold;
   font-size: 18px;
-  font-family: inherit;
-  color: #fff;
 }
 
 .station-top-section {
@@ -75,8 +72,6 @@ header {
 
 .station-responsive-image-video {
   position: relative;
-  /*flex: 0 0 50%;
-  max-width: 50%;*/
   height: auto;
   padding: 0;
   margin: 0;
@@ -103,17 +98,13 @@ header {
   text-align: center;
   padding: 0;
   margin: 0;
-  /*background-position: center center;
-  display: inline-block;*/
 }
 
 .station-div-icons {
   position: relative;
   left: 0;
   top: 0;
-
   height: fit-content;
-  /*width: 19%;*/
 }
 
 .station-footer {
@@ -134,10 +125,9 @@ table {
 table,
 th,
 td {
-  text-align: -webkit-center;
-  width: fit-content;
+  text-align: center;
+  width: 100%;
   height: auto;
-  color: white;
   padding: 2px;
 }
 
@@ -174,4 +164,10 @@ th {
     text-align: center;
   }
 
+}
+
+@-moz-document url-prefix() {
+  p{
+    font-size-adjust: 0.5;
+  }
 }
