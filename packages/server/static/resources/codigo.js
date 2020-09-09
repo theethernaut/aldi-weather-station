@@ -8,11 +8,12 @@ let idPendorcho = "5f25deec455c843370ac03f6",
   idCarrasco = "5f2d99e54da90845f442dc31";
 
 function main() {
+  $("#station-suscribe-button").attr("disabled", true);
   $("#ViendoActual").empty();
   $("#ViendoActual").append(`Estas viendo: El Pendorcho`);
   listar();
 
-  $("#countySel").change(function () {
+  $("#select-de-estacion").change(function () {
     $("#station-suscribe-button").removeAttr("disabled");
   });
 }
@@ -89,11 +90,9 @@ const listarRecord = (resp) => {
   if (resp.rain === "true") {
     lluvia = "Está lloviendo";
     document.getElementById("imagenLluvia").src = "../static/img/rain.png";
-    //$("#imagenLluvia").attr("src","../static/img/rain.png");
   } if (resp.rain === "false") {
     lluvia = "No está lloviendo";
     document.getElementById("imagenLluvia").src = "../static/img/sun-vacio.png";
-    //$("#imagenLluvia").attr("src","../static/img/sun-vacio.png");
   }
 };
 
@@ -102,7 +101,6 @@ const mostrarError = (error) => {
 };
 
 const listar = () => {
-  $("#station-suscribe-button").attr("disabled", true);
   $.ajax({
     url: "http://3.20.14.136:80/records",
     type: "GET",
@@ -113,13 +111,13 @@ const listar = () => {
 };
 
 function changeRecords() {
-  var Viendo1 = document.getElementById("countySel").value;
+  var Viendo1 = document.getElementById("select-de-estacion").value;
   $("#ViendoActual").empty();
   $("#ViendoActualSuscripcion").empty();
   $("#ViendoActual").append(`Estas viendo: ${Viendo1}`);
   $("#ViendoActualSuscripcion").append(`${Viendo1}`);
   var idRaspi;
-  var selectRaspi = document.getElementById("countySel").value;
+  var selectRaspi = document.getElementById("select-de-estacion").value;
 
   if (selectRaspi === "El Pendorcho") idRaspi = idPendorcho;
   if (selectRaspi === "El Emir") idRaspi = idEmir;
@@ -143,7 +141,7 @@ function suscribe() {
   var data, hour, raspi, active;
   hour = $("#horarios").children("option:selected").val();
 
-  var selectRaspi = document.getElementById("countySel").value;
+  var selectRaspi = document.getElementById("select-de-estacion").value;
 
   if (selectRaspi === "El Pendorcho") raspi = idPendorcho;
   if (selectRaspi === "El Emir") raspi = idEmir;
@@ -171,7 +169,7 @@ function suscribe() {
       alert(`Usted se ha suscrito con exito!`);
       $("#suscrito").empty();
       $("#suscrito").append(
-        `<p class="station-texto"> Suscrito: ${activo} </p> `
+        `<p class="station-texto"> Suscrito: ${activo} </p>`
       );
     },
   });

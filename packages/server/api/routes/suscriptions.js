@@ -27,6 +27,10 @@ let respuestaRecord = {
     wind_speed: "",
   },
 };
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+let respuestaUser = { email: "" };
+
 async function getRecordData(activo, raspiId, userId, hora) {
   const URL = "http://3.20.14.136:80/records/idRaspi";
   axios
@@ -48,7 +52,6 @@ async function getRecordData(activo, raspiId, userId, hora) {
     });
 }
 
-let respuestaUser = { email: "" };
 async function getUserData(activo, userId, hora, respuestaRecord) {
   const URL = "http://3.20.14.136:80/users/userId";
   axios
@@ -69,7 +72,7 @@ async function getUserData(activo, userId, hora, respuestaRecord) {
       console.log("Error de GET USER DATA: " + error);
     });
 }
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
