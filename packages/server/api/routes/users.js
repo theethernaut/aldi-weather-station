@@ -38,8 +38,10 @@ router.post("/login", (req, res, next) => {
 // Logout
 router.get("/logout", (req, res) => {
   req.logout();
-  req.flash("success_msg", "You are logged out");
-  res.redirect("/users/login");
+  req.session.destroy(function (err) {
+    res.clearCookie('connect.sid');
+    res.redirect('/'); 
+  });
 });
 
 router.get("/userId", (req, res, next) => {

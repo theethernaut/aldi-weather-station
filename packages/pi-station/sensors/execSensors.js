@@ -22,5 +22,5 @@ function initSensors() {
 }
 
 module.exports = {
-  main,
+  main
 };

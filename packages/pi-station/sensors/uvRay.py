@@ -15,6 +15,6 @@ with busio.I2C(board.SCL, board.SDA) as i2c:
     #for j in range(10):
     uv_raw = uv.uv_raw
     risk_level = uv.get_index(uv_raw)
-    f= open("../output/uvRay.json","w+")
+    f= open("/home/pi/Desktop/aldi-weather-station/packages/pi-station/output/uvRay.json","w+")
     f.write('{"uv_index":"%d","uv_risk_level":"%s"}' % (uv_raw, risk_level))
     f.close()
