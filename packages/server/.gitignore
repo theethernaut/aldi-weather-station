@@ -2,3 +2,4 @@ node_modules/
 *.avi
 *.jpg
 .env
+.vscode

@@ -7,8 +7,7 @@ const axios = require("axios");
 const https = require("https");
 
 const Suscription = require("../models/suscription");
-const Record = require("../models/record");
-const User = require("../models/user");
+
 //const { response } = require("../../app");
 const agent = new https.Agent({ rejectUnauthorized: false });
 let respuestaRecord = {
@@ -28,7 +27,7 @@ let respuestaRecord = {
   },
 };
 async function getRecordData(activo, raspiId, userId, hora) {
-  const URL = "http://3.20.14.136:3000/records/idRaspi";
+  const URL = "http://3.20.14.136:80/records/idRaspi";
   axios
     .get(URL, {
       params: {
@@ -50,7 +49,7 @@ async function getRecordData(activo, raspiId, userId, hora) {
 
 let respuestaUser = { email: "" };
 async function getUserData(activo, userId, hora, respuestaRecord) {
-  const URL = "http://3.20.14.136:3000/users/userId";
+  const URL = "http://3.20.14.136:80/users/userId";
   axios
     .get(URL, {
       params: {
