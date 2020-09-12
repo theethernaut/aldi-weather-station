@@ -11,14 +11,18 @@ body {
   font-size: 1.2rem;
   line-height: 1.6;
   color: #fff;
-  background-color: #003fff;
+  background-color: #008080;
+}
+
+.page-wrapper {
+  width: fit-content;
 }
 
 header {
   width: 100%;
   height: 2.5em;
   position: fixed;
-  background: #003fff;
+  background: #008080;
   text-align: center;
   z-index: 9;
   top: 0;
@@ -38,7 +42,7 @@ header {
 .station-top-section {
   position: static;
   width: 100%;
-  background-color: #339cff;
+  background-color: #00ced1;
   padding: 0;
   margin: 0;
 }
@@ -84,7 +88,7 @@ header {
 .station-bottom-section {
   position: static;
   width: 100%;
-  background-color: #339cff;
+  background-color: #00ced1;
   text-align: center;
   padding: 0;
   margin: 0;
@@ -94,7 +98,7 @@ header {
   position: static;
   width: 100%;
   height: auto;
-  background-color: #339cff;
+  background-color: #00ced1;
   text-align: center;
   padding: 0;
   margin: 0;
@@ -112,7 +116,7 @@ header {
   width: 100%;
   left: 0;
   bottom: 1em;
-  background-color: #003fff;
+  background-color: #008080;
   text-align: center;
   height: 2.5em;
 }
@@ -132,7 +136,7 @@ td {
 }
 
 th {
-  background-color: #003fff;
+  background-color: #008080;
 }
 
 .div-actual-bottom {
@@ -143,14 +147,14 @@ th {
 }
 
 .suscripcion-horarios {
-  border-color: #003fff;
+  border-color: #008080;
   width: auto;
   height: auto;
   margin: auto;
   display: inline-flex;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
   .page-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -164,10 +168,4 @@ th {
     text-align: center;
   }
 
-}
-
-@-moz-document url-prefix() {
-  p{
-    font-size-adjust: 0.5;
-  }
 }

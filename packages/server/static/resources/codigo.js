@@ -156,7 +156,7 @@ function suscribe() {
   $.ajax({
     url: "http://3.20.14.136:80/suscriptions",
     data: data,
-    type: "post",
+    type: "POST",
     dataType: "json",
     success: function (data) {
       //  ... do something with the data...
@@ -172,6 +172,7 @@ function suscribe() {
         `<p class="station-texto"> Suscrito: ${activo} </p>`
       );
     },
+    error: mostrarError
   });
 }
 

@@ -1,0 +1,37 @@
+@-moz-document url-prefix() {
+  p{
+    font-size-adjust: 0.5;
+  }
+
+  .page-wrapper {
+    width: -moz-fit-content;
+  }
+
+  #station-selecciones {
+    height: -moz-fit-content;
+  }
+  #select-first-div {
+    width: -moz-fit-content;
+    height: -moz-fit-content;
+  }
+
+  #select-second-div {
+    width: -moz-fit-content;
+    height: -moz-fit-content;
+  }
+
+  .station-div-icons {
+    height: -moz-fit-content;
+  }
+  .div-actual-bottom {
+    width: -moz-fit-content;
+  }
+
+  #header-text{
+    width: -moz-fit-content;
+    height: -moz-fit-content;
+  }
+  .estacion-actual-top {
+    width: -moz-fit-content;
+  }
+}
