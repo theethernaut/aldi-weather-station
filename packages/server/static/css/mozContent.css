@@ -34,4 +34,7 @@
   .estacion-actual-top {
     width: -moz-fit-content;
   }
+  table, th, td {
+    text-align: -moz-center;
+  }
 }

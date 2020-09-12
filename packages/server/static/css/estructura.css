@@ -129,7 +129,7 @@ table {
 table,
 th,
 td {
-  text-align: center;
+  text-align: -webkit-center;
   width: 100%;
   height: auto;
   padding: 2px;
