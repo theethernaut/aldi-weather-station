@@ -19,7 +19,7 @@
 }
 
 #logout-text:hover {
-  color: #0ff;
+  color: rgb(227 129 127);
 }
 
 .introduccion {
@@ -60,6 +60,7 @@
   height: auto;
   font-size: 34px;
   padding-left: 10px;
+  color: rgb(227, 129, 127);
 }
 
 .estacion-actual-bottom {
@@ -69,7 +70,6 @@
   left: 10px;
   width: fit-content;
   height: auto;
-  font-size: 20px;
 }
 
 .station-icons {
@@ -91,7 +91,7 @@
 }
 
 .suscripcion-button:hover {
-  color: #0ff;
+  color:rgb(227 129 127);
 }
 
 /* Remove IE arrow */
@@ -162,7 +162,7 @@ option {
 
 /* Transition */
 .custom-select:hover::after {
-  color: #0ff;
+  color: rgb(227 129 127);
 }
 
 @media (max-width: 768px) {

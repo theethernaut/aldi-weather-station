@@ -115,7 +115,7 @@ function changeRecords() {
   $("#ViendoActual").empty();
   $("#ViendoActualSuscripcion").empty();
   $("#ViendoActual").append(`Estas viendo: ${Viendo1}`);
-  $("#ViendoActualSuscripcion").append(`${Viendo1}`);
+  $("#ViendoActualSuscripcion").append(`${Viendo1},`);
   var idRaspi;
   var selectRaspi = document.getElementById("select-de-estacion").value;
 

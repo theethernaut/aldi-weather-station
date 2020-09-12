@@ -1,23 +1,16 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const schedule = require("node-schedule");
-const nodemailer = require("nodemailer");
+let schedule = require("node-schedule");
+let nodemailer = require("nodemailer");
 const axios = require("axios");
 const https = require("https");
 
 const Suscription = require("../models/suscription");
-const Record = require("../models/record");
-const User = require("../models/user");
+
 //const { response } = require("../../app");
-
-/**
- * c=const / l=let / f=function
- */
-
-const cAgent = new https.Agent({ rejectUnauthorized: false });
-
-let lRespuestaRecord = {
+const agent = new https.Agent({ rejectUnauthorized: false });
+let respuestaRecord = {
   data: {
     _id: "",
     idRaspberry: "",
@@ -33,21 +26,20 @@ let lRespuestaRecord = {
     wind_speed: "",
   },
 };
-
-async function fGetRecordData(lActivo, lRaspiId, lUserId, lHora) {
+async function getRecordData(activo, raspiId, userId, hora) {
   const URL = "http://3.20.14.136:80/records/idRaspi";
   axios
     .get(URL, {
       params: {
-        idRaspi: lRaspiId,
+        idRaspi: raspiId,
       },
-      httpsAgent: cAgent,
+      httpsAgent: agent,
       withCredentials: true,
     })
     .then((response) => {
       //handle success
-      lRespuestaRecord = { data: response.data };
-      fGetUserData(lActivo, lUserId, lHora, lRespuestaRecord);
+      respuestaRecord = { data: response.data };
+      getUserData(activo, userId, hora, respuestaRecord);
     })
     .catch((error) => {
       //handle error
@@ -55,32 +47,29 @@ async function fGetRecordData(lActivo, lRaspiId, lUserId, lHora) {
     });
 }
 
-let lRespuestaUser = { email: "" };
-
-async function fGetUserData(lActivo, lUserId, lHora, lRespuestaRecord) {
+let respuestaUser = { email: "" };
+async function getUserData(activo, userId, hora, respuestaRecord) {
   const URL = "http://3.20.14.136:80/users/userId";
   axios
     .get(URL, {
       params: {
-        userId: lUserId,
+        userId: userId,
       },
-      httpsAgent: cAgent,
+      httpsAgent: agent,
       withCredentials: true,
     })
     .then((response) => {
       //handle success
-      lRespuestaUser = { email: response.data.email };
-      fMain(lActivo, lHora, lRespuestaUser, lRespuestaRecord);
+      respuestaUser = { email: response.data.email };
+      main(activo, hora, respuestaUser, respuestaRecord);
     })
     .catch((error) => {
       //handle error
       console.log("Error de GET USER DATA: " + error);
     });
 }
-
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-
-let lTransporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
     user: "aldisurfschool31@gmail.com",
@@ -89,57 +78,57 @@ let lTransporter = nodemailer.createTransport({
   tls: { rejectUnauthorized: false },
 });
 
-let lMailOptions = {
+let mailOptions = {
   from: "aldisurfschool31@gmail.com",
-  to: lRespuestaUser.email,
+  to: respuestaUser.email,
   subject: "Tu reporte de playa esta pronto!",
   html: `<h3>¡Datos ambientales de Aldi-Surf-School!</h3> <br>
         <h4> El reporte para hoy nos dice: <h4><br>
-        <p>Temperatura interna: ${lRespuestaRecord.data.internal_temp} </p> <br>
-        <p>Temperatura externa: ${lRespuestaRecord.data.external_temp} </p> <br>
-        <p>Humedad: ${lRespuestaRecord.data.humidity} </p> <br>
-        <p>Dirección del viento: ${lRespuestaRecord.data.wind_direction} </p> <br>
-        <p>Velocidad del viento: ${lRespuestaRecord.data.wind_speed} </p> <br>
-        <p>Lluvia: ${lRespuestaRecord.data.rain} </p> <br>
-        <p>UV index: ${lRespuestaRecord.data.uv_index} </p> <br>
-        <p>Riesgo de rayos UV: ${lRespuestaRecord.data.uv_risk_level} </p> <br>
+        <p>Temperatura interna: ${respuestaRecord.data.internal_temp} </p> <br>
+        <p>Temperatura externa: ${respuestaRecord.data.external_temp} </p> <br>
+        <p>Humedad: ${respuestaRecord.data.humidity} </p> <br>
+        <p>Dirección del viento: ${respuestaRecord.data.wind_direction} </p> <br>
+        <p>Velocidad del viento: ${respuestaRecord.data.wind_speed} </p> <br>
+        <p>Lluvia: ${respuestaRecord.data.rain} </p> <br>
+        <p>UV index: ${respuestaRecord.data.uv_index} </p> <br>
+        <p>Riesgo de rayos UV: ${respuestaRecord.data.uv_risk_level} </p> <br>
         <h4> Gracias por confiar en nosotros. </h4> <br>
         <h3> Buenas Olas! <br>
              Weather Station </h3>
        `,
 };
 
-let lMailScheduler = function (lHora, lRespuestaUser, lRespuestaRecord) {
+var mailScheduler = function (hora, respuestaUser, respuestaRecord) {
   // set rules for scheduler
   var rule = new schedule.RecurrenceRule();
   rule.dayOfWeek = [new schedule.Range(0, 6)];
   rule.hour = "21"; //Find it from database
   // scheduleJob take a rule and a function
   // you will need to pass a function object
-  // into the lMailScheduler function
+  // into the mailScheduler function
   schedule.scheduleJob("mailJob", rule, function () {
-    lSendEmail(lRespuestaUser, lRespuestaRecord);
+    sendEmail(respuestaUser, respuestaRecord);
   });
 };
 
 // Send e-mail
-let lSendEmail = (lRespuestaUser, lRespuestaRecord) => {
-  lMailOptions.to = lRespuestaUser.email;
-  lMailOptions.html = `<h3>¡Datos ambientales de Aldi-Surf-School!</h3> <br>
+const sendEmail = (respuestaUser, respuestaRecord) => {
+  mailOptions.to = respuestaUser.email;
+  mailOptions.html = `<h3>¡Datos ambientales de Aldi-Surf-School!</h3> <br>
   <h4> El reporte para hoy nos dice: <h4><br>
-  <p>Temperatura interna: ${lRespuestaRecord.data.internal_temp} </p> <br>
-  <p>Temperatura externa: ${lRespuestaRecord.data.external_temp} </p> <br>
-  <p>Humedad: ${lRespuestaRecord.data.humidity} </p> <br>
-  <p>Dirección del viento: ${lRespuestaRecord.data.wind_direction} </p> <br>
-  <p>Velocidad del viento: ${lRespuestaRecord.data.wind_speed} </p> <br>
-  <p>Lluvia: ${lRespuestaRecord.data.rain} </p> <br>
-  <p>UV index: ${lRespuestaRecord.data.uv_index} </p> <br>
-  <p>Riesgo de rayos UV: ${lRespuestaRecord.data.uv_risk_level} </p> <br>
+  <p>Temperatura interna: ${respuestaRecord.data.internal_temp} </p> <br>
+  <p>Temperatura externa: ${respuestaRecord.data.external_temp} </p> <br>
+  <p>Humedad: ${respuestaRecord.data.humidity} </p> <br>
+  <p>Dirección del viento: ${respuestaRecord.data.wind_direction} </p> <br>
+  <p>Velocidad del viento: ${respuestaRecord.data.wind_speed} </p> <br>
+  <p>Lluvia: ${respuestaRecord.data.rain} </p> <br>
+  <p>UV index: ${respuestaRecord.data.uv_index} </p> <br>
+  <p>Riesgo de rayos UV: ${respuestaRecord.data.uv_risk_level} </p> <br>
   <h4> Gracias por confiar en nosotros. </h4> <br>
   <h3> Buenas Olas! <br>
        Weather Station </h3>
  `;
-  lTransporter.sendMail(lMailOptions, function (error, info) {
+  transporter.sendMail(mailOptions, function (error, info) {
     if (error) {
       console.log("Error de email: " + error);
     } else {
@@ -148,22 +137,19 @@ let lSendEmail = (lRespuestaUser, lRespuestaRecord) => {
   });
 };
 
-function fMain(lActivo, lHora, lRespuestaUser, lRespuestaRecord) {
-  if (lActivo == true || lActivo == "true") {
-    lMailScheduler(lHora, lRespuestaUser, lRespuestaRecord);
+function main(activo, hora, respuestaUser, respuestaRecord) {
+  if (activo == true || activo == "true") {
+    mailScheduler(hora, respuestaUser, respuestaRecord);
   } else {
     schedule.cancelJob("mailJob");
   }
 }
 
-console.log("Antes del router");
-
 router.post("/", (req, res, next) => {
-  console.log("Dentro del router");
-  let lActivo = req.body.active;
-  let lRaspiId = req.body.raspi;
-  let lUserId = req.session.passport.user;
-  let lHora = req.body.hour;
+  let activo = req.body.active;
+  let raspiId = req.body.raspi;
+  let userId = req.session.passport.user;
+  let hora = req.body.hour;
   const suscription = new Suscription({
     _id: new mongoose.Types.ObjectId(),
     user: req.session.passport.user,
@@ -178,10 +164,10 @@ router.post("/", (req, res, next) => {
       .exec()
       .then(() => {
         const response = {
-          activo: lActivo,
+          activo: activo,
         };
-        fGetRecordData(lActivo, lRaspiId, lUserId, lHora);
-        //await fMain(lActivo, lRaspiId, lUserId, lHora);
+        getRecordData(activo, raspiId, userId, hora);
+        //await main(activo, raspiId, userId, hora);
         res.status(201).json(response);
       })
       .catch((err) => {
