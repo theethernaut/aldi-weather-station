@@ -148,11 +148,11 @@ function main(activo, hora, respuestaUser, respuestaRecord) {
 router.post("/", (req, res, next) => {
   let activo = req.body.active;
   let raspiId = req.body.raspi;
-  let userId = req.session.passport.user;
+  let userId = req.user;
   let hora = req.body.hour;
   const suscription = new Suscription({
     _id: new mongoose.Types.ObjectId(),
-    user: req.session.passport.user,
+    user: req.user,
     raspi: req.body.raspi,
     hour: req.body.hour,
     active: req.body.active,

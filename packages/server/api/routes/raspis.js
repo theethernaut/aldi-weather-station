@@ -63,7 +63,7 @@ router.get("/:raspiId", (req, res, next) => {
           raspi: doc,
           request: {
             type: "GET",
-            url: "http://3.20.14.136:80/raspis",
+            url: "http://3.20.14.136:80/raspis" + id,
           },
         });
       } else {
