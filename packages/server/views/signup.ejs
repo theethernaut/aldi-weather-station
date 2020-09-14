@@ -13,14 +13,15 @@
 	<link rel="stylesheet" type="text/css" href="../static/css/util.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/main.css">
 </head>
-</head>
 
 <body>
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
 
-				<h1><span class="fa fa-sign-in"></span> Registro </h1>
+				<span class="login100-form-title"><span class="fa fa-sign-in"> </span> Registro </span>
+				<br>
+				<br>
 				<br>
 				<% if (message.length > 0) { %>
 				<div class="alert alert-danger"><%= message %></div>
@@ -53,8 +54,9 @@
 						</button>
 					</button>
 				</form>
-				<hr>
-				<p>Ya tienes una cuenta? <a href="/">Login</a></p>
+				<div class="w-full text-center p-t-55">
+					<p class="txt2">Ya tienes una cuenta? <a href="/">Login</a></p>
+				</div>
 			</div>
 		</div>
 	</div>
