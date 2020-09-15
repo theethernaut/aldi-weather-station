@@ -19,7 +19,7 @@
 }
 
 #logout-text:hover {
-  color: #C6A664;
+  color: #FFBA00;
 }
 
 .introduccion {
@@ -91,7 +91,7 @@
 }
 
 .suscripcion-button:hover {
-  color: #C6A664;
+  color: #FFBA00;
 }
 
 /* Remove IE arrow */
@@ -162,7 +162,7 @@ option {
 
 /* Transition */
 .custom-select:hover::after {
-  color: #C6A664;
+  color: #FFBA00;
 }
 
 @media (max-width: 768px) {
