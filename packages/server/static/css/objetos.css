@@ -19,7 +19,7 @@
 }
 
 #logout-text:hover {
-  color: rgb(227 129 127);
+  color: #C6A664;
 }
 
 .introduccion {
@@ -60,7 +60,7 @@
   height: auto;
   font-size: 34px;
   padding-left: 10px;
-  color: rgb(227, 129, 127);
+  color: #fff;
 }
 
 .estacion-actual-bottom {
@@ -91,7 +91,7 @@
 }
 
 .suscripcion-button:hover {
-  color:rgb(227 129 127);
+  color: #C6A664;
 }
 
 /* Remove IE arrow */
@@ -162,7 +162,7 @@ option {
 
 /* Transition */
 .custom-select:hover::after {
-  color: rgb(227 129 127);
+  color: #C6A664;
 }
 
 @media (max-width: 768px) {

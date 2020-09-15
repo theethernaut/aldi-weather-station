@@ -38,7 +38,7 @@ const listarRecord = (resp) => {
     `
     <table class="station-main-div-icons">
       <tr>
-        <th>Temepatura</th>
+        <th>Temperatura</th>
         <th>Humedad</th>
         <th>Tiempo</th>
         <th>Viento</th>
