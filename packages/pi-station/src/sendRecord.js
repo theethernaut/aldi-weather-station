@@ -9,10 +9,9 @@ let time = dateTime();
 
 function main() {
   mergeFiles();
-
   setTimeout(function () {
     readFiles();
-  }, 10000); // 10 seconds
+  }, 8000);
 }
 
 function mergeFiles() {
