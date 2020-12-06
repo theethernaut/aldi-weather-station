@@ -73,17 +73,15 @@ app.use(function (req, res, next) {
   next();
 });
 const indexRoutes = require("./api/routes/index");
+const stationRoutes = require("./api/routes/station");
 const usersRoutes = require("./api/routes/users");
 const recordRoutes = require("./api/routes/records");
-const raspiRoutes = require("./api/routes/raspis");
-const suscriptionsRoutes = require("./api/routes/suscriptions");
 
 // Routes which should handle requests
 app.use("/", indexRoutes);
+app.use("/station", stationRoutes);
 app.use("/users", usersRoutes);
 app.use("/records", recordRoutes);
-app.use("/raspis", raspiRoutes);
-app.use("/suscriptions", suscriptionsRoutes);
 
 app.use((req, res, next) => {
   const error = new Error("Not found");

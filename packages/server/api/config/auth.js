@@ -11,6 +11,14 @@ module.exports = {
     if (!req.isAuthenticated()) {
       return next();
     }
-    res.redirect("/index");
+    res.redirect("/station");
+  },
+
+  allowNonAuthenticated: function (req, res, next) {
+    const path = require('path');
+    if (!req.isAuthenticated()) {
+      res.sendFile(path.resolve('views/index.html'));
+    }
+    //return next();
   }
 };

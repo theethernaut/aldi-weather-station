@@ -4,7 +4,6 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 
 const Record = require("../models/record");
-const verifyRaspi = require("./verifyRaspi");
 
 router.get("/", (req, res, next) => {
   Record.findOne()
@@ -39,7 +38,7 @@ router.get("/public", (req, res, next) => {
   res.send();
 });
 
-router.post("/", verifyRaspi, (req, res, next) => {
+router.post("/", (req, res, next) => {
   fs.writeFileSync(
     "public/captureImage.jpg",
     req.body.image,

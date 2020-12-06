@@ -1,177 +1,611 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-  <meta charset="utf-8" />
-  <meta name="description" content="" />
-  <meta name="page_type" content="np-template-header-footer-from-plugin" />
-  <title>Weather Station</title>
-  <link rel="stylesheet" href="../static/css/estructura.css" media="screen" />
-  <link rel="stylesheet" href="../static/css/objetos.css" media="screen" />
-  <link rel="stylesheet" href="../static/css/mozContent.css" media="screen" />
-  <link rel="icon" type="image/png" href="../static/img/compass.png" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="ALDI Surf School es un negocio orientado a enseñar a sus clientes a surfear y a vivir una experiencia inolvidable.">
+  <meta name="author" content="Inovatik">
 
-  <script class="u-script" type="text/javascript" src="../static/resources/jquery.js" defer=""></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script class="u-script" type="text/javascript" src="../static/resources/codigo.js" defer=""></script>
-  <script src="../static/resources/select.js"> </script>
+  <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+    <meta property="og:site_name" content="Aldi Surf School" /> <!-- website name -->
+    <meta property="og:site" content="www.aldisurfschool.com" /> <!-- website link -->
+    <meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+    <meta property="og:description" content="" /> <!-- description shown in the actual shared post -->
+    <meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+    <meta property="og:url" content="" /> <!-- where do you want your post to link to -->
+    <meta property="og:type" content="article" />
 
-  <script type="application/ld+json">
-      {
-        "@context": "http://schema.org",
-        "@type": "Organization",
-        "name": "",
-        "url": "index.html"
-      }
-    </script>
-  <meta property="og:title" content="Index" />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#40bcdf" />
-  <link rel="canonical" href="index.html" />
-  <meta property="og:url" content="index.html" />
+  <!-- PAY PAL-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+
+  <!-- Website Title -->
+  <title>Aldi Surf School</title>
+  
+  <!-- Styles -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap&subset=latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext" rel="stylesheet">
+  <link href="../static/css/bootstrap.css" rel="stylesheet">
+  <link href="../static/css/fontawesome-all.css" rel="stylesheet">
+  <link href="../static/css/swiper.css" rel="stylesheet">
+  <link href="../static/css/magnific-popup.css" rel="stylesheet">
+  <link href="../static/css/styles.css" rel="stylesheet">
+ 
+  <!-- Favicon  -->
+  <link rel="icon" href="../static/img/images/favicon.png">
+
+  <link rel="preconnect" href="//pcdn.piiojs.com">
+
+  <link rel="preload" as="script" href="//pcdn.piiojs.com/fvoo6n/image.min.js">
 </head>
-
-<<<<<<< HEAD
-<body class="u-body">
-  <header class="u-align-center-sm u-align-center-xs u-clearfix u-header u-header" id="sec-3fcc">
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <nav class="u-align-left u-menu u-menu-dropdown u-offcanvas u-menu-1">
-        <div class="menu-collapse" style="
-              font-size: 1rem;
-              font-weight: 700;
-              letter-spacing: 0;
-              text-transform: uppercase;">
-          <a class="u-border-3 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-grey-90"
-            href="#">
-          </a>
-        </div>
-        <div class="u-custom-menu u-nav-container">
-          <ul class="u-nav u-spacing-30 u-unstyled u-nav-1">
-            <li class="u-nav-item">
-              <a class="u-border-3 u-border-active-palette-1-base u-border-hover-palette-1-base u-border-no-left u-border-no-right u-border-no-top u-border-palette-1-base u-button-style u-nav-link u-text-active-palette-1-base u-text-grey-90 u-text-hover-palette-2-base"
-                href="/users/logout" style="padding: 10px 14px; color:#111111">Logout</a>
-            </li>
-          </ul>
-        </div>
-        <div class="u-custom-menu u-nav-container-collapse">
-          <div
-            class="u-align-center u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
-            <div class="u-menu-close"></div>
-            <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2">
-              <li class="u-nav-item">
-                <a class="u-button-style u-nav-link" href="/users/logout" style="padding: 10px 20px; color:#111111">Logout</a>
-              </li>
-            </ul>
-          </div>
-          <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
-        </div>
-      </nav>
-      <h2 class="u-custom-font u-font-montserrat u-text u-text-default u-text-palette-1-base u-text-1"
-        data-animation-name="fadeIn" data-animation-duration="1000" data-animation-delay="0"
-        data-animation-direction="">
-        Weather Station
-      </h2>
-    </div>
-  </header>
-  <section
-    class="u-align-center-xs u-align-right-lg u-align-right-md u-align-right-sm u-align-right-xl u-clearfix u-image u-shading u-section-1"
-    id="carousel_84db">
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <div class="u-custom-font u-font-montserrat u-text u-text-1">
-        <div class="select">
-          <select name="opttwo" id="countySel" size="1" onchange="changeRecords()">
-            <option value="" selected disabled> Primero seleccione la Zona</option>
-          </select>
-=======
-<body>
-  <div class="page-wrapper">
-    <header>
-      <p id="header-text">
-        Estación Meteorológica
-      </p>
-      <a id="logout-text" href="/users/logout">Logout</a>
-    </header>
->>>>>>> f3634210a2fb554d844359e9f8705c3794adcd9e
-
-    <div class="intro">
-     
- <section class="station-top-section">
-	
-        <div id="station-selecciones">
-<br>        
-  <div id="select-first-div">
-            <div class="custom-select">
-              <select name="optone" id="select-de-zona" size="1">
-                <option value="" selected disabled> Seleccione Zona</option>
-              </select>
-            </div>
-          </div>
-          <div id="select-second-div">
-            <div class="custom-select">
-              <select name="opttwo" id="select-de-estacion" size="1" onchange="changeRecords()">
-                <option value="" selected disabled> Primero seleccione la Zona</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <!-- <p class="station-texto introduccion">.</p> -->
-        <br>
-
-        <p class="estacion-actual-top" id="ViendoActual"></p>
-
-        <div class="station-responsive-image-video">
-          <img id="responsive-image" class="img-video" data-image-width="1280" data-image-height="720"
-            src="http://3.20.14.136:80/captureImage.jpg" />
-
-          <div id="encarcela-video">
-            <video id="responsive-video" class="img-video" frameborder="0" allowfullscreen="true" controls>
-              <source src="http://3.20.14.136:80/captureVideo.mp4" type="video/mp4" />
-              <source src="http://3.20.14.136:80/captureVideo.mp4" type="video/ogg" />
-              Tu navegador no soporta esta etiqueta de video.
-            </video>
-          </div>
-        </div>
-        <br>
-        <div id="data"></div>
-
-      </section>
-    </div>
-    <section class="station-bottom-section">
-      <div class="div-actual-bottom">
-        <br>
-        <h2 class="estacion-actual-bottom introduccion">Si desea recibir e-mails con el estado del tiempo en:
-          <span id="ViendoActualSuscripcion">El pendorcho,</span>
-          <span>puede seleccionar una hora para recibir un e-mail cada día, utilizando el selector de abajo.</span>
-        </h2>
+<body data-spy="scroll" data-target=".fixed-top">
+  
+  <!-- Preloader -->
+<div class="spinner-wrapper">
+      <div class="spinner">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
       </div>
-
-
-      <div class="suscripcion-horarios">
-        <div class="custom-select">
-          <select name="slct" id="horarios">
-            <option value="8">8:00hs</option>
-            <option value="12">12:00hs</option>
-            <option value="16">16:00hs</option>
-          </select>
-        </div>
-        <span>
-          <button type="button" class="suscripcion-button" id="station-suscribe-button" onclick="suscribe()"
-            name="button1">Suscribirse</button>
-        </span>
-      </div>
-
-      <br>
-      <p id="suscrito"></p>
-	<br>
-    </section>
-    <footer class="station-footer">
-      <p id="footer-text">
-        ©2020 Weather Station.&nbsp; Todos los derechos reservados.
-      </p>
-    </footer>
   </div>
-</body>
+  <!-- end of preloader -->
+  
 
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+      <!-- Text Logo - Use this if you don't have a graphic logo -->
+      <!-- <a class="navbar-brand logo-text page-scroll" href="static.html">Aria</a> -->
+
+      <!-- Image Logo -->
+      <a class="navbar-brand logo-image" href="#header"><img src="../static/img/images/aldi-logo.png" alt="Aldi logo"></a>
+      
+      <!-- Mobile Menu Toggle Button -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-awesome fas fa-bars"></span>
+          <span class="navbar-toggler-awesome fas fa-times"></span>
+      </button>
+      <!-- end of mobile menu toggle button -->
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                  <a class="nav-link page-scroll" href="#header">HOME <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="/users/login"> ALDI CAM </span></a>
+            </li>
+              <li class="nav-item">
+                  <a class="nav-link page-scroll" href="#intro">¿QUIÉNES SOMOS?</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link page-scroll" href="#services">CLASES</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link page-scroll" href="#findus">ENCONTRANOS</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link page-scroll" href="#contact">CONTACTO</a>
+              </li>
+          </ul>
+          <span class="nav-item social-icons">
+              <span class="fa-stack">
+                  <a href="https://www.facebook.com/aldisurfschool" target="blank">
+                      <span class="hexagon"></span>
+                      <i class="fab fa-facebook-f fa-stack-1x"></i>
+                  </a>
+              </span>
+              <span class="fa-stack">
+                  <a href="https://www.instagram.com/aldi_surfschool" target="blank">
+                      <span class="hexagon"></span>
+                      <i class="fab fa-instagram fa-stack-1x"></i>
+                  </a>
+              </span>
+          </span>
+      </div>
+  </nav> <!-- end of navbar -->
+  <!-- end of navbar -->
+
+
+  <!-- Header -->
+  <header id="header" class="header">
+      <div class="header-content">
+          <div class="container">
+              <div class="row">
+                  <div class="col-lg-12">
+                      <div class="text-container">
+                          <h1><span id="js-rotating"></span><br> ALDI SURF SCHOOL</h1>
+                          <p class="p-heading p-large">  </p>
+                          <a class="btn-solid-lg page-scroll" href="#services"> RESERVAR CLASES </a>
+                      </div>
+                  </div> <!-- end of col -->
+              </div> <!-- end of row -->
+          </div> <!-- end of container -->
+      </div> <!-- end of header-content -->
+  </header> <!-- end of header -->
+  <!-- end of header -->
+
+
+  <!-- Intro -->
+  <div id="intro" class="basic-1">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-5">
+                  <div class="text-container">
+                      <div class="section-title">¿Quiénes somos? </div>
+                        <h2> Juanchi y Franco, hermanos fundadores.</h2>
+                        <p class = "justify"> Provenientes de una familia apasionada por el mar, Juanchi destacado
+                            surfer local participo en dos ocasiones en
+                            el Mundial Junior de Surf de la 
+                            <a href="https://www.isasurf.org/es/" class="green" target="blank">ISA Surfing Association</a>
+                            representando a Uruguay. Franco, el mayor, próximo a obtener su título 
+                            de Licenciado en educación física, aporta todos sus conocimientos al Surf. 
+                            <br><br>
+                            ↓ Acá abajo le dejamos nuestra misión ↓
+                        </p>
+                        <p class = "testimonial-text justify"> "Entregar enseñanza de calidad para generar autonomía dentro del deporte,
+                            en la menor cantidad de sesiones posibles, inspirando y motivando a nuestros clientes a hacer del Surf un
+                            estilo de vida saludable. Promover un ambiente donde primen la seguridad y la confianza entre instructores y usuarios,
+                            fomentando procesos de aprendizaje significativos y motivación constante ". </p>
+                        <div class = "testimonial-author"></div>
+  
+                  </div> <!-- end of text-container -->
+              </div> <!-- end of col -->
+              <div class="col-lg-7">
+                  <div class="image-container">
+                      <img class="img-fluid" data-piio="../static/img/images/bros.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+f9vPQAJZAN2rlRQVAAAAABJRU5ErkJggg==" />
+                  </div> <!-- end of image-container -->
+              </div> <!-- end of col -->
+          </div> <!-- end of row -->
+      </div> <!-- end of container -->
+  </div> <!-- end of basic-1 -->
+  <!-- end of intro -->
+
+
+  <!-- Description -->
+  <div class="cards-1">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                  
+                  <!-- Card -->
+                  <div class="card">
+                      <span class="fa-stack">
+                          <span class="hexagon"></span>
+                            <i class="fas fa-stack-1x">
+                                <img class="imgSmall" data-piio="../static/img/images/equipo.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+f9vPQAJZAN2rlRQVAAAAABJRU5ErkJggg==" />
+                            </i>
+                      </span>
+                      <div class="card-body">
+                        <h4 class="card-title">Trabajo en equipo</h4>
+                        <p>Contamos con excelentes profesores y
+                             con ellos nos vamos a encargar de que tu sesión en el mar sea una experiencia
+                             de disfrute y aprendizaje al máximo.</p>
+                      </div>
+                  </div>
+                  <!-- end of card -->
+
+                  <!-- Card -->
+                  <div class="card">
+                      <span class="fa-stack">
+                          <span class="hexagon"></span>
+                            <i class="fa fa-stack-1x">
+                                <img class="imgSmall" data-piio="../static/img/images/seguridad.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+f9vPQAJZAN2rlRQVAAAAABJRU5ErkJggg==" />
+                            </i>
+                      </span>
+                      <div class="card-body">
+                          <h4 class="card-title">Calidad y Seguridad</h4>
+                          <p>Para la seguridad de nuestros surfistas contamos con
+                            los permisos adecuados por parte del estado y trabajamos en conjunto
+                            con los guardavidas de la playa.</p>
+                      </div>
+                  </div>
+                  <!-- end of card -->
+
+                  <!-- Card -->
+                  <div class="card">
+                      <span class="fa-stack">
+                          <span class="hexagon"></span>
+                          
+                            <i class="fas fa-stack-1x">  
+                              <img class="imgSmall" data-piio="../static/img/images/excelencia.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+f9vPQAJZAN2rlRQVAAAAABJRU5ErkJggg==" />
+                            </i>
+                      </span>
+                      <div class="card-body">
+                          <h4 class="card-title">Modalidad</h4>
+                            <p> Te brindamos todo lo necesario para tu clase, la misma incluye traje
+                                de neopreno, tabla adecuada e instructor personal.</p>
+  
+                      </div>
+                  </div>
+                  <!-- end of card -->
+
+              </div> <!-- end of col -->
+          </div> <!-- end of row -->
+      </div> <!-- end of container -->
+  </div> <!-- end of cards -->
+  <!-- end of description -->
+
+
+  <!-- Services -->
+  <div id="services" class="cards-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">CLASES</div>
+                <h3> Elegí la clase o el paquete<br>que mejor se adapte a tus necesidades. </h3>
+                <h6 style="color:#14bf98; text-align: center;">¡Recordá que también podes abonar en efectivo en los puntos de venta!</h6>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-image">
+                        <img class="img-fluid" data-piio="../static/img/images/pago1.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+f9vPQAJZAN2rlRQVAAAAABJRU5ErkJggg==" />
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title" style="color:#14bf98;">$30 USD</h3>
+                          <ul class="list-unstyled li-space-lg">
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body">
+                                    <h5>
+                                        Clase Individual <br> 
+                                    </h5>
+                                </div>
+                            </li>
+                              <li class="media">
+                                  <i class="fas fa-square"></i>
+                                  <div class="media-body"><h5> Válido para usar a disposición del cliente.
+                                      No es válido para reserva, las clases son por orden de llegada en la playa.
+                                      </h5>
+                                      </div>
+                              </li>
+                              <li class="media">
+                                  <i class="fas fa-square"></i>
+                                  <div class="media-body"><h4> Ideal para probar por primera vez! </h4></div>
+                              </li>
+                          </ul>
+                    </div>
+                    <div id="paypal-button-container"></div> <!-- end of button-container-->
+                    <!-- <div class="button-container">
+                        <a class="btn-solid-reg page-scroll" href="#">$30 USD</a>
+                    </div> end of button-container -->
+                </div>
+                <!-- end of card -->
+
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-image">
+                        <img class="img-fluid" data-piio="../static/img/images/pago2.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+f9vPQAJZAN2rlRQVAAAAABJRU5ErkJggg==" />
+                    </div>
+                    <div class="card-body">
+                      <h3 class="card-title" style="color:#14bf98;">$135 USD</h3>
+                          
+                      <ul class="list-unstyled li-space-lg">
+                            <li class="media">
+                                <i class="fas fa-square"></i>
+                                <div class="media-body">
+                                    <h5>
+                                        Pack de 5 clases 
+                                    </h5>
+                                </div>
+                            </li>  
+                            <li class="media">
+                              <i class="fas fa-square"></i>
+                              <div class="media-body"><h5>Válido para usar a disposición del cliente.
+                                  No es válido para reserva, las clases son por orden de llegada en la playa.
+                                  </h5>
+                                  </div>
+                          </li>
+                          <li class="media">
+                              <i class="fas fa-square"></i>
+                              <div class="media-body"><h4>Obtienes un 10%</h4></div>
+                          </li>
+                      </ul>
+                  </div>
+                  <div id="paypal-button-container1"></div>
+                  <!-- <div class="button-container">
+                      <button class="btn-solid-reg page-scroll">$135 USD</a>
+                  </div> end of button-container -->
+                </div>
+                <!-- end of card -->
+
+                <!-- Card -->
+                <div class="card">
+                    <div class="card-image">
+                        <img class="img-fluid" data-piio="../static/img/images/las4.jpg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8+f9vPQAJZAN2rlRQVAAAAABJRU5ErkJggg==" />
+                    </div>
+                    <div class="card-body">
+                      <h3 class="card-title" style="color:#14bf98;">$255 USD</h3>
+                      <ul class="list-unstyled li-space-lg">
+                        <li class="media">
+                            <i class="fas fa-square"></i>
+                            <div class="media-body">
+                                <h5>
+                                    Pack de 10 clases 
+                                </h5>
+                            </div>
+                        </li> 
+                          <li class="media">
+                              <i class="fas fa-square"></i>
+                              <div class="media-body"><h5>Valido para usar a disposición del cliente.
+                                  No es válido para reserva, las clases son por orden de llegada en la playa.
+                                  </h5>
+                                  </div>
+                          </li>
+                          <li class="media">
+                              <i class="fas fa-square"></i>
+                              <div class="media-body"><h4>Obtienes un 15%</h4></div>
+                          </li>
+                      </ul>
+                      <p class="price"><span></span></p>
+                  </div>
+                  <div id="paypal-button-container2"></div>
+                  <!-- <div class="button-container">
+                      <a class="btn-solid-reg page-scroll" href="#">255 USD</a>
+                  </div> end of button-container -->
+                </div>
+                <!-- end of card -->
+
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of cards-2 -->
+<!-- end of services -->
+
+
+  <!-- Gallery -->
+  <!-- <div class="slider">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                <h2>GALERIA</h2>
+                <p class="p-heading"> Nuestros clientes son la guía para saber que tan bien estamos trabajando.
+                    ¡Y no nos imaginamos un mejor futuro para Aldi que ayudar a nuestros clientes a conseguir sus objetivos! </p>
+                    <div class="col-lg-12">
+                        <div class="simple-slider simple-slider-demo">
+                             
+                            <div class="slider-wrapper">
+                                <div class="slider-slide">
+                                    <video width="auto" height="100%" data-piio="./img/images/Aldivideo.mp4" controls>
+                                        <source src="./img/images/Aldivideo.mp4" type="video/mp4">
+                                        Your browser does not support HTML5 video.
+                                    </video>
+                                </div>
+                            </div>
+                    
+                            <div class="slider-btn slider-btn-prev"></div>
+                            <div class="slider-btn slider-btn-next"></div>
+                        </div>
+                        
+                    </div>
+              </div>  end of col -->
+          <!-- </div>  end of row -->
+      <!-- </div> end of container -->
+   <!-- </div>end of slider -->
+  <!-- end of testimonials --> 
+  
+  
+  <!-- Call Me -->
+  <div id="findus" class="form-1">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6">
+                  <div class="text-container">
+                    <div class="section-title">¿Dónde estamos?</div>
+                    <h2 class="white">Nos encontramos frente al edificio 'Grey Stone'</h2>
+                    <ul class="list-unstyled li-space-lg white">
+                        <li class="media">
+                            <i class="fas fa-square"></i>
+                            <div class="media-body"> Ubicados en la parada 32 Playa Brava, Punta del Este. 
+                            </div>
+                        </li>
+                        <li class="media">
+                            <i class="fas fa-square"></i>
+                            <div class="media-body"> Nuestra playa cuenta con estacionamiento y parada de ómnibus para 
+                                que tu llegada sea aún más fácil.
+                            </div>
+                        </li>
+                        <li class="media">
+                            <i class="fas fa-square"></i>
+                            <div class="media-body">Estamos dispuestos a aclarar tus dudas a la brevedad. 
+                              Envianos un <a href="#contact" class="green page-scroll"> mensaje! </a>
+                              </div>
+                          </li>
+                      </ul>
+                  </div>
+              </div> <!-- end of col -->
+              <div class="col-lg-6">
+                <div class="map-responsive">
+                  <iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=Gray%20Stone%2020100%20Punta%20del%20Este%2C%20Maldonado%20Department%2C%20Uruguay+(aldi%20surf%20school)&amp;ie=UTF8&amp;t=&amp;z=15&amp;iwloc=A&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0">
+                  </iframe>
+                </div>
+              </div> <!-- end of col -->
+          </div> <!-- end of row -->
+      </div> <!-- end of container -->
+  </div> <!-- end of form-1 -->
+  <!-- end of call me -->
+
+<!-- Weather Channel -->
+ <!--  <div id="findus" class="form-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h2>El pronostico de olas por Magic Sea Weed!</h2>
+                <p class="p-heading"> Podras ver el pronostico de olas para el pendorcho por la siguiente semana.</p>
+              </div> 
+                <iframe src="https://magicseaweed.com/La-Barra-de-Maldonado-Surf-Report/3727/Embed/" width="1200" height="600" frameborder="0"></iframe>
+            </div> end of col -->
+        <!-- </div> end of row -->
+    <!-- </div> end of container -->
+<!-- </div> end of form-1 -->
+<!-- end of call me -->
+ 
+
+  <!-- Contact -->
+  <div id="contact" class="form-2">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-6">
+                  <div class="text-container">
+                    <div class="section-title">CONTACTO</div>
+                    <h2>Entra en contacto con nosotros usando este formulario.</h2>
+                    <p>Por cualquier consulta, asesoría o inquietud estamos contentos con ayudarlo :) </p>
+                      <ul class="list-unstyled li-space-lg">
+                          <li class="address"><i class="fas fa-map-marker-alt"></i>Parada 32 y medio de la Brava, Punta del Este, Uruguay</li>
+                          <li><i class="fas fa-phone"></i><a href="tel:0059895713912">+598 95 71 39 12</a></li>
+                          <li><i class="fas fa-phone"></i><a href="tel:0059896213377">+598 96 21 33 77</a></li>
+                          <li><i class="fas fa-envelope"></i><a href="mailto:aldisurfschool31@gmail.com">aldisurfschool31@gmail.com</a></li>
+                      </ul>
+                      <h3>Búscanos en nuestras redes sociales!</h3>
+
+                      <span class="fa-stack">
+                          <a href="https://www.facebook.com/aldisurfschool" target="blank">
+                              <span class="hexagon"></span>
+                              <i class="fab fa-facebook-f fa-stack-1x"></i>
+                          </a>
+                      </span>
+                      <span class="fa-stack">
+                          <a href="https://www.instagram.com/aldi_surfschool" target="blank">
+                              <span class="hexagon"></span>
+                              <i class="fab fa-instagram fa-stack-1x"></i>
+                          </a>
+                      </span>
+                  </div> <!-- end of text-container -->
+              </div> <!-- end of col -->
+              <div class="col-lg-6">
+                  
+                  <!-- Contact Form -->
+                  <form id="contactForm" data-toggle="validator" data-focus="false">
+                      <div class="form-group">
+                          <input type="text" class="form-control-input" id="cname" required>
+                          <label class="label-control" for="cname">Nombre</label>
+                          <div class="help-block with-errors"></div>
+                      </div>
+                      <div class="form-group">
+                          <input type="email" class="form-control-input" id="cemail" required>
+                          <label class="label-control" for="cemail">Email</label>
+                          <div class="help-block with-errors"></div>
+                      </div>
+                      <div class="form-group">
+                          <textarea class="form-control-textarea" id="cmessage" required></textarea>
+                          <label class="label-control" for="cmessage">Tú mensaje</label>
+                          <div class="help-block with-errors"></div>
+                      </div>
+                      <div class="form-group">
+                          <button type="submit" class="form-control-submit-button">ENVIAR MENSAJE</button>
+                      </div>
+                      <div class="form-message">
+                          <div id="cmsgSubmit" class="h3 text-center hidden"></div>
+                      </div>
+                  </form>
+                  <!-- end of contact form -->
+
+              </div> <!-- end of col -->
+          </div> <!-- end of row -->
+      </div> <!-- end of container -->
+  </div> <!-- end of form-2 -->
+  <!-- end of contact -->
+
+
+  <!-- Footer -->
+  <div class="footer">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6">
+                  <div class="text-container about">
+                    <h4>Nuestros valores</h4>
+                    <p class="white"> Lograr transmitir los valores y las técnicas del deporte de 
+                      manera efectiva para conseguir en nuestros clientes autonomía y adherencia. </p>
+                  </div> <!-- end of text-container -->
+              </div> <!-- end of col -->
+              <div class="col-md-2">
+                  <div class="text-container">
+                  </div> <!-- end of text-container -->
+              </div> <!-- end of col -->
+              <div class="col-md-2">
+                  <div class="text-container">
+                    <h4>Links</h4>
+                    <ul class="list-unstyled li-space-lg">
+                        <li>
+                            <a class="white" href="#header">HOME</a>
+                        </li>
+                        <li>
+                            <a class="white" href="#intro">¿QUIÉNES SOMOS?</a>
+                        </li>
+                        <li>
+                            <a class="white" href="#services">CLASES</a>
+                        </li>
+                    </ul>
+                  </div> <!-- end of text-container -->
+              </div> <!-- end of col -->
+                <div class="col-md-2">
+                  <div class="text-container">
+                    <h4>____________</h4>
+                    <ul class="list-unstyled li-space-lg">
+                        <li>
+                            <a class="white" href="#findus">ENCONTRANOS</a>
+                        </li>
+                        <li>
+                            <a class="white" href="#contact">CONTACTO</a>
+                        </li>
+                    </ul>
+                  </div> <!-- end of text-container -->
+              </div> <!-- end of col -->
+          </div> <!-- end of row -->
+      </div> <!-- end of container -->
+  </div> <!-- end of footer -->  
+  <!-- end of footer -->
+
+
+  <!-- Copyright -->
+  <div class="copyright">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                  <p class="p-small">Copyright © 2020 <a href="https://inovatik.com">Template by Inovatik</a></p>
+              </div> <!-- end of col -->
+          </div> <!-- enf of row -->
+      </div> <!-- end of container -->
+  </div> <!-- end of copyright --> 
+  <!-- end of copyright -->
+  
+    
+  <!-- Scripts -->
+  <script>
+    (function(i,m,a,g,e) {
+      e = i.getElementsByTagName(m)[0], (g = i.createElement(m)).src = "//pcdn.piiojs.com/"+a+"/image.min.js",
+      g.onerror = function() {
+          (g = i.createElement(m)).src = "https://fs.piio.co/image-failover.min.js",
+          e.parentNode.insertBefore(g, e);
+      }, e.parentNode.insertBefore(g, e);
+    }(document, "script", "fvoo6n"));      
+  </script>
+  <script src="../static/js/jquery.min.js"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+  <script src="../static/js/popper.min.js"></script> <!-- Popper tooltip library for Bootstrap -->
+  <script src="../static/js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+  <script src="../static/js/jquery.easing.min.js"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+  <script src="../static/js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+  <script src="../static/js/jquery.magnific-popup.js"></script> <!-- Magnific Popup for lightboxes -->
+  <script src="../static/js/morphext.min.js"></script> <!-- Morphtext rotating text in the header -->
+  <script src="../static/js/isotope.pkgd.min.js"></script> <!-- Isotope for filter -->
+  <script src="../static/js/validator.min.js"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+  <script src="../static/js/scripts.js"></script> <!-- Custom scripts -->
+ 
+ 
+  <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AZH0iBh4ZpJK2o_hB_ByczKjOmzU5d1rigBeaH2gszDp5F_v62rBoxKlESzswRvVjTrYOiQ7fgkdPuhq"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+    </script>
+    <script src="../static/js/codigo.js"></script> <!-- Custom scripts -->
+  <!-- Sweet Alert 2 -->
+    <!-- <script src="sweetalert2.all.min.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+    <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
+
+</body>
 </html>
