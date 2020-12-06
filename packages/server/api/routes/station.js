@@ -4,10 +4,10 @@ const path = require('path');
 const { ensureAuthenticated, forwardAuthenticated } = require("../config/auth");
 
 // Welcome Page
-router.get('/', forwardAuthenticated, (req, res) =>  res.render('login.ejs', { message: req.flash('loginMessage') }));
+router.get('/loginStation', forwardAuthenticated, (req, res) =>  res.render('login.ejs', { message: req.flash('loginMessage') }));
 
 // Dashboard
-router.get("/station", ensureAuthenticated, (req, res) => {
+router.get("/aldi", ensureAuthenticated, (req, res) => {
   res.sendFile(path.resolve('views/station.html'));
   //res.sendFile("/../../views/dashboard.html", { root: __dirname });
   //   res.sendFile('/index.html');

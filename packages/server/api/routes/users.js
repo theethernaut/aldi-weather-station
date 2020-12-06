@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
+const path = require("path");
 
 // Load User model
 const User = require('../models/user');
@@ -29,7 +30,7 @@ router.post(
 // Login
 router.post("/login", (req, res, next) => {
   passport.authenticate("local-login", {
-    successRedirect: "/station",
+    successRedirect: "/station/aldi",
     failureRedirect: "/users/login",
     failureFlash: true,
   })(req, res, next);

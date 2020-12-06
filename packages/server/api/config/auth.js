@@ -8,10 +8,11 @@ module.exports = {
   },
 
   forwardAuthenticated: function (req, res, next) {
+    const path = require('path');
     if (!req.isAuthenticated()) {
       return next();
     }
-    res.redirect("/station");
+    res.redirect("/station/aldi");
   },
 
   allowNonAuthenticated: function (req, res, next) {
