@@ -39,7 +39,7 @@ paypal.Buttons({
         return actions.order.create({
             purchase_units: [{
                 amount: {
-                    value: '135'
+                    value: '100'
                 }
             }]
         });
@@ -73,7 +73,7 @@ paypal.Buttons({
         return actions.order.create({
             purchase_units: [{
                 amount: {
-                    value: '255'
+                    value: '190'
                 }
             }]
         });
