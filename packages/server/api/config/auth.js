@@ -20,6 +20,6 @@ module.exports = {
     if (!req.isAuthenticated()) {
       res.sendFile(path.resolve('views/index.html'));
     }
-    //return next();
+    return next();
   }
 };
