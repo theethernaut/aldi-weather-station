@@ -801,6 +801,39 @@ input[type='checkbox'] {
 	margin-bottom: 1.25rem;
 }
 
+/*********************/
+/*    04. Header     */
+/*********************/
+.header1 {
+	background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('../img/123.png') center center no-repeat;
+	background-size: cover;
+}
+
+.header1 .header-content {
+	padding-top: 8rem;
+	padding-bottom: 2.125rem;
+	text-align: center;
+}
+
+.header1 .text-container {
+	margin-bottom: 3rem;
+}
+
+.header1 h1 {
+	margin-bottom: 0.5rem;
+	color: #fff;
+}
+
+.header1 .p-large {
+	margin-bottom: 2rem;
+	color: #dfe5ec;
+}
+
+.header1 .btn-solid-lg {
+	margin-right: 0.5rem;
+	margin-bottom: 1.25rem;
+}
+
 
 /*********************/
 /*     05. Intro     */
