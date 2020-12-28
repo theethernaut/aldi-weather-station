@@ -39,14 +39,14 @@ router.get("/public", (req, res, next) => {
 });
 
 router.post("/", (req, res, next) => {
-  fs.writeFileSync(
+  /*fs.writeFileSync(
     "public/captureImage.jpg",
     req.body.image,
     { encoding: "base64" },
     function (err) {
       err ? console.log(err) : console.log("File image created");
     }
-  );
+  );*/
   fs.writeFileSync(
     "public/captureVideo.mp4",
     req.body.video,
@@ -56,7 +56,7 @@ router.post("/", (req, res, next) => {
     }
   );
 
-    const record = new Record({
+  /*  const record = new Record({
       _id: new mongoose.Types.ObjectId(),
       idRaspberry: req.body.idRaspberry,
       internal_temp: req.body.internal_temp,
@@ -86,7 +86,11 @@ router.post("/", (req, res, next) => {
             error: err,
           });
         });
-    });
+    });*/
+	res.status(201).json({
+	message: "Created video successfully",
+});
+
   
 });
 
